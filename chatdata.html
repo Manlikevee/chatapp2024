@@ -21,7 +21,15 @@
                 <path d="M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z" fill="var(--greybar)"/>
               </svg>
         </div>
-        <div class="chatbubble">There are few minor changes that need to be done in the final version before sending it to the boss for the review. So we have to connect to discuss it.</div>
+        <div class="chatbubble">
+            <div class="quoted">
+                <div class="quotetext">
+                <div class="quotetitle uname">Lara Mueller  <div class="cancel">x</div></div>
+                <small class="small twolines">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, dolor. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, aperiam?</div>    
+                </small>
+               </div>
+            There are few minor changes that need to be done in the final version before sending it to the boss for the review. So we have to connect to discuss it.</div>
     </div>
     
     <div class="messagesent invite">
@@ -119,5 +127,57 @@
         </div> 
         </div>
     </div>
+
+    <script>
+            const conversationData = [
+        {
+            type: "invite",
+            sender: "sent",
+            roomName: "Ishika’s Personal Room",
+            message: "There are few minor changes that need.",
+            imageSrc: "image 40.png"
+        },
+        {
+            type: "image",
+            sender: "rec",
+            message: "Hey there! Have you heard about how AI is changing the world?",
+            imageUrl: "https://images.unsplash.com/"
+        },
+        {
+            "type": "text",
+            "sender": "sent",
+            "message": "Hey there! "
+        },
+        {
+            "type": "text",
+            "sender": "rec",
+            "message": "How Are You Doing "
+        },
+
+        {
+            "type": "replytext",
+            "sender": "rec",
+            "message": "I am doing fine thank you",
+            "from": "Tobi",
+            "quotemessage": "How Are You Doing "
+        },
+
+        
+        {
+            "type": "replytext",
+            "sender": "sent",
+            "message": "Thank God for that, Hope u are done with that project",
+            "from": "Tobi",
+            "quotemessage": "I am doing fine thank you"
+        },
+
+        {
+            "type": "text",
+            "sender": "rec",
+            "message": "That project hmm, still working on it"
+        },
+
+    ]
+    </script>
 </body>
 </html>

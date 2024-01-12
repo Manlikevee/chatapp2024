@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -49,6 +49,7 @@ body{
     box-sizing: border-box;
     font-family: 'Nunito Sans', sans-serif;
     background: var(--background);
+    scroll-behavior: smooth;
 }
 
 
@@ -127,9 +128,7 @@ height: 100vh;
         height: 100%;
     }
 
-    .imgmsg{
-        min-width: 50%;
-    }
+ 
     .chatdata {
         overflow-y: auto;
         width: 100%;
@@ -137,6 +136,8 @@ padding: 12px;
 display: flex;
 flex-direction: column;
 gap:   15px;
+scroll-behavior: smooth;
+transition: 0.2s;
     }
 #chatContainer{
     width: 100%;
@@ -162,7 +163,7 @@ gap:   15px;
 }
 
 .joinbtn{
-    width:60%;
+    width:40%;
     height: 100%;
 }
 .col{
@@ -289,7 +290,6 @@ width: fit-content;
 padding: 8px;
 align-items: flex-start;
 gap: 10px;
-flex: 1 0 0;
 background-color: var(--UI-Dark-02);
 display: flex;
 flex-direction: column;
@@ -310,7 +310,9 @@ line-height: 20px; /* 142.857% */
     overflow: hidden;
 
 }
-
+.imgmsg .chatbubble{
+min-width: 50%;
+}
 
 .chatdate{
     color: var(--Text-Secondary);
@@ -361,7 +363,7 @@ display: flex;
 flex-direction: column;
 align-items: flex-start;
 gap: 10px;
-flex: 1 0 0;
+
 background-color: var(--UI-Dark-02);
 background: var(--Color-Color-03);
 color: var(--culturedblack);
@@ -371,7 +373,7 @@ font-family: Nunito Sans;
 font-size: 14px;
 font-style: normal;
 font-weight: 400;
-line-height:19px; /* 142.857% */
+line-height: 20px; /* 142.857% */
 }
 
     .mediafiles{
@@ -422,6 +424,27 @@ color: var(--white);
     flex-direction: row;
     align-items: center;
     gap: 10px;
+}
+
+.textareasection{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.quoted{
+    padding: 3px;
+    border-left: 4px solid #00f ;
+    background-color: var(--backgrounddark);
+    border-radius: 4px;
+}
+
+.quotetext{
+    padding: 5px;
+}
+.quotetitle{
+    display: flex;
+    justify-content: space-between;
 }
 .input{
     width: 100%;
@@ -776,4 +799,51 @@ border-radius: 50%;
 
 .show{
     display: flex;
+}
+
+.twolines{
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    display: -webkit-box;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+.messagerec .quotedpost{
+gap: 4px;
+}
+.messagesent .quoted{
+    background-color: #98cd6a;
+    border-color: var(--sendbtn);
+}
+
+.imgmsg{
+    min-width: 50%;
+    max-width: 55%;
+}
+.cancel{
+
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: flex;
+  text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+}
+.hide{
+    display: flex;
+}
+.messagesent .quoted .uname{
+    font-weight: 600;
+    color: var(--culturedblack) !important;
+}
+.messagesent .quotedpost {
+    gap: 4px;
+}
+.messagesent .quoted .twolines{
+    color: var(--black) !important;
+    font-size: 13px;
 }
