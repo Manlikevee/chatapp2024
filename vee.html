@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Demo styles -->
+  <style>
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .autoplay-progress {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--swiper-theme-color);
+    }
+    .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+display: flex;
+gap: 10px;
+
+    }
+
+    .swiper-pagination-bullet{
+        width: 100%;
+        border-radius: 0;
+        margin: 0;
+    } 
+
+    .autoplay-progress svg {
+      --progress: 0;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      stroke-width: 4px;
+      stroke: var(--swiper-theme-color);
+      fill: none;
+      stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+      stroke-dasharray: 125.6;
+      transform: rotate(-90deg);
+    }
+.mySwipers{
+  width: 70%;
+}
+    .stories{
+        display: flex;
+        gap: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Swiper -->
+  <div class="stories">
+    <div class="storyone" id="storyone">one</div>
+    <div class="storytwo" id="storytwo">two</div>
+    <div class="storythree" id="storythree">three</div>
+  </div>
+
+  <!-- Swiper -->
+  <div class="mySwiper-container" id="hidden">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <!-- Slides will be added dynamically using JavaScript -->
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+      <div class="autoplay-progress">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="20"></circle>
+        </svg>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper and Load Stories -->
+  <script>
+
+    const progressCircle = document.querySelector(".autoplay-progress svg");
+    const progressContent = document.querySelector(".autoplay-progress span");
+    const mySwiperContainer = document.querySelector(".mySwiper-container"); // added this line
+    const swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 5500,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      on: {
+        autoplayTimeLeft(s, time, progress) {
+          progressCircle.style.setProperty("--progress", 1 - progress);
+          progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+        }
+      }
+    });
+
+    const storiesData = [
+      {
+        name: 'storyone',
+        stories: [
+          'https://placekitten.com/600/400',
+          'https://placekitten.com/600/401',
+          'https://placekitten.com/601/400',
+        ]
+      },
+      {
+        name: 'storytwo',
+        stories: [
+          'https://placekitten.com/602/400',
+          'https://placekitten.com/603/400',
+          'https://placekitten.com/604/400',
+        ]
+      },
+      {
+        name: 'storythree',
+        stories: [
+          'https://placekitten.com/605/400',
+          'https://placekitten.com/606/400',
+          'https://placekitten.com/607/400',
+        ]
+      }
+    ];
+
+    // Handle story clicks
+    const storyButtons = document.querySelectorAll('.stories div');
+    storyButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        // Get the ID of the clicked story
+        const storyId = button.id;
+
+        // Find the corresponding story in the data
+        const selectedStory = storiesData.find(story => story.name === storyId);
+
+        if (selectedStory) {
+          // Clear existing slides
+          swiper.removeAllSlides();
+
+          // Add slides for the selected story
+          selectedStory.stories.forEach(image => {
+            swiper.appendSlide(`<div class="swiper-slide"><img src="${image}" alt="${storyId}"></div>`);
+          });
+
+          // Go to the first slide and start autoplay
+          swiper.slideTo(0);
+          swiper.autoplay.start();
+          
+          // Show mySwiper container
+          mySwiperContainer.style.display = 'block';
+        }
+      });
+    });
+
+    // Stop autoplay when reaching the last slide
+    swiper.on('slideChange', () => {
+      if (swiper.isEnd) {
+        swiper.autoplay.stop();
+        // Hide mySwiper container when reaching the last slide
+        mySwiperContainer.style.display = 'none';
+      }
+    });
+</script>
+</body>
+
+</html>
