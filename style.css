@@ -1135,8 +1135,33 @@ padding-left: 5px;
     }
 }
 
+.completemessage{
+    display: flex;
+    gap: 17px;
+    width: 100%;
+    transition: 0.5s ease-in-out;
+    align-items: center;
+}
 
+.completemessage:hover .messageopt{
+    display: flex;
+    cursor: pointer;
+}
+.messageopt{
+    transition: 0.5s ease-in-out;
+    display: none;
+    gap: 7px;
+    border-radius: 5px;
+padding: 4px;
+background-color: var(--background);
+color: var(--cultured);
+align-items: center;
+cursor:  pointer;
 
+}
+.messageopt span{
+    font-size: 20px;
+}
 
 @media screen and (max-width:600px) {
     .chatscreen{display: none;}
