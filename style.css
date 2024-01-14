@@ -288,7 +288,7 @@ line-height: 19.185px; /* 166.667% */
     max-width: 67%;
     display: flex;
     width: fit-content;
-    margin-left: auto;
+
     flex-direction: row-reverse;
 }
 
@@ -1142,8 +1142,25 @@ padding-left: 5px;
     transition: 0.5s ease-in-out;
     align-items: center;
 }
+.completemessagesent, .completemessagerec {
+    display: flex;
+    gap: 17px;
+    width: 100%;
+    transition: 0.5s ease-in-out;
+    align-items: center;
+}
 
-.completemessage:hover .messageopt{
+.completemessagesent{
+    flex-direction: row-reverse;
+}
+
+.completemessagesent .messageopt{
+    margin-left: auto;
+    transform: scale(-1);
+
+
+}
+.completemessage:hover .messageopt, .completemessagesent:hover .messageopt, .completemessagerec:hover .messageopt{
     display: flex;
     cursor: pointer;
 }
