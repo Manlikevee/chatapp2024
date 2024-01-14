@@ -9,6 +9,9 @@
 
 
 :root {
+
+    --bubblehover:#141416;
+    --story: #F1E0AC;
 --brighrtness: 0.6;
     --sendbtn: #337c09d7 ;
     --greenbar: #e1ffc7;
@@ -352,6 +355,98 @@ line-height: 18px; /* 150% */
     display: none;
 }
 
+.mySwiper-container{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  backdrop-filter: blur(1px);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+  align-items: center;
+  display: none;
+    
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+ 
+    background-color: transparent;
+    z-index: 100666;
+  backdrop-filter: blur(1px);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 777777;
+  align-items: center;
+  display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+  }
+
+  .autoplay-progress {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--swiper-theme-color);
+  }
+  .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
+display: flex;
+gap: 10px;
+
+  }
+
+  .swiper-pagination-bullet{
+      width: 100%;
+      border-radius: 0;
+      margin: 0;
+  } 
+
+  .autoplay-progress svg {
+    --progress: 0;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    stroke-width: 4px;
+    stroke: var(--swiper-theme-color);
+    fill: none;
+    stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+    stroke-dasharray: 125.6;
+    transform: rotate(-90deg);
+  }
+.mySwipers{
+width: 70%;
+height: 100vh;
+
+}
 
 .chatimg img{
     filter: brightness(var(--brighrtness));
@@ -890,7 +985,13 @@ gap: 4px;
     gap: 10px;
     overflow-y: auto;
 }
-
+.chatbubbles{
+    margin-top: 10px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+  
+}
 .sidebarextradata{
   
         overflow-y: auto;
@@ -898,9 +999,48 @@ gap: 4px;
         display: flex;
         flex-direction: column;
         gap: 10px;
+        height: 100%;
 
 }
 
+.chatbubbled{
+padding: 14px;
+padding-left: 5px;
+    width: 100%;
+    border-radius: 4px;
+    transition: 0.5s ease-in-out;
+}
+
+.chatbubbled:hover{
+    background-color: var(--bubblehover);
+    cursor: pointer;
+}
+
+.chatbubbled .userdata{
+    gap: 7px;
+    width: 100%;
+}
+.chatextra{
+    width: 20%;
+    word-break: break-all;
+}
+.chatbubbled .mg{
+    display: flex;
+}
+
+.chatbubbled .uname{
+    width: 100%;
+    font-size: 15px;
+    color: white;
+}
+
+.chatbubbled .twolines{
+    font-size: 13px;
+}
+.time{
+    width: fit-content;
+    text-align: right;
+}
 .logout{
     border-radius: 4px;
     background: var(--UI-Dark-02, #26272D);
@@ -926,4 +1066,83 @@ gap: 4px;
     width: 100%;
     padding: 10px;
     border-bottom: 1px solid var(--line);
+}
+
+.item {
+    background-color: var(--story);
+    padding: 1px;
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 4px;
+}
+.item img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
+    
+}
+
+.tts{
+
+}
+.owlsection{
+    width: 280px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-top: 10px;
+}
+
+.no-js .owl-carousel, .owl-carousel.owl-loaded {
+    display: flex !important;
+    gap: 10px;
+}
+
+.owl-carousel.owl-drag .owl-item {
+    padding-right: 10px;
+}
+
+
+@media screen and (max-width:1100px) {
+    .mediafiles{
+        display: none;
+    }
+    .owlsection{
+        width: 200px;
+    }
+    
+}
+
+@media screen and (max-width:700px) {
+    .chatbody{}
+    
+    .sidebar{
+        width: 50%;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .chatscreen{display: none;}
+    
+    .sidebar{
+        width: 100%;
+    }
+
+    .chatbubbles .usersname{
+        width: 100%;
+    }
+    .owlsection{
+        width: 100%;
+    }
+    .messagerec{
+        width: 72%;
+    }
+
+    .messagesent{
+        width: 72%;
+    }
 }

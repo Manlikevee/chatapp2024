@@ -27,7 +27,28 @@
             }
             
 
+            $(document).ready(function(){
+              $(".owl-carousel").owlCarousel({
+                items: 4, // Number of items to display
+                loop: false, // Infinite loop
+                responsive: {
             
+                  600: {
+                    items: 4 // Number of items to display on medium screens
+                  },
+                  1000: {
+                    items: 4 // Number of items to display on large screens
+                  },
+                  1400: {
+                    items: 5 // Number of items to display on large screens
+                  }
+                  ,
+                  1800: {
+                    items: 6 // Number of items to display on large screens
+                  }
+                }
+              });
+            });      
 
     
 
@@ -328,3 +349,227 @@
     // Call the function to render the conversation
     renderConversation();
 
+    const chatData = [
+      {
+        "name": "Lara Mueller",
+        "time": "Wednesday",
+        "message": "Hey, I heard that you wanted...Hey, I heard that you wanted..."
+      },
+      {
+        "name": "John Smith",
+        "time": "Thursday",
+        "message": "Hi there! What's up? Hi there! What's up? Hi there! What's up?"
+      },
+      {
+        "name": "Emily Johnson",
+        "time": "Friday",
+        "message": "I saw the movie yesterday. It was amazing!"
+      },
+      {
+        "name": "Chris Brown",
+        "time": "Saturday",
+        "message": "Did you catch the game last night? It was intense!"
+      },
+      {
+        "name": "Sophie Davis",
+        "time": "Sunday",
+        "message": "Let's plan a picnic next weekend. What do you think?"
+      },
+      {
+        "name": "Alex Turner",
+        "time": "Monday",
+        "message": "Hey, long time no see! How have you been?"
+      },
+      {
+        "name": "Mia Rodriguez",
+        "time": "Tuesday",
+        "message": "I just finished reading a great book. Would you like a recommendation?"
+      },
+      {
+        "name": "Daniel Lee",
+        "time": "Wednesday",
+        "message": "Remember that trip we took last year? Good times!"
+      },
+      {
+        "name": "Olivia White",
+        "time": "Thursday",
+        "message": "I'm thinking of redecorating my room. Any suggestions?"
+      },
+      {
+        "name": "Ethan Harris",
+        "time": "Friday",
+        "message": "Have you tried the new restaurant downtown? It's fantastic!"
+      },
+      {
+        "name": "Ava Martin",
+        "time": "Saturday",
+        "message": "Happy weekend! Any exciting plans ahead?"
+      },
+      {
+        "name": "Samuel Turner",
+        "time": "Sunday",
+        "message": "Just got back from a hiking trip. Nature is so refreshing!"
+      },
+      {
+        "name": "Zoe Baker",
+        "time": "Monday",
+        "message": "I'm learning to play the guitar. It's challenging but fun!"
+      },
+      {
+        "name": "Leo Hernandez",
+        "time": "Tuesday",
+        "message": "Thinking of starting a book club. Interested?"
+      },
+      {
+        "name": "Nora Adams",
+        "time": "Wednesday",
+        "message": "How about trying a new recipe this weekend? I can share one with you."
+      }
+      // Add more objects for additional chat bubbles
+    ];
+
+    function generateChatBubble(data) {
+      return `
+        <div class="chatbubbled">
+            <div class="userdata">
+                <div class="profilephoto">
+                    <img src="image 116.png" alt="">
+                </div>
+                <div class="usersname">
+                    <div>
+                        <small class="small mg">
+                            <div class="uname">${data.name}</div>
+                            <div class="time">${data.time}</div>
+                        </small>
+                    </div>
+                    <small class="small twolines">${data.message}</small>
+                </div>
+            </div>
+        </div>`;
+    }
+    
+    // Generate HTML for all chat bubbles
+    const chatHTML = chatData.map(generateChatBubble).join('');
+    
+    // Append generated HTML to a container (assuming you have a container with id "chatContainer")
+    document.getElementById('allchat').innerHTML = chatHTML;
+
+
+
+    const progressCircle = document.querySelector(".autoplay-progress svg");
+    const progressContent = document.querySelector(".autoplay-progress span");
+    const mySwiperContainer = document.querySelector(".mySwiper-container"); // added this line
+    const swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 5500,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      on: {
+        autoplayTimeLeft(s, time, progress) {
+          progressCircle.style.setProperty("--progress", 1 - progress);
+          progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+        }
+      }
+    });
+
+    const storiesData = [
+      {
+        name: 'storyone',
+        stories: [
+          'https://plus.unsplash.com/premium_photo-1677215211005-0305cb45e09f?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1653669486781-7265d7824b44?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1653669486980-7891ab4b261e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1543269664-56d93c1b41a6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        ]
+      },
+      {
+        name: 'storytwo',
+        stories: [
+          'https://placekitten.com/602/400',
+          'https://placekitten.com/603/400',
+          'https://placekitten.com/604/400',
+        ]
+      },
+      {
+        name: 'storythree',
+        stories: [
+          'https://placekitten.com/605/400',
+          'https://placekitten.com/606/400',
+          'https://placekitten.com/607/400',
+        ]
+      }
+    ];
+
+    // Handle story clicks
+    const storyButtons = document.querySelectorAll('.stories div');
+    storyButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        // Get the ID of the clicked story
+        const storyId = button.id;
+
+        // Find the corresponding story in the data
+        const selectedStory = storiesData.find(story => story.name === storyId);
+
+        if (selectedStory) {
+          // Clear existing slides
+          swiper.removeAllSlides();
+
+          // Add slides for the selected story
+          selectedStory.stories.forEach(image => {
+            swiper.appendSlide(`<div class="swiper-slide"><img src="${image}" alt="${storyId}"></div>`);
+          });
+
+          // Go to the first slide and start autoplay
+          swiper.slideTo(0);
+          swiper.autoplay.start();
+          
+          // Show mySwiper container
+          mySwiperContainer.style.display = 'block';
+        }
+      });
+    });
+
+    // Stop autoplay when reaching the last slide
+    swiper.on('slideChange', () => {
+      if (swiper.isEnd) {
+        swiper.autoplay.stop();
+        // Hide mySwiper container when reaching the last slide
+        mySwiperContainer.style.display = 'none';
+      }
+    });
+
+
+
+    
+    
+
+    function myswitch() {
+      // Get references to the elements
+      switchicon = document.getElementById('switch');
+      sidebar = document.getElementById('sidebar');
+      chatsection = document.getElementById('chatscreen');
+  
+      // Toggle the display property
+      if (sidebar.style.display === 'none') {
+          // If sidebar is hidden, show it and hide chat screen
+          sidebar.style.display = 'flex';
+          chatsection.style.display = 'none';
+          adjustChatDataHeight()
+      } else {
+          // If sidebar is visible, hide it and show chat screen
+          sidebar.style.display = 'none';
+          chatsection.style.display = 'flex';
+          adjustChatDataHeight()
+      }
+  }
+  
