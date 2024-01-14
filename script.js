@@ -67,7 +67,7 @@
             type: "image",
             sender: "rec",
             message: "Hey there! Have you heard about how AI is changing the world?",
-            imageUrl: "https://images.unsplash.com/photo-1682687982167-d7fb3ed8541d?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            imageUrl: "https://plus.unsplash.com/premium_photo-1677215211005-0305cb45e09f?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         },
         {
             "type": "text",
