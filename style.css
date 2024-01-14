@@ -6,7 +6,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+html {
+    scroll-behavior: smooth;
+    /*Adds smooth scrolling instead of snapping to element*/
+  }
 
 :root {
 
@@ -545,6 +548,7 @@ color: var(--white);
     border-left: 4px solid #00f ;
     background-color: var(--backgrounddark);
     border-radius: 4px;
+    text-decoration: none;
 }
 
 .quotetext{

@@ -112,6 +112,12 @@
             message: "That Image image looks fascinating! AI is enabling creativity and innovation."
         },
         {
+          id : 'code88833',
+          type: "text",
+          sender: "rec",
+          message: "Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. I don’t know where I would be without your love. To the most wonderful woman I know, thank you for constantly bringing out the best in me."
+      },
+        {
             type: "text",
             sender: "sent",
             message: "Absolutely! It's amazing to see how AI is transforming various aspects of our lives."
@@ -243,11 +249,21 @@
             "quotemessage": "Homemade pasta is a culinary masterpiece! I have a soft spot for sushi – the delicate balance of flavors is pure bliss. Now, onto a topic that stirs passion in many hearts: football! Do you have a favorite team that you cheer for with all your might?"
           },
 
-          {
-            id: '22',
-            type: "text",
-            sender: "rec",
-            message: "Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. I don’t know where I would be without your love. To the most wonderful woman I know, thank you for constantly bringing out the best in me."
+
+        {
+          "id" : 'code884833',
+          "type": "text",
+          "sender": "sent",
+          "message": "Hey there! 😊 Can I steal a moment of your time?"
+        },
+        {
+          "id" : 'code88844',
+          "type": "replytext",
+          "sender": "rec",
+          "message": "Of course! What's on your mind?",
+          "from": "You",
+          "quotemessage": "Hey there! 😊 Can I steal a moment of your time?",
+          "quotedid":"code88833",
         },
     ];
     
@@ -313,22 +329,25 @@
                             </div>`;
         }
         else if (message.type === 'replytext') {
-            messageHTML += `<div class="${message.sender === 'sent' ? 'messagesent' : 'messagerec'}">
+            messageHTML += `<div class="${message.sender === 'sent' ? 'messagesent' : 'messagerec'}" id=${message.id ?  message.id : '#'}>
                                 <div class="edgecontrol">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
                                 <path d="${message.sender === 'sent' ? 'M18.5039 3.6641C20.1503 2.56645 19.3733 3.61246e-06 17.3944 3.52596e-06L2.60673e-06 -9.53989e-08L1.90735e-06 16L18.5039 3.6641Z' : 'M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z'}" fill="${message.sender === 'sent' ? 'var(--greenbar)' : 'var(--greybar)'}"/>
                             </svg>
                                 </div>
                                 <div class="chatbubble quotedpost">
-                                <div class="quoted">
+                                <a class="quoted" href="${message.quotedid ? '#' + message.quotedid : '#'}">
                                 <div class="quotetext">
                                 <div class="quotetitle uname">${message.from} </div>
                                 <small class="small twolines">
                                 ${message.quotemessage}  
                                 </div>    
                                 </small>
-                               </div>
-                                ${message.message}</div>
+                               </a>
+
+                                ${message.message}
+                                
+                                </div>
                             </div>`;
         }
         
@@ -424,7 +443,8 @@
         "name": "Nora Adams",
         "time": "Wednesday",
         "message": "How about trying a new recipe this weekend? I can share one with you."
-      }
+      },
+
       // Add more objects for additional chat bubbles
     ];
 
