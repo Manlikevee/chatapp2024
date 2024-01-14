@@ -573,3 +573,16 @@
       }
   }
   
+
+  function updateContainerHeight() {
+    var container = document.querySelector('.container');
+    container.style.height = window.innerHeight + 'px';
+    adjustChatDataHeight()
+}
+
+// Initial height calculation
+updateContainerHeight();
+
+
+// Update height on window resize
+window.addEventListener('resize', updateContainerHeight);

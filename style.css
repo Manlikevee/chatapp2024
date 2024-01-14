@@ -74,7 +74,14 @@ main{
     height: 100%;
 }
 
-
+.container{
+    width: 100%;
+    margin: auto;
+display: flex;
+    background-color: white;
+height: 100vh;
+    
+}
 @media screen and (max-width: 2000px) {
 .container{
     width: 1600px;
@@ -90,7 +97,7 @@ height: 100vh;
     .container{
         width: 1800px;
         margin: auto;
-    
+        display: flex;
     background-color: white;
     height: 100vh;
         
@@ -101,7 +108,7 @@ height: 100vh;
         .container{
             width: 3500px;
             margin: auto;
-        
+            display: flex;
         background-color: white;
         height: 100vh;
             
@@ -112,7 +119,7 @@ height: 100vh;
     .container{
         width: 100%;
         margin: auto;
-   
+        display: flex;
         background-color: white;
     height: 100vh;
         
@@ -1141,10 +1148,27 @@ padding-left: 5px;
         width: 100%;
     }
     .messagerec{
-        width: 72%;
+        width: 82%;
+        max-width: 80%;
     }
 
     .messagesent{
-        width: 72%;
+        max-width: 80%;
+        width: 82%;
     }
+    .chatimg {
+        width: 100%;
+        height: 100%;
+        max-height: 400px;
+        overflow: hidden;
+    }
+    .imgmsg .chatbubble{
+        width: 82%;
+    }
+    .imgmsg {
+        min-width: 60%;
+        max-width: 74%;
+    }
+    
+    
 }
