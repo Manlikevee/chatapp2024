@@ -631,6 +631,21 @@
   }
   
 
+function searchshow() {
+
+
+  const searchbtn = document.getElementById('srch');
+  const overlay = document.getElementById('overlay');
+  const seachbox = document.getElementById('search');
+
+  // Toggle the 'show' class on overlay and overlaydata
+  overlay.classList.toggle('show');
+  seachbox.classList.toggle('searchshow');
+
+
+
+}
+
   function updateContainerHeight() {
     var container = document.querySelector('.container');
     container.style.height = window.innerHeight + 'px';

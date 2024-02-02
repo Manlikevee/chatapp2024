@@ -70,12 +70,23 @@
                             <div class="toggle"><span class="material-symbols-outlined">
                                     more_vert
                                 </span></div>
+                                <div class="toggle srch" id="srch" onclick="searchshow()">
+                                    <span class="material-symbols-outlined">
+                                        search
+                                    </span>
+                                </div>
+
                         </div>
+
+
 
 
                     </div>
                 </div>
-                <div class="sidebardatas">
+                <div class="sidebardatas" id="search" onclick="searchshow()">
+                    <div class="closed">
+                        x
+                    </div>
                     <div class="searchinput">
                         <input type="text" placeholder="Search"> <span class="material-symbols-outlined">
                             search
@@ -111,10 +122,10 @@
                     </div>
 
                 </div>
-                <div class="sidebarextradata">
+                <div class="sidebarextradata" id="msgdta">
                     <div class="sidebardatas">
                         <div class="infotitle" id="switch" onclick="myswitch()">
-                            Stories
+                            Messages
                         </div>
                         <div class="chatbubbles" id="allchat">
 
@@ -427,7 +438,9 @@
 
 
 
+
         </div>
+        
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Tabs</title>
+    <style>
+      /* Add your styling for tabs here */
+      .tab {
+        display: block;
+        padding: 10px;
+        text-align: center;
+        height: 250px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+  
+    <!-- Tabs container -->
+    <div id="tabs-container">
+      <!-- Tabs will be dynamically added here -->
+      <div class="tab" id="tab333">tab333</div>
+      <div id="tab1" class="tab" style="background-color: rgb(36, 56, 223)">
+        <h2>tab1</h2>
+      </div>
+      <div id="tab2" class="tab" style="background-color: rgb(100, 104, 7)">
+        <h2>tab2</h2>
+      </div>
+      <div id="tab3" class="tab" style="background-color: rgb(138, 10, 179)">
+        <h2>tab3</h2>
+      </div>
+      <div id="tab4" class="tab" style="background-color: rgb(254, 16, 55)">
+        <h2>tab4</h2>
+      </div>
+      <div id="tab5" class="tab" style="background-color: rgb(176, 246, 102)">
+        <h2>tab5</h2>
+      </div>
+      <div id="tab20" class="tab"><h2>tab20yoo</h2></div>
+      <div id="tab6" class="tab" style="background-color: rgb(202, 101, 42)">
+        <h2>tab6</h2>
+      </div>
+      <div id="tab7" class="tab" style="background-color: rgb(176, 28, 110)">
+        <h2>tab7</h2>
+      </div>
+      <div id="tab8" class="tab" style="background-color: rgb(25, 252, 26)">
+        <h2>tab8</h2>
+      </div>
+      <div id="tab9" class="tab" style="background-color: rgb(202, 108, 117)">
+        <h2>tab9</h2>
+      </div>
+      <div id="tab10" class="tab"><h2>tab10</h2></div>
+      <div id="tab11" class="tab" style="background-color: rgb(156, 92, 170)">
+        <h2>tab11</h2>
+      </div>
+      <div id="tab12" class="tab" style="background-color: rgb(164, 210, 57)">
+        <h2>tab12</h2>
+      </div>
+      <div id="tab13" class="tab" style="background-color: rgb(100, 223, 192)">
+        <h2>tab13</h2>
+      </div>
+      <div id="tab14" class="tab" style="background-color: rgb(212, 88, 195)">
+        <h2>tab14</h2>
+      </div>
+      <div id="tab15" class="tab" style="background-color: rgb(42, 72, 175)">
+        <h2>tab15</h2>
+      </div>
+      <div id="tab16" class="tab" style="background-color: rgb(102, 96, 170)">
+        <h2>tab16</h2>
+      </div>
+      <div id="tab17" class="tab" style="background-color: rgb(155, 154, 249)">
+        <h2>tab17</h2>
+      </div>
+      <div id="tab18" class="tab" style="background-color: rgb(143, 211, 198)">
+        <h2>tab18</h2>
+      </div>
+      <div id="tab19" class="tab" style="background-color: rgb(212, 252, 110)">
+        <h2>tab19</h2>
+      </div>
+
+      <div id="tab20" class="tab" style="background-color: rgb(211, 5, 193)">
+        <h2>tab2000000000</h2>
+      </div>
+      <div id="tab22" class="tab" style="background-color: rgb(48, 112, 1)">
+        <h2>tab22</h2>
+      </div>
+      <div id="tab23" class="tab" style="background-color: rgb(242, 79, 255)">
+        <h2>tab23</h2>
+      </div>
+      <div id="tab24" class="tab" style="background-color: rgb(238, 239, 65)">
+        <h2>tab24</h2>
+      </div>
+      <div id="tab25" class="tab" style="background-color: rgb(167, 9, 242)">
+        <h2>tab25</h2>
+      </div>
+      <div id="tab26" class="tab" style="background-color: rgb(249, 151, 74)">
+        <h2>tab26</h2>
+      </div>
+      <div id="tab27" class="tab" style="background-color: rgb(113, 202, 69)">
+        <h2>tab27</h2>
+      </div>
+      <div id="tab28" class="tab" style="background-color: rgb(46, 48, 77)">
+        <h2>tab28</h2>
+      </div>
+      <div id="tab29" class="tab" style="background-color: rgb(216, 223, 128)">
+        <h2>tab29</h2>
+      </div>
+      <div id="tab30" class="tab" style="background-color: rgb(221, 97, 165)">
+        <h2>tab30</h2>
+      </div>
+    </div>
+    <a href="#tab20">tab21</a>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Create tabs dynamically
+            for (let i = 1; i <= 30; i++) {
+                const tabId = (i === 20 || i === 21) ? 'tab20' : 'tab' + i;
+                createTab(tabId);
+            }
+    
+            // Scroll to #tab23 when the page loads
+            scrollToTab('tab23');
+        });
+    
+        function createTab(tabId) {
+            // Create tab element
+            const tab = document.createElement('div');
+            tab.id = tabId;
+            tab.className = 'tab';
+    
+            // Set random background color
+            const randomColor = getRandomColor();
+            tab.style.backgroundColor = randomColor;
+    
+            // Set text content
+            tab.innerHTML = `<h2>${tabId}</h2>`;
+            
+            // Append tab to tabs container
+            document.getElementById('tabs-container').appendChild(tab);
+        }
+    
+        function getRandomColor() {
+            // Generate a random hex color
+            return '#' + Math.floor(Math.random()*16777215).toString(16);
+        }
+    
+        function scrollToTab(tabId) {
+            // Scroll to the specified tab
+            const tabElement = document.getElementById(tabId);
+            if (tabElement) {
+                tabElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+  </body>
+</html>
