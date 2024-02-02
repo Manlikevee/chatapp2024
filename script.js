@@ -632,8 +632,10 @@
   
 
 function searchshow() {
+  switchicon = document.getElementById('switch');
+  sidebar = document.getElementById('sidebar');
 
-
+  console.log('kekekek')
   const searchbtn = document.getElementById('srch');
   const overlay = document.getElementById('overlay');
   const seachbox = document.getElementById('search');
