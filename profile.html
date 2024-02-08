@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Veechat</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#26272D" />
+<meta name="description" content="VeeChat: Redefining Messaging Excellence. Elevate your communication experience with VeeChat, a dynamic messaging web app. Seamlessly connect, share, and collaborate with friends and colleagues. Enjoy a feature-packed platform that prioritizes security, innovation, and user-friendly design. Experience the future of messaging – VeeChat, where every conversation becomes an exceptional journey. Start chatting, start connecting!">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+</head>
+
+
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="overlay" id="overlay"></div>
+    <div class="swipecont">
+        <div class="mySwiper-container" id="hidden">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slides will be added dynamically using JavaScript -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <div class="autoplay-progress">
+                    <svg viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20"></circle>
+                    </svg>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main>
+
+        <div class="container">
+            <div class="sidebar" id="sidebar">
+                <div class="sidebarheader">
+                    <div class="chatscreenheader">
+                        <div class="userdata">
+                            <div class="profilephoto">
+                                <img src="image 40.png" alt="">
+                            </div>
+                            <div class="usersname">
+                                <div> <small class="small uname">ManLikeVee<img src="Vector (47).svg" alt=""> </small>
+                                </div>
+                                <small class="small">odahviktor@gmail.com</small>
+                            </div>
+                        </div>
+                        <div class="usersettings">
+                            <div class="search"> <span class="material-symbols-outlined">
+                                    add_comment
+                                </span></div>
+                            <div class="toggle"><span class="material-symbols-outlined">
+                                    more_vert
+                                </span></div>
+                                <div class="toggle srch" id="srch" onclick="searchshow()">
+                                    <span class="material-symbols-outlined">
+                                        search
+                                    </span>
+                                </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <div class="sidebardatas" id="search" >
+                    <div class="closed" onclick="searchshow()">
+                        x
+                    </div>
+                    <div class="searchinput">
+                        <input type="text" placeholder="Search"> <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </div>
+                </div>
+                <div class="sidebardatas">
+                    <div class="infotitle">
+                        Stories
+                    </div>
+                    <div class="owlsection">
+                        <div class="owl-carousel stories">
+                            <div class="tts">
+                                <div class="item" id="storyone"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item" id="storytwo"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item" id="storythree"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <!-- Add more items as needed -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="sidebarextradata" id="msgdta">
+                    <div class="sidebardatas">
+                        <div class="infotitle" id="switch" onclick="myswitch()">
+                            Messages
+                        </div>
+                        <div class="chatbubbles" id="allchat">
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="messagesettings">
+                    <div class="logoutbtn">
+                        <div class="logout">
+                            <div class="icon">
+                                <span class="material-symbols-outlined">
+                                    logout
+                                </span>
+                            </div>
+                            <div class="messagetext">Logout</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="chatscreen" id="chatscreen">
+
+
+                <div class="chatbody">
+                    <div class="chatcontainer" id="profilecontainer">
+                      
+                        <div class="charheader">
+                            <div class="chatscreenheader">
+                                <div class="userdata">
+                                    <div class="profilephoto">
+                                        <img src="image 40.png" alt="">
+                                    </div>
+                                    <div class="usersname" onclick="myswitch()">
+                                        <div> <small class="small uname">Lara Mueller <img src="Vector (47).svg" alt="">
+                                            </small></div>
+                                        <small class="small">Last Seen yesterday at 4:00 pm</small>
+                                    </div>
+                                </div>
+                                <div class="usersettings">
+                                    <div class="search">
+                                        <span class="material-symbols-outlined">
+                                            search
+                                        </span>
+                                    </div>
+                                    <div class="toggle"><span class="material-symbols-outlined">
+                                            more_vert
+                                        </span></div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="profilecontent" id="profilecontent">Profile content
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non in corporis quasi, fugit eaque adipisci ipsum dolorem. Eum incidunt ipsam asperiores sapiente, aliquid voluptas nam error dignissimos eveniet repellat placeat tenetur inventore sit, vel quae et quod quam laborum maiores sed delectus veniam voluptates itaque! Fugiat, consequuntur eveniet provident illum et totam ullam alias. Ratione exercitationem tenetur facilis reprehenderit odit dolorum eos quaerat, et ipsa facere quam consequuntur tempore eius modi praesentium! Temporibus optio et est aperiam animi itaque maxime rerum doloribus, officia accusamus asperiores laboriosam nesciunt quae eligendi quod soluta, eos sequi fuga eius obcaecati in qui. Earum officia amet dolore officiis cumque velit dolorem eum doloribus praesentium illum, aut reiciendis quibusdam! Iste ipsam repudiandae fugit omnis nostrum itaque at esse, distinctio veniam cum dicta nesciunt quaerat maiores quod ex natus ullam officiis eaque consectetur incidunt! Laborum neque impedit beatae recusandae aut culpa fuga, ipsum accusantium perspiciatis facere explicabo, accusamus placeat incidunt eveniet cumque dolorem reiciendis delectus aspernatur quasi ea? Laboriosam incidunt non iure corporis illum, provident dolore sapiente eveniet sunt, commodi sit fugit magni perferendis quod cumque assumenda est. Totam quis odio aliquam aliquid voluptates sint officia excepturi at, doloremque fugiat voluptatem ipsam, pariatur molestiae ipsa, assumenda unde fugit amet dolore ipsum quisquam? Placeat ipsam nulla omnis tenetur amet ab eum autem delectus unde, doloremque qui quibusdam quae voluptatum minima consequuntur neque similique debitis non esse repellendus illum vitae deserunt explicabo necessitatibus! Corporis architecto minima illum non quam quae autem neque maxime alias libero deleniti similique obcaecati nulla quisquam consectetur saepe, molestias id velit animi iure itaque quaerat ut repudiandae recusandae. Alias deserunt, atque similique ullam ab ea minus, animi consequatur officiis voluptas dignissimos autem dolores nulla cumque mollitia voluptatum sequi reiciendis saepe voluptatem facere? Corrupti quia nam iusto qui repudiandae officiis deserunt! Possimus natus obcaecati nemo sed? Laudantium voluptas amet facere vel, dolorem nobis dolor asperiores fugiat eos blanditiis, rerum nihil possimus neque sapiente maxime illum, ad exercitationem reprehenderit. Est quo esse itaque aliquam impedit minima dicta ducimus ad odio exercitationem tenetur doloribus, possimus sequi laboriosam eligendi at assumenda distinctio? Fugit minus porro soluta cupiditate, minima impedit! Ipsum, explicabo laudantium. Cupiditate quas sit facere non quasi nam fugiat unde. Voluptatem esse nesciunt repellendus qui, doloribus culpa maiores eos. Ducimus doloribus atque non tempora, sint quae placeat error veniam, rem ratione autem sed unde, a adipisci architecto quis quaerat odit quas repellat et cum voluptatem. Numquam praesentium magni dolor quo possimus eligendi ad veritatis delectus quas vitae aut aspernatur nemo mollitia facere dicta a officia nam sed alias quasi iusto, reprehenderit quis eum. Neque, vel! Minus dolore deserunt perspiciatis omnis tempore animi tenetur. Ut vitae dignissimos nobis harum dolores illum, magnam impedit non in numquam deleniti, tempore voluptate enim laudantium expedita sint aperiam provident quaerat optio eius vero velit? Minima quos nisi minus quo dolor porro quia consequuntur similique, cumque soluta doloribus placeat perspiciatis suscipit officia nemo corrupti quisquam? Ipsa error, obcaecati atque provident sunt, ex quod iusto deleniti ipsam consectetur totam quia dicta cupiditate nisi! Libero, ipsam.
+                        </div>
+                     
+                    </div>
+                
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+        
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="script.js" async defer></script>
+
+    
+</body>
+
+</html>
