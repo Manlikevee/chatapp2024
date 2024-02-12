@@ -1505,13 +1505,21 @@ overflow-wrap: break-word;
     opacity: 1;
     background-color: #333;
   }
+  
+  .steps{
+    display: flex;
+ width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--culturedtwo);
+  }
 .stepup{
     width: 100%;
     display: flex;
 }
   .popup {
     background-color: var(--backgrounddark);
-    width: 90%;
+    width: 65%;
     padding: 30px 40px;
     position: absolute;
     transform: translate(-50%, -50%);
