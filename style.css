@@ -1698,6 +1698,12 @@ text-align: left;
     .sidebar{
         width: 100%;
     }
+
+    .chatscreenheader {
+
+        position: fixed;
+        width: 100%;
+    }
     .popup {
         width: 90%;
         margin: auto;
