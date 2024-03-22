@@ -266,7 +266,7 @@
           "from": "You",
           'datetime': new Date(),
           "quotemessage": "Hey there! 😊 Can I steal a moment of your time?",
-          "quotedid":"88833",
+          "quotedid": "88833",
         },
     ];
 
@@ -482,12 +482,37 @@ function replyto(id){
       return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-    function createconversation() {
+
+
+
+
+
+
+
+
+
+  function createconversation() {
       let message = document.getElementById('mymessage').value
       let quotedids = document.getElementById('quotedid').value
+      var file = document.getElementById('myimg').files[0];
+      console.log(file)
       
-      
-      if(quotedids && message) {
+
+     if(message && file){
+        let data = {
+          id: getRandomNumber(1, 990000),
+           type: "image",
+           sender: "sent",
+           from: "victor",
+           message: message,
+           datetime: new Date(),
+       }
+
+       compressAndEncodeToBase64(file=file, data=data);
+
+      }
+
+      else if(quotedids && message && !file) {
         conversationData.push({
           id: getRandomNumber(1, 990000),
            type: "replytext",
@@ -509,11 +534,7 @@ function replyto(id){
       });
       }
       
-      else if(message && !quotedids){
-console.log(
  
-)
-      }
       
       else{
         alert('message cannot be empty')
@@ -524,6 +545,94 @@ console.log(
 
     renderConversation();
     }
+
+
+
+    function displayFileSize(size, elementId) {
+      var fileSizeDisplay = document.getElementById(elementId);
+      var fileSizeFormatted = (size / 1024).toFixed(2) + " KB";
+      fileSizeDisplay.textContent = "File Size: " + fileSizeFormatted;
+  }
+
+
+  async function compressAndEncodeToBase64(file, data) {
+console.log(data)
+var quality = 60;
+var output_format = 'jpg';
+
+var reader = new FileReader();
+
+reader.onload = function () {
+  var img = new Image();
+  img.src = reader.result;
+
+  img.onload = function () {
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // Check if the image has transparency
+      var hasTransparency = false;
+      ctx.drawImage(img, 0, 0);
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < imageData.data.length; i += 4) {
+          if (imageData.data[i + 3] < 255) { // Check alpha value
+              hasTransparency = true;
+              break;
+          }
+      }
+
+      // If image has transparency, draw it onto a white background before converting to JPEG
+      if (hasTransparency) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+          ctx.fillStyle = '#FFFFFF'; // Set background color to white
+          ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas with white
+      }
+
+      // Draw image onto canvas
+      ctx.drawImage(img, 0, 0);
+
+      // Convert canvas to JPEG
+      canvas.toBlob(function (blob) {
+          var readerBlob = new FileReader();
+          readerBlob.readAsDataURL(blob);
+          readerBlob.onloadend = function () {
+              var base64Result = URL.createObjectURL(blob);
+              // var target_img = document.getElementById("target_img");
+              // target_img.src = base64Result;
+              // displayFileSize(blob.size, "compressed_file_size");
+              console.log("Compressed file size:", blob.size);
+              data.imageUrl = base64Result
+              conversationData.push(data)
+              document.getElementById('myimg').value = ''
+              renderConversation();
+
+            
+          };
+      }, 'image/jpeg', quality / 100);
+  };
+};
+
+reader.onerror = function (error) {
+  console.error("Error:", error);
+};
+
+reader.readAsDataURL(file);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const chatData = [
       {

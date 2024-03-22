@@ -20,7 +20,7 @@
 
             reader.addEventListener("load", function () {
                 var source_img = document.getElementById("source_img");
-                source_img.src = reader.result;
+                // source_img.src = reader.result;
                 displayFileSize(file.size, "original_file_size");
                 compressAndEncodeToBase64(file=file, name='vee');
             }, false);
@@ -84,6 +84,7 @@
                     target_img.src = base64Result;
                     displayFileSize(blob.size, "compressed_file_size");
                     console.log("Compressed file size:", blob.size);
+                  
                 };
             }, 'image/jpeg', quality / 100);
         };
