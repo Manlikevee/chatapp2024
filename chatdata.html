@@ -7,6 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+
+
+
+    <div id="chatData" style="overflow-y: scroll; height: 200px; border: 1px solid #ddd;">
+        <!-- dynamic chat messages would show here -->
+        <span id="bottom"></span>
+    </div>
+    <button id="addDummyData">Add Dummy Data</button>
+    
+
+
+
+<!-- 
     <div class="messagesent">
         <div class="edgecontrol">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
@@ -190,6 +203,59 @@
         },
 
     ]
+    </script> -->
+
+    <script>
+ // Get references to the elements
+let chatData = document.getElementById('chatData');
+let bottomSpan = document.getElementById('bottom');
+let addDummyDataBtn = document.getElementById('addDummyData');
+
+// Function to check if the user is at the bottom of the chat view
+function isUserAtBottom() {
+    console.log('scrolltop plus client height', chatData.scrollTop + chatData.clientHeight)
+    console.log('scroll height', chatData.scrollHeight)
+if(chatData.scrollTop + chatData.clientHeight === chatData.scrollHeight ){
+    console.log('sameeeeee')
+}
+
+
+}
+
+// Function to scroll to the bottom of the chat view
+function scrollToBottom() {
+    chatData.scrollTop = chatData.scrollHeight;
+    console.log('fff')
+}
+
+// Function to add dummy data to the chat view
+function addDummyData() {
+    if (chatData.scrollHeight - (chatData.scrollTop + chatData.clientHeight) < 50) {
+    scrollToBottom();
+}
+    // Add dummy data to the chat view here
+    let dummyData = document.createElement('div');
+    dummyData.textContent = 'Dummy Data';
+    chatData.appendChild(dummyData);
+
+    if (chatData.scrollHeight - (chatData.scrollTop + chatData.clientHeight) < 50) {
+    scrollToBottom();
+}
+    // Scroll to the bottom if the user is already at the bottom
+
+}
+
+// Event listener for button click to add dummy data
+addDummyDataBtn.addEventListener('click', addDummyData);
+
+// Event listener for scroll events on the chat view
+chatData.addEventListener('scroll', function() {
+    // Automatically scroll to the bottom if the user is at the bottom
+    if (isUserAtBottom()) {
+        scrollToBottom();
+    }
+});
+
     </script>
 </body>
 </html>

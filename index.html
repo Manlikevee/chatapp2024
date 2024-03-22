@@ -189,7 +189,7 @@
                         </div>
 
                         <div class="chatdata" id="chatData">
-
+<!-- 
 <div class="completemessage ">
     <div class="messagerec ">
         <div class="edgecontrol">
@@ -258,8 +258,39 @@
 
                             <div class="chatdate">
                                 Today
+                            </div> -->
+
+                            <div class="messagesent">
+                                <div class="edgecontrol">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16"
+                                        fill="none">
+                                        <path
+                                            d="M18.5039 3.6641C20.1503 2.56645 19.3733 3.61246e-06 17.3944 3.52596e-06L2.60673e-06 -9.53989e-08L1.90735e-06 16L18.5039 3.6641Z"
+                                            fill="var(--greenbar)" />
+                                    </svg>
+                                </div>
+                                <div class="chatbubble quotedpost">
+                                    <div class="quoted">
+                                        <div class="quotetext">
+                                            <div class="quotetitle uname">You </div>
+                                            <small class="small twolines">
+                                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet,
+                                                dolor. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
+                                                aperiam?
+                                        </div>
+                                        </small>
+                                    </div>
+
+                                    lsnc nsnc c nsnc s sansncnasc nanscjsc nsanc Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Veniam, illum delectus perferendis vel quia sit quo voluptate,
+                                    excepturi quidem veritatis, obcaecati id dolorem
+
+                                
+                                </div>
                             </div>
-                            <div id="chatContainer"></div>
+                            <div id="chatContainer">
+
+                            </div>
 
                         </div>
                         <div class="chatfooter">
@@ -303,26 +334,17 @@
                                         attach_file_add
                                     </span>
                                 </div>
-                                <div class="textareasection">
-                                    <div class="quoted hide">
-                                        <div class="quotetext">
-                                            <div class="quotetitle uname">Lara Mueller <div class="cancel">x</div>
-                                            </div>
-                                            <small class="small twolines">
-                                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                dolor. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-                                                aperiam?
-                                        </div>
-                                        </small>
-                                    </div>
+                                <div class="textareasection" >
+                                    <div id="qtd"></div>
+                                
                                     <div class="input">
-
-                                        <textarea name="" id="" rows="1" placeholder="Write a message"></textarea>
+<input type="hidden" name="" id="quotedid">
+                                        <textarea name="" id="mymessage" rows="1" placeholder="Write a message"></textarea>
                                     </div>
                                 </div>
 
 
-                                <div class="attachment snd" id="attachmentbtn">
+                                <div class="attachment snd" id="attachmentbtn" onclick="createconversation()">
                                     <span class="material-symbols-outlined">
                                         send
                                     </span>
@@ -379,7 +401,7 @@
                                 <div class="mediatitle">
                                     Media, Links and Documents
                                 </div>
-                                <div class="mediacontainer">
+                                <!-- <div class="mediacontainer">
                                     <div class="media">
                                         <img src="https://images.unsplash.com/photo-1704642406927-d454ea541612?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                             alt="">
@@ -392,7 +414,7 @@
                                         <img src="https://images.unsplash.com/photo-1682695795557-17447f921f79?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                             alt="">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="messagesettings">
