@@ -1729,12 +1729,12 @@ text-align: left;
         width: 100%;
     }
     .messagerec{
-        max-width: 85%;
+        max-width:85%;
         width: 85%;
     }
 
     .messagesent{
-        max-width: 85%;
+        max-width:85%;
         width: 85%;
     }
     .chatimg {
@@ -1748,8 +1748,23 @@ text-align: left;
     }
     .imgmsg {
         min-width: 60%;
-        max-width: 79%;
+        max-width: 85%;
     }
-    
+    .chatdata {
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+
+        scroll-behavior: smooth;
+        transition: 0.2s;
+    }
+
+    .edgecontrol {
+        width: 12px;
+        height: 19px;
+    }
     
 }
