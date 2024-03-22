@@ -507,7 +507,15 @@ function replyto(id){
           message: message,
           datetime: new Date(),
       });
-      } else{
+      }
+      
+      else if(message && !quotedids){
+console.log(
+ 
+)
+      }
+      
+      else{
         alert('message cannot be empty')
       }
       document.getElementById('mymessage').value = ''
