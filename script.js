@@ -359,7 +359,8 @@
                             </svg>
                                 </div>
                                 <div class="chatbubble">${message.message}
-                                <div class="smallspan"> ${formatDateTime(message.datetime)}  &#10003;&#10003;   </div>
+                                <div class="smallspan"> ${formatDateTime(message.datetime)}  
+                                <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
                                 </div>
                             </div>
                             <div class="messageopt" onclick="replyto(${message.id})" >
@@ -395,7 +396,8 @@
                                </a>
                              
                                 ${message.message}
-                                <div class="smallspan"> ${formatDateTime(message.datetime)} &#10003;&#10003;  </div>
+                                <div class="smallspan"> ${formatDateTime(message.datetime)} 
+                                <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
                                 </div>
                             </div>
                             <div class="messageopt"  onclick="replyto(${message.id})" >

@@ -1002,8 +1002,10 @@ gap: 4px;
     gap: 4px;
 }
 .messagesent .quoted .twolines{
-    color: var(--black) !important;
     font-size: 13px;
+    -webkit-line-clamp: 2;
+    color: var(--black) !important;
+    line-height: normal;
 }
 
 .sidebarheader{
@@ -1699,11 +1701,7 @@ text-align: left;
         width: 100%;
     }
 
-    .chatscreenheader {
-
-        position: fixed;
-        width: 100%;
-    }
+    
     .popup {
         width: 90%;
         margin: auto;
