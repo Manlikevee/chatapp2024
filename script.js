@@ -27,29 +27,7 @@
             }
             
 
-            $(document).ready(function(){
-              $(".owl-carousel").owlCarousel({
-                items: 4, // Number of items to display
-                loop: false, // Infinite loop
-                responsive: {
-            
-                  600: {
-                    items: 4 // Number of items to display on medium screens
-                  },
-                  1000: {
-                    items: 4 // Number of items to display on large screens
-                  },
-                  1400: {
-                    items: 5 // Number of items to display on large screens
-                  }
-                  ,
-                  1800: {
-                    items: 6 // Number of items to display on large screens
-                  }
-                }
-              });
-            });      
-
+      
             let active = 1;
 
 const chatData = [
@@ -793,3 +771,28 @@ function toggleFullscreen() {
       }
   }
 }
+
+
+
+$(document).ready(function(){
+  $(".owl-carousel").owlCarousel({
+    items: 4, // Number of items to display
+    loop: false, // Infinite loop
+    responsive: {
+
+      600: {
+        items: 4 // Number of items to display on medium screens
+      },
+      1000: {
+        items: 4 // Number of items to display on large screens
+      },
+      1400: {
+        items: 5 // Number of items to display on large screens
+      }
+      ,
+      1800: {
+        items: 6 // Number of items to display on large screens
+      }
+    }
+  });
+});      
