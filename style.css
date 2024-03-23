@@ -147,7 +147,9 @@ height: 100vh;
    
     }
 
- 
+ .moveup{
+    padding-top: -4px;
+ }
     .chatdata {
         overflow-y: auto;
         width: 100%;
