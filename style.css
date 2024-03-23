@@ -19,7 +19,7 @@ html {
     --sendbtn: #337c09d7 ;
     --greenbar: #e1ffc7;
     --greybar:#26272D;
-    --Color-Color-03: #e1ffc7;
+    --Color-Color-03: #D9FDD3;
 --background: rgba(29, 30, 34, 1);
 --backgrounddark: rgba(20, 20, 22, 1);
 --Text-Secondary: rgba(255, 255, 255, 0.60);
@@ -159,12 +159,18 @@ flex-direction: column;
 gap:   15px;
 scroll-behavior: smooth;
 transition: 0.2s;
+background-attachment: fixed;
+background-image: url('istockphoto-1183632265-612x612\ 1.png');
+background:linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url(68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131306234303866303735642e706e67.png) repeat;
+background-position: center;
+background-size: 40%;
+background-repeat: repeat;
     }
 #chatContainer{
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap:   15px;  
+    gap:   10px;  
     /* overflow-y: scroll; */
     /* overflow-x: hidden; */
     height: fit-content;
@@ -298,7 +304,7 @@ line-height: 19.185px; /* 166.667% */
     max-width: 67%;
     display: flex;
     width: fit-content;
-
+word-break: break-all;
     flex-direction: row-reverse;
 }
 
@@ -306,6 +312,7 @@ line-height: 19.185px; /* 166.667% */
     max-width: 65%;
     display: flex;
 width: fit-content;
+word-break: break-all;
     
 }
 .edgecontrol{
@@ -561,21 +568,33 @@ color: var(--white);
     text-decoration: none;
     width: 100%;
 }
-
+.www{
+    width: 100%;
+}
 .messagesent .smallspan{
     color: #575757;
     font-size: 11px;
     align-self: right;
     margin-left: auto;
-    margin-top: -7px;
+    margin-top: -1px;
+    padding: 0 0 0 16px;
+    bottom: -4px;
+    display: inline-block;
+    float: right;
+    padding: 0 0 0 7px;
+    position: relative;
 }
+.sendings .metadata {
+    margin-left: auto;
+    margin-top: -1px;
 
+}
 .messagerec .smallspan{
     color: #c3c3c3;
     font-size: 11px;
     align-self: right;
     margin-left: auto;
-    margin-top: -7px;
+
 } 
 .quotetext{
     padding: 5px;
@@ -969,7 +988,7 @@ border-radius: 50%;
 .twolines{
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-
+    word-break: break-all;
     display: -webkit-box;
     overflow: hidden;
     overflow-wrap: break-word;
@@ -979,7 +998,7 @@ border-radius: 50%;
 gap: 4px;
 }
 .messagesent .quoted{
-    background-color: #98cd6a;
+    background-color: #98cd6a99;
     border-color: var(--sendbtn);
 }
 
@@ -1764,9 +1783,23 @@ letter-spacing: 0em;
 text-align: left;
 
 }
+.mybackbtn{
+    display: none;
+    color: var(--Color-Color-03);
+    font-size: 15px;
+}
 @media screen and (max-width:600px) {
     .chatscreen{display: none;}
-    
+    .hidden{
+        display: none;
+    }
+    .mybackbtn{
+        display: flex;
+        cursor: pointer;
+    }
+    .showing{
+        display: flex;
+    }
     .sidebar{
         width: 100%;
     }

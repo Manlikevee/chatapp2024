@@ -30,51 +30,87 @@
       
             let active = 1;
 
-const chatData = [
+            const chatData = [
               {
                   "id": 1,
                   "name": "Lara Mueller",
                   "time": "Wednesday",
-                  "message": "Hey, I heard that you wanted...Hey, I heard that you wanted..."
+                  "message": "Hey, I heard that you wanted...Hey, I heard that you wanted...",
+                  "lastSeen": "Today at 10:30 AM",
+                  "status": "Spring's arrival brings blossoms, and nature's gentle renewal.",
+                  "quote": "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+                  "phoneNumber": "+1234567890",
+                  "email": "lara.mueller@example.com"
               },
               {
                   "id": 2,
                   "name": "John Smith",
                   "time": "Thursday",
-                  "message": "Hi there! What's up? Hi there! What's up? Hi there! What's up?"
+                  "message": "Hi there! What's up? Hi there! What's up? Hi there! What's up?",
+                  "lastSeen": "Today at 9:00 AM",
+                  "status": "Enjoying the simple pleasures of life.",
+                  "quote": "The only way to do great work is to love what you do.",
+                  "phoneNumber": "+1987654321",
+                  "email": "john.smith@example.com"
               },
               {
                   "id": 3,
                   "name": "Emily Johnson",
                   "time": "Friday",
-                  "message": "I saw the movie yesterday. It was amazing!"
+                  "message": "I saw the movie yesterday. It was amazing!",
+                  "lastSeen": "Today at 11:45 AM",
+                  "status": "Exploring the beauty of the world.",
+                  "quote": "In every walk with nature one receives far more than he seeks.",
+                  "phoneNumber": "+1122334455",
+                  "email": "emily.johnson@example.com"
               },
               {
                   "id": 4,
                   "name": "Chris Brown",
                   "time": "Saturday",
-                  "message": "Did you catch the game last night? It was intense!"
+                  "message": "Did you catch the game last night? It was intense!",
+                  "lastSeen": "Today at 1:20 PM",
+                  "status": "Chasing dreams and goals.",
+                  "quote": "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+                  "phoneNumber": "+9988776655",
+                  "email": "chris.brown@example.com"
               },
               {
                   "id": 5,
                   "name": "Sophie Davis",
                   "time": "Sunday",
-                  "message": "Let's plan a picnic next weekend. What do you think?"
+                  "message": "Let's plan a picnic next weekend. What do you think?",
+                  "lastSeen": "Today at 2:10 PM",
+                  "status": "Embracing the joy of togetherness.",
+                  "quote": "Happiness is a journey, not a destination.",
+                  "phoneNumber": "+5544332211",
+                  "email": "sophie.davis@example.com"
               },
               {
                   "id": 6,
                   "name": "Alex Turner",
                   "time": "Monday",
-                  "message": "Hey, long time no see! How have you been?"
+                  "message": "Hey, long time no see! How have you been?",
+                  "lastSeen": "Today at 3:30 PM",
+                  "status": "Dreaming big and making it happen.",
+                  "quote": "The future belongs to those who believe in the beauty of their dreams.",
+                  "phoneNumber": "+7788990011",
+                  "email": "alex.turner@example.com"
               },
               {
                   "id": 7,
                   "name": "Ethan Harris",
                   "time": "Friday",
-                  "message": "Have you tried the new restaurant downtown? It's fantastic!"
+                  "message": "Have you tried the new restaurant downtown? It's fantastic!",
+                  "lastSeen": "Today at 12:15 PM",
+                  "status": "Exploring new culinary adventures.",
+                  "quote": "One cannot think well, love well, sleep well, if one has not dined well.",
+                  "phoneNumber": "+1122334455",
+                  "email": "ethan.harris@example.com"
               },
               // Add more objects for additional chat bubbles
-            ];
+          ];
+          
             
 
 const AllChats = []
@@ -99,13 +135,42 @@ const AllChats = []
             const activeProfile = AllChats.find(profile => profile.chat_id === active);
             const activeuser = chatData.find(profile => String(profile.id)  === String(active) );
             conversationData = activeProfile.conversationDatas
-            document.getElementById('usersname').innerHTML = activeuser.name
+            document.getElementById('usersname').innerHTML = activeuser?.name
+            document.getElementById('lastseen').innerHTML = `${activeuser?.lastSeen}`
+            document.getElementById('pname').innerHTML = `${activeuser?.name}`
+            document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`
+            document.getElementById('ptext').innerHTML = `${activeuser?.quote}`
             renderConversation();
+            const filteredArray = conversationData?.filter(obj => obj?.imageUrl);
+            if(filteredArray){
+              const imagecontainer = document.getElementById('mediablob')
+              imagecontainer.innerHTML = ''
+              filteredArray.forEach(date => {
+                const messageHTML =   createimages(date)
+            
+                imagecontainer.innerHTML += messageHTML;
+            });
+        
+            
+             
+            }
+            myswitch()
             console.log(active)
         }
 
     // Sample conversation data in JSON format
 
+
+    function createimages(data) {
+      let imageHTML = '';
+      imageHTML+= `
+      <div class="media">
+      <img src="${data?.imageUrl}" loading="lazy"
+          alt="">
+  </div>
+      `
+      return imageHTML;
+    }
 
     function formatDateTime(date) {
       const options = { 
@@ -176,9 +241,14 @@ const AllChats = []
                                     <div class="chatimg">
                                         <img src="${message.imageUrl}" alt="" loading="lazy">
                                     </div>
+
+                                    <div class='www'> 
                                     ${message?.message  ? message?.message : ''} 
-                                    <div class="smallspan"> ${formatDateTime(message.datetime)}  
-                                    <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
+                                    <span class="smallspan"> ${formatDateTime(message.datetime)} 
+                                    <ion-icon name="checkmark-done-outline"></ion-icon>  </span> </div>
+
+                                 
+                         
                                 </div>
                             </div>
                             <div class="messageopt"  onclick="replyto(${message.id})">
@@ -197,9 +267,12 @@ const AllChats = []
                                 <path d="${message.sender === 'sent' ? 'M18.5039 3.6641C20.1503 2.56645 19.3733 3.61246e-06 17.3944 3.52596e-06L2.60673e-06 -9.53989e-08L1.90735e-06 16L18.5039 3.6641Z' : 'M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z'}" fill="${message.sender === 'sent' ? 'var(--greenbar)' : 'var(--greybar)'}"/>
                             </svg>
                                 </div>
-                                <div class="chatbubble">${message.message}
-                                <div class="smallspan"> ${formatDateTime(message.datetime)}  
-                                <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
+                                <div class="chatbubble">
+                                <div class='www'> 
+                                ${message.message}
+                                <span class="smallspan"> ${formatDateTime(message.datetime)} 
+                                <ion-icon name="checkmark-done-outline"></ion-icon>  </span> </div>
+                                
                                 </div>
                             </div>
                             <div class="messageopt" onclick="replyto(${message.id})" >
@@ -234,10 +307,11 @@ const AllChats = []
                                 </div>    
                                 </small>
                                </a>
-                             
-                                ${message.message}
-                                <div class="smallspan"> ${formatDateTime(message.datetime)} 
-                                <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
+                               <div class='www'> 
+                               ${message.message}
+                               <span class="smallspan"> ${formatDateTime(message.datetime)} 
+                               <ion-icon name="checkmark-done-outline"></ion-icon>  </span> </div>
+                               
                                 </div>
                             </div>
                             <div class="messageopt"  onclick="replyto(${message.id})" >
@@ -275,9 +349,12 @@ const AllChats = []
                                       <div class="chatimg">
                                         <img src="${message.imageUrl}" alt="" loading="lazy">
                                     </div>
-                                ${message.message}
-                                <div class="smallspan"> ${formatDateTime(message.datetime)} 
-                                <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
+<div class='www'> 
+${message.message}
+<span class="smallspan"> ${formatDateTime(message.datetime)} 
+<ion-icon name="checkmark-done-outline"></ion-icon>  </span> </div>
+
+
                                 </div>
                             </div>
                             <div class="messageopt"  onclick="replyto(${message.id})" >
@@ -700,18 +777,21 @@ function lloading(){
       sidebar = document.getElementById('sidebar');
       chatsection = document.getElementById('chatscreen');
   
+sidebar.classList.toggle('hidden')
+chatsection.classList.toggle('showing')
+adjustChatDataHeight()
       // Toggle the display property
-      if (sidebar.style.display === 'none') {
-          // If sidebar is hidden, show it and hide chat screen
-          sidebar.style.display = 'flex';
-          chatsection.style.display = 'none';
-          adjustChatDataHeight()
-      } else {
-          // If sidebar is visible, hide it and show chat screen
-          sidebar.style.display = 'none';
-          chatsection.style.display = 'flex';
-          adjustChatDataHeight()
-      }
+      // if (sidebar.style.display === 'none') {
+      //     // If sidebar is hidden, show it and hide chat screen
+      //     sidebar.style.display = 'flex';
+      //     chatsection.style.display = 'none';
+      //     adjustChatDataHeight()
+      // } else {
+      //     // If sidebar is visible, hide it and show chat screen
+      //     sidebar.style.display = 'none';
+      //     chatsection.style.display = 'flex';
+      //     adjustChatDataHeight()
+      // }
   }
   
 
