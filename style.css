@@ -1008,6 +1008,69 @@ gap: 4px;
     line-height: normal;
 }
 
+.lazyload .notetitle, .lazyload .mynotebody, .lazyloads{
+    color: transparent !important;
+    background-color: #1C1C1C;
+    border-radius: 3px; 
+    position: relative;
+    overflow: hidden;
+cursor: progress;
+user-select: none;
+width: fit-content ;
+  }
+  .chatContainerz {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* overflow-y: scroll; */
+    /* overflow-x: hidden; */
+    /* height: 100%; */
+}
+  .messagesent .lazyloads{
+    background-color:  var(--UI-Dark-02) !important;
+  } 
+
+  .lazyload .note {
+    position: relative;
+    overflow: hidden;
+cursor: progress;
+  }
+
+
+.lazyload .notetitle::after, .lazyload .mynotebody::after, .lazyloads::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0));
+    animation: load 1.3s infinite;
+ }
+ 
+
+@keyframes load {
+    
+    100% {
+      transform: translateX(100%);
+    }
+  }
+.details div::before{
+  animation-delay: 0.25s;
+}
+
+@keyframes shimmer {
+    0%{
+      background-position: -450px 0;
+    }
+    100%{
+      background-position: 450px 0;
+    }
+  }
+
 .sidebarheader{
     padding:3px;
 }

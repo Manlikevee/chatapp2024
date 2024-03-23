@@ -50,225 +50,84 @@
               });
             });      
 
+            let active = 1;
+
+const chatData = [
+              {
+                  "id": 1,
+                  "name": "Lara Mueller",
+                  "time": "Wednesday",
+                  "message": "Hey, I heard that you wanted...Hey, I heard that you wanted..."
+              },
+              {
+                  "id": 2,
+                  "name": "John Smith",
+                  "time": "Thursday",
+                  "message": "Hi there! What's up? Hi there! What's up? Hi there! What's up?"
+              },
+              {
+                  "id": 3,
+                  "name": "Emily Johnson",
+                  "time": "Friday",
+                  "message": "I saw the movie yesterday. It was amazing!"
+              },
+              {
+                  "id": 4,
+                  "name": "Chris Brown",
+                  "time": "Saturday",
+                  "message": "Did you catch the game last night? It was intense!"
+              },
+              {
+                  "id": 5,
+                  "name": "Sophie Davis",
+                  "time": "Sunday",
+                  "message": "Let's plan a picnic next weekend. What do you think?"
+              },
+              {
+                  "id": 6,
+                  "name": "Alex Turner",
+                  "time": "Monday",
+                  "message": "Hey, long time no see! How have you been?"
+              },
+              {
+                  "id": 7,
+                  "name": "Ethan Harris",
+                  "time": "Friday",
+                  "message": "Have you tried the new restaurant downtown? It's fantastic!"
+              },
+              // Add more objects for additional chat bubbles
+            ];
+            
+
+const AllChats = []
     
+            let activeconvo = 0
+
+            let conversationData = [
+    
+            ];
+            function createProfileIfNotExists(chat_id) {
+              if (!AllChats.some(profile => profile.chat_id === chat_id)) {
+                AllChats.push({ chat_id, conversationDatas: [] });
+              }
+          }
 
 
+         
+
+      function updateActiveUser(id) {
+            active = id
+            createProfileIfNotExists(active);
+            const activeProfile = AllChats.find(profile => profile.chat_id === active);
+            const activeuser = chatData.find(profile => String(profile.id)  === String(active) );
+            conversationData = activeProfile.conversationDatas
+            document.getElementById('usersname').innerHTML = activeuser.name
+            renderConversation();
+            console.log(active)
+        }
 
     // Sample conversation data in JSON format
-    let conversationData = [
-      //   {
-      //       type: "invite",
-      //       sender: "sent",
-      //       roomName: "Ishika’s Personal Room",
-      //       message: "There are few minor changes that need.",
-      //       imageSrc: "image 40.png"
-      //   },
-      //   {
-      //       type: "image",
-      //       sender: "rec",
-      //       message: "Hey there! Have you heard about how AI is changing the world?",
-      //       imageUrl: "https://plus.unsplash.com/premium_photo-1677215211005-0305cb45e09f?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Hey there! Have you heard about how AI is changing the world?"
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "rec",
-      //       "message": "Absolutely! AI is making significant impacts across various industries, from healthcare to finance."
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "It's fascinating how AI is enhancing efficiency and bringing about innovative solutions. What specific areas interest you the most?"
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "rec",
-      //       "message": "I'm particularly interested in AI applications in natural language processing and chatbots. The advancements in language understanding have been impressive."
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Absolutely! Chatbots are revolutionizing customer support and communication. They can provide instant assistance and improve user experiences. What do you think about the ethical considerations surrounding AI?"
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "rec",
-      //       "message": "Ethical considerations are crucial. It's essential to ensure responsible AI development, addressing issues like bias and privacy concerns. Striking the right balance is key for the positive impact of AI on society."
-      //   },
-      //   {
-      //       type: "image",
-      //       sender: "rec",
-      //       imageUrl: "https://i.pinimg.com/564x/71/0b/b0/710bb08e5b6f161b3e17028a012641a5.jpg",
-            
-      //       "message": "Beautifully generated Ai Images"
-      //   },
-      //   {
-      //       type: "text",
-      //       sender: "rec",
-      //       message: "That Image image looks fascinating! AI is enabling creativity and innovation."
-      //   },
-        {
-          id : '88833',
-          type: "text",
-          from:'victor',
-          sender: "rec",
-          datetime: new Date(),
-          message: "Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. I don’t know where I would be without your love. To the most wonderful woman I know, thank you for constantly bringing out the best in me."
-      },
-      //   {
-      //       type: "text",
-      //       sender: "sent",
-      //       message: "Absolutely! It's amazing to see how AI is transforming various aspects of our lives."
-      //   },
-      //   {
-      //       "type": "image",
-      //       "sender": "sent",
-      //       "message": "I prefer this alot more, The beauty in so many colors.Very eye catching.( Joy )",
-      //       imageUrl: "https://i.pinimg.com/564x/9f/8f/30/9f8f3075d1cb75d190240d242765142a.jpg",
-      //   },
-      //   {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Hey there! 😊 Can I steal a moment of your time?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "Of course! What's on your mind?",
-      //       "from": "You",
-      //       "quotemessage": "Hey there! 😊 Can I steal a moment of your time?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Lily! 🌸 What a lovely name! It suits you perfectly. Tell me, what's your favorite way to spend a lazy Sunday?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "Lazy Sundays are the best, right? I love curling up with a good book. How about you?",
-      //       "from": "You",
-      //       "quotemessage": "Lily! 🌸 What a lovely name! It suits you perfectly. Tell me, what's your favorite way to spend a lazy Sunday?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Books, huh? That's fascinating! Any particular genre that makes your heart race?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "I'm a sucker for romance novels! There's just something magical about love stories. What about you, any favorite genre?",
-      //       "from": "You",
-      //       "quotemessage": "Books, huh? That's fascinating! Any particular genre that makes your heart race?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Romance novels, huh? I might have to borrow a few recommendations from you! Any all-time favorites?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "Oh, where do I start? 'Pride and Prejudice,' 'Romeo and Juliet,' and 'The Notebook' are classics. Do you enjoy reading romantic tales?",
-      //       "from": "You",
-      //       "quotemessage": "Romance novels, huh? I might have to borrow a few recommendations from you! Any all-time favorites?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Absolutely! There's something enchanting about love stories. 'The Fault in Our Stars' and 'Eleanor Oliphant Is Completely Fine' are among my favorites. Any other hobbies you'd like to share, Lily?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "Great choices! Besides reading, I enjoy painting landscapes and playing the piano. How about you? Any hidden talents or hobbies?",
-      //       "from": "You",
-      //       "quotemessage": "Absolutely! There's something enchanting about love stories. 'The Fault in Our Stars' and 'Eleanor Oliphant Is Completely Fine' are among my favorites. Any other hobbies you'd like to share, Lily?"
-      //     },
 
-
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "It's a gift! So, Lily, besides dodgy jokes, what are your passions? What makes your heart race with excitement?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "rec",
-      //       "message": "Well, Alex, I have this inexplicable love for old bookstores, lazy Sunday mornings, and dancing in the rain. What about you? What's your secret passion?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Ah, Lily, you just described a perfect day! As for me, I secretly love singing in the shower and believe that every meal deserves a dash of hot sauce. Spice it up, right?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Favorite spots, Lily! Do you have any go-to places that hold a special spot in your heart? Perhaps a cozy cafe or a hidden park?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "Absolutely! There's this quaint bookstore cafe downtown. The smell of old books and freshly brewed coffee makes it magical. How about you? Any favorite spots that bring a smile to your face?",
-      //       "from": "Lily",
-      //       "quotemessage": "Favorite spots, Lily! Do you have any go-to places that hold a special spot in your heart? Perhaps a cozy cafe or a hidden park?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "That bookstore cafe sounds like a dream! Personally, I love this rooftop garden with a view of the city lights. It's my little haven. Now, shifting gears a bit, how about dinner? Any favorite dishes that make your taste buds dance?"
-      //     },
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "City lights and rooftop gardens? That sounds enchanting! As for dinner, I'm a sucker for homemade pasta. There's something therapeutic about cooking a delicious meal. What about you? Any favorite cuisines or dishes?",
-      //       "from": "Lily",
-      //       "quotemessage": "That bookstore cafe sounds like a dream! Personally, I love this rooftop garden with a view of the city lights. It's my little haven. Now, shifting gears a bit, how about dinner? Any favorite dishes that make your taste buds dance?"
-      //     },
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Homemade pasta is a culinary masterpiece! I have a soft spot for sushi – the delicate balance of flavors is pure bliss. Now, onto a topic that stirs passion in many hearts: football! Do you have a favorite team that you cheer for with all your might?"
-      //     },
-
-      //     {
-      //       "type": "text",
-      //       "sender": "sent",
-      //       "message": "Absolutely! There's something enchanting about love stories. 'The Fault in Our Stars' and 'Eleanor Oliphant Is Completely Fine' are among my favorites. Any other hobbies you'd like to share, Lily?"
-      //     },
-
-      //     {
-      //       "type": "replytext",
-      //       "sender": "rec",
-      //       "message": "Sushi and football, a dynamic duo! I'm a die-hard fan of Manchester United. The thrill of the game and the camaraderie of the fans make it an unforgettable experience. How about you? Any football teams that you passionately support?",
-      //       "from": "Lily",
-      //       "quotemessage": "Homemade pasta is a culinary masterpiece! I have a soft spot for sushi – the delicate balance of flavors is pure bliss. Now, onto a topic that stirs passion in many hearts: football! Do you have a favorite team that you cheer for with all your might?"
-      //     },
-
-
-      //   {
-      //     "id" : 'code884833',
-      //     "type": "text",
-      //     "sender": "sent",
-      //     "message": "Hey there! 😊 Can I steal a moment of your time?"
-      //   },
-        {
-          "id" : '88844',
-          "type": "replytext",
-          "sender": "rec",
-          "message": "Of course! What's on your mind?",
-          "from": "You",
-          'datetime': new Date(),
-          "quotemessage": "Hey there! 😊 Can I steal a moment of your time?",
-          "quotedid": "88833",
-        },
-    ];
 
     function formatDateTime(date) {
       const options = { 
@@ -340,9 +199,11 @@
                                         <img src="${message.imageUrl}" alt="" loading="lazy">
                                     </div>
                                     ${message?.message  ? message?.message : ''} 
+                                    <div class="smallspan"> ${formatDateTime(message.datetime)}  
+                                    <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
                                 </div>
                             </div>
-                            <div class="messageopt">
+                            <div class="messageopt"  onclick="replyto(${message.id})">
                             <span class="material-symbols-outlined">
                                 reply
                                 </span>
@@ -373,6 +234,7 @@
         }
         else if (message.type === 'replytext') {
           console.log(conversationData)
+          console.log(message.quotedid)
           const messquote = conversationData.find(obj => String(obj.id) === String(message.quotedid));
           console.log('the message is ', messquote)
             messageHTML += `
@@ -406,6 +268,46 @@
                                 </span>
                         </div>
                             </div>`;
+        } else if (message.type === 'replyimg') {
+          console.log(conversationData)
+          const messquote = conversationData.find(obj => String(obj.id) === String(message.quotedid));
+          console.log('the message is ', messquote)
+            messageHTML += `
+            <div class="${message.sender === 'sent' ? 'completemessagesent' : 'completemessagerec'}">
+            
+            <div class="${message.sender === 'sent' ? 'messagesent' : 'messagerec'}" id=${message.id ?  message.id : '#'}>
+                                <div class="edgecontrol">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                <path d="${message.sender === 'sent' ? 'M18.5039 3.6641C20.1503 2.56645 19.3733 3.61246e-06 17.3944 3.52596e-06L2.60673e-06 -9.53989e-08L1.90735e-06 16L18.5039 3.6641Z' : 'M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z'}" fill="${message.sender === 'sent' ? 'var(--greenbar)' : 'var(--greybar)'}"/>
+                            </svg>
+                                </div>
+                                <div class="chatbubble quotedpost">
+
+
+
+                                <a class="quoted" href="${message.quotedid ? '#' + message.quotedid : '#'}">
+                                <div class="quotetext">
+                                <div class="quotetitle uname">${messquote?.from} </div>
+                                <small class="small twolines">
+                                ${messquote?.message}  
+                             
+                                </div>    
+                                </small>
+                               </a>
+                                      <div class="chatimg">
+                                        <img src="${message.imageUrl}" alt="" loading="lazy">
+                                    </div>
+                                ${message.message}
+                                <div class="smallspan"> ${formatDateTime(message.datetime)} 
+                                <ion-icon name="checkmark-done-outline"></ion-icon>  </div>
+                                </div>
+                            </div>
+                            <div class="messageopt"  onclick="replyto(${message.id})" >
+                            <span class="material-symbols-outlined">
+                                reply
+                                </span>
+                        </div>
+                            </div>`;
         }
 
 
@@ -425,7 +327,7 @@ function replyto(id){
     quotecontainer.innerHTML= ` `
   } else{
     document.getElementById('quotedid').value = id
-    const replydata =  conversationData.find(obj => String(obj.id)   === String(id)  );
+    let replydata =  conversationData.find(obj => String(obj.id)   === String(id)  );
     quotecontainer.innerHTML= `
     <div class="quoted" id="${replydata?.id}" onclick="replyto('closequote')">
     <div class="quotetext" >
@@ -442,9 +344,7 @@ function replyto(id){
 
 
 }
-
-
-    function renderConversation() {
+function renderConversation() {
 
   
         const chatContainer = document.getElementById('chatContainer');
@@ -478,7 +378,7 @@ function replyto(id){
   // cd.addEventListener('scroll', calculateScrollDistance);
    
     // Call the function to render the conversation
-    renderConversation();
+  
 
     function getRandomNumber(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -497,10 +397,10 @@ function replyto(id){
       let message = document.getElementById('mymessage').value
       let quotedids = document.getElementById('quotedid').value
       var file = document.getElementById('myimg').files[0];
-      console.log(file)
+
       
 
-     if(message && file){
+     if(message && file && !quotedids){
         let data = {
           id: getRandomNumber(1, 990000),
            type: "image",
@@ -512,6 +412,18 @@ function replyto(id){
 
        compressAndEncodeToBase64(file=file, data=data);
 
+      }
+      else if(quotedids && message && file) {
+        let data = {
+          id: getRandomNumber(1, 990000),
+           type: "replyimg",
+           sender: "sent",
+           from: "victor",
+           quotedid:  quotedids,
+           message: message,
+           datetime: new Date(),
+       }
+       compressAndEncodeToBase64(file=file, data=data);
       }
 
       else if(quotedids && message && !file) {
@@ -525,6 +437,7 @@ function replyto(id){
            datetime: new Date(),
        });
       }
+
       else if (message && !quotedids){
         conversationData.push({
          id: getRandomNumber(1, 990000),
@@ -628,97 +541,59 @@ reader.readAsDataURL(file);
 
 
 
+function lloading(){
+  const lload = document.getElementById('cz').innerHTML = 
+  `
+  <div class="centertext lazyloads lazyloads">   Select a note to view</div>
+  <div class="chatContainerz">
+    <div class="completemessagerec ">
+        <div class="messagerec " id="88833">
+
+                            <div class="chatbubble lazyloads lazyloads">Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. 
+
+                            </div>
+                        </div>
+
+                        </div>
+
+    <div class="completemessagerec ">
+                            <div class="messagerec " id="88833">
+
+                                                <div class="chatbubble lazyloads lazyloads">Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. 
+
+                                                </div>
+                                            </div>
+
+                                            </div>
+
+                                            <div class="completemessagesent">
+                                                <div class="messagesent" id="324923">
+
+                                                    <div class="chatbubble lazyloads lazyloads">Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. 
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="completemessagesent">
+                                                <div class="messagesent" id="324923">
+
+                                                    <div class="chatbubble lazyloads lazyloads">Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. 
+    
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
+</div>
 
+  `
 
-
-
-
-
-    const chatData = [
-      {
-        "name": "Lara Mueller",
-        "time": "Wednesday",
-        "message": "Hey, I heard that you wanted...Hey, I heard that you wanted..."
-      },
-      {
-        "name": "John Smith",
-        "time": "Thursday",
-        "message": "Hi there! What's up? Hi there! What's up? Hi there! What's up?"
-      },
-      {
-        "name": "Emily Johnson",
-        "time": "Friday",
-        "message": "I saw the movie yesterday. It was amazing!"
-      },
-      {
-        "name": "Chris Brown",
-        "time": "Saturday",
-        "message": "Did you catch the game last night? It was intense!"
-      },
-      {
-        "name": "Sophie Davis",
-        "time": "Sunday",
-        "message": "Let's plan a picnic next weekend. What do you think?"
-      },
-      {
-        "name": "Alex Turner",
-        "time": "Monday",
-        "message": "Hey, long time no see! How have you been?"
-      },
-      {
-        "name": "Mia Rodriguez",
-        "time": "Tuesday",
-        "message": "I just finished reading a great book. Would you like a recommendation?"
-      },
-      {
-        "name": "Daniel Lee",
-        "time": "Wednesday",
-        "message": "Remember that trip we took last year? Good times!"
-      },
-      {
-        "name": "Olivia White",
-        "time": "Thursday",
-        "message": "I'm thinking of redecorating my room. Any suggestions?"
-      },
-      {
-        "name": "Ethan Harris",
-        "time": "Friday",
-        "message": "Have you tried the new restaurant downtown? It's fantastic!"
-      },
-      {
-        "name": "Ava Martin",
-        "time": "Saturday",
-        "message": "Happy weekend! Any exciting plans ahead?"
-      },
-      {
-        "name": "Samuel Turner",
-        "time": "Sunday",
-        "message": "Just got back from a hiking trip. Nature is so refreshing!"
-      },
-      {
-        "name": "Zoe Baker",
-        "time": "Monday",
-        "message": "I'm learning to play the guitar. It's challenging but fun!"
-      },
-      {
-        "name": "Leo Hernandez",
-        "time": "Tuesday",
-        "message": "Thinking of starting a book club. Interested?"
-      },
-      {
-        "name": "Nora Adams",
-        "time": "Wednesday",
-        "message": "How about trying a new recipe this weekend? I can share one with you."
-      },
-
-      // Add more objects for additional chat bubbles
-    ];
+}
 
     function generateChatBubble(data) {
       return `
-        <div class="chatbubbled">
+        <div class="chatbubbled" onclick="updateActiveUser(${data.id})">
             <div class="userdata">
                 <div class="profilephoto">
                     <img src="image 116.png" alt="">
