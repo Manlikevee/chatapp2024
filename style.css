@@ -1233,6 +1233,12 @@ padding-left: 5px;
 .closed{
     display: none;
 }
+
+.mediafiles{
+    position: fixed;
+    transition: right 0.5s ease;
+    transition: left 0.5s ease;
+}
 @media screen and (max-width:1100px) {
     .mediafiles{
         display: none;
@@ -1241,6 +1247,7 @@ body{
     overflow: hidden;
 }
     .mediafiles {
+        transition: right 0.5s ease;
         z-index: 9999999;
         left: 100%;
         width: 100%;
@@ -1248,8 +1255,10 @@ body{
         display: flex;
         flex-direction: column;
         gap: 5px;
-        position: absolute;
+     
         height: 100%;
+        transition: right 0.5s ease;
+        transition: left 0.5s ease;
     }
 
     .mediashow{
