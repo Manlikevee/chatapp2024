@@ -1246,6 +1246,10 @@ padding-left: 5px;
         position: fixed;
         display: none;
     }
+
+    .chatdata{
+        background-size: 70%
+    }
 body{
     overflow: hidden;
 }
