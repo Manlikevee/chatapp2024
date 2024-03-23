@@ -131,9 +131,12 @@
                 <div class="sidebarextradata" id="msgdta">
                     <div class="sidebardatas">
                         <div class="infotitle" id="switch" onclick="myswitch()">
-                            Messages
+                            Messages    <a href="#" onclick="swapchat()">back</a> 
                         </div>
-                        <div class="chatbubbles" id="allchat">
+                        <div class="newchats chatbubbles" id="newchats" >
+                         
+                        </div>
+                        <div class="chatbubbles h" id="allchat">
 
 
 
@@ -228,7 +231,7 @@
 
                                         <div class="attachcontent">
                                             <div class="attachicon">
-                                                <input type="file" name="" id="myimg" >
+                                                <input type="file" name="" class="file-upload-input" id="myimg" accept=".jpg, .jpeg, .png, .gif" >
                                                 <span class="material-symbols-outlined">
                                                     photo_library
                                                 </span>
@@ -316,11 +319,13 @@
                                 <div class="mediatitle">
                                     Media, Links and Documents
                                 </div>
+
+                
                                 <div class="mediacontainer" id="mediablob">
-                                    <div class="media">
+                                    <!-- <div class="media">
                                         <img src="https://images.unsplash.com/photo-1704642406927-d454ea541612?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" loading="lazy"
                                             alt="">
-                                    </div>
+                                    </div> -->
                      
            
                                 </div>

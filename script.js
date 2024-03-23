@@ -28,9 +28,9 @@
             
 
       
-            let active = 1;
+            let active = '';
 
-            const chatData = [
+            const ChatDatas = [
               {
                   "id": 1,
                   "name": "Lara Mueller",
@@ -111,6 +111,14 @@
               // Add more objects for additional chat bubbles
           ];
           
+
+          const chatData  = [
+
+          ];
+
+          function startchat() {
+  
+          }
             
 
 const AllChats = []
@@ -370,6 +378,19 @@ ${message.message}
                             </div>`;
         }
 
+        const filteredArray = conversationData?.filter(obj => obj?.imageUrl);
+        if(filteredArray){
+          const imagecontainer = document.getElementById('mediablob')
+          imagecontainer.innerHTML = ''
+          filteredArray.forEach(date => {
+            const messageHTML =   createimages(date)
+        
+            imagecontainer.innerHTML += messageHTML;
+        });
+    
+        
+         
+        }
 
         return messageHTML;
     }
@@ -671,14 +692,76 @@ function lloading(){
         </div>`;
     }
     
-    // Generate HTML for all chat bubbles
-    const chatHTML = chatData.map(generateChatBubble).join('');
+
+    function generatenewChatBubble(data) {
+      return `
+        <div class="chatbubbled"  onclick="newdeets(${data.id})">
+            <div class="userdata">
+                <div class="profilephoto">
+                    <img src="image 116.png" alt="">
+                </div>
+                <div class="usersname">
+                    <div>
+                        <small class="small mg">
+                            <div class="uname">${data.name}</div>
+                     
+                        </small>
+                    </div>
+                    <small class="small twolines">${data?.quote}</small>
+                </div>
+            </div>
+        </div>`;
+    }
     
-    // Append generated HTML to a container (assuming you have a container with id "chatContainer")
-    document.getElementById('allchat').innerHTML = chatHTML;
 
+    function genbubble(){
+   // Generate HTML for all chat bubbles
+   const chatHTML = chatData.map(generateChatBubble).join('');
+   const mylength = chatData.length
+    if (mylength){
+      document.getElementById('allchat').innerHTML = chatHTML;
+    }
+    else{
+      document.getElementById('allchat').innerHTML = 
+      `
+      <div class="oops">
+      <ion-icon name="cog-outline"></ion-icon>
+      <h4>No conversations yet</h4>
+      <p>Oops! You haven't started any conversation yet. Click <a href="#" onclick="swapchat()">here</a> to start one.</p>
+  </div>
+      `;
+    }
+   // Append generated HTML to a container (assuming you have a container with id "chatContainer")
+  
 
+    } genbubble()
 
+ function alluserslist(){
+  const chatHTML = ChatDatas.map(generatenewChatBubble).join('');
+  document.getElementById('newchats').innerHTML = chatHTML;
+  
+ } alluserslist()
+
+ function swapchat(){
+  document.getElementById('newchats').classList.toggle('h')
+  document.getElementById('allchat').classList.toggle('h')
+ }
+
+ function newdeets(id){
+  let newData = chatData.find(item => item?.id === id);
+
+  if(newData){
+    updateActiveUser(newData?.id)
+    swapchat()
+  } else{
+   newData = ChatDatas.find(item => item?.id === id);
+   console.log(newData)
+    chatData.push(newData);
+    genbubble()
+    swapchat()
+    updateActiveUser(newData?.id)
+  }
+ }
     const progressCircle = document.querySelector(".autoplay-progress svg");
     const progressContent = document.querySelector(".autoplay-progress span");
     const mySwiperContainer = document.querySelector(".mySwiper-container"); // added this line
@@ -856,6 +939,8 @@ function toggleFullscreen() {
       }
   }
 }
+
+
 
 
 
