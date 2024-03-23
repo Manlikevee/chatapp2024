@@ -158,6 +158,11 @@ const AllChats = []
             console.log(active)
         }
 
+
+        function mediashow(){
+          const med = document.getElementById('mymedia')
+          med.classList.toggle('mediashow')
+        }
     // Sample conversation data in JSON format
 
 
