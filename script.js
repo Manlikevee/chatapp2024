@@ -1,13 +1,13 @@
 // Calculate and set the height of the chat data section
 function adjustChatDataHeight() {
-  // var container = document.querySelector(".chatcontainer");
-  // var header = document.querySelector(".charheader");
-  // var footer = document.querySelector(".chatfooter");
-  // var chatData = document.getElementById("chatData");
+  var container = document.querySelector(".chatcontainer");
+  var header = document.querySelector(".charheader");
+  var footer = document.querySelector(".chatfooter");
+  var chatData = document.getElementById("chatData");
 
-  // var availableHeight =
-  //   container.clientHeight - header.clientHeight - footer.clientHeight;
-  // chatData.style.height = availableHeight + "px";
+  var availableHeight =
+    container.clientHeight - header.clientHeight - footer.clientHeight;
+  chatData.style.height = availableHeight + "px";
 }
 
 // Call the function initially and whenever the window is resized
@@ -792,9 +792,9 @@ function searchshow() {
 }
 
 function updateContainerHeight() {
-  var container = document.querySelector(".container");
-  container.style.height = window.innerHeight + "px";
-  adjustChatDataHeight();
+  // var container = document.querySelector(".container");
+  // container.style.height = window.innerHeight + "px";
+  // adjustChatDataHeight();
 }
 
 // Initial height calculation
