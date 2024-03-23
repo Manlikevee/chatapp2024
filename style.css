@@ -82,7 +82,7 @@ main{
     margin: auto;
 display: flex;
     background-color: white;
-height: 100dvh;
+height: 100vh;
     
 }
 @media screen and (max-width: 2000px) {
