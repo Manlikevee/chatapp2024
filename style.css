@@ -166,6 +166,7 @@ background-position: center;
 background-size: 40%;
 background-repeat: repeat;
     }
+
 #chatContainer{
     width: 100%;
     display: flex;
@@ -381,7 +382,29 @@ line-height: 18px; /* 150% */
     align-items: center;
     display: none;
 }
-
+@media screen and (max-width:700px) {
+    .all {
+        margin-top: 30px;
+        font-family: DM Sans;
+        font-size: 35px;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.03em;
+        text-align: center;
+        margin-top: 40px;
+        text-align: center;
+    }
+    .suball {
+        max-width: 90%;
+        margin: auto;
+        font-family: poppins;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+        text-align: center;
+        text-align: center;
+    }
+}
 .mySwiper-container{
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
@@ -883,8 +906,8 @@ margin-top: 9px;
     width: 100%;
     display: grid;
     align-items: center;
-    gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 4px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 .media{
     width: 100%;
@@ -907,7 +930,7 @@ margin-top: 9px;
 .media{
   
     padding: 1px;
-    height: 70px;
+
     border-radius: 2px;
 }
 .messagetext{
