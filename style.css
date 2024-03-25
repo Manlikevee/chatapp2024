@@ -1823,6 +1823,9 @@ overflow-wrap: break-word;
     .bsmall{
         width: 100%;
     }
+    .chatdata {
+        background-size: 100%;
+    }
 }
 
 .completemessage{
