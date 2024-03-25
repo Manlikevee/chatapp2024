@@ -13,8 +13,9 @@
             adjustChatDataHeight();
             window.addEventListener('resize', adjustChatDataHeight);
 
-            function adjustTextareaHeight(textarea) {
+            function adjustTextareaHeight() {
               // Reset the height to fit-content
+              const textarea = document.getElementById('mymessage')
               textarea.style.height = 'fit-content';
               adjustChatDataHeight()
             
@@ -447,7 +448,7 @@ function replyto(id){
 
 function renderConversation() {
 
-  
+
         const chatContainer = document.getElementById('chatContainer');
         chatContainer.innerHTML = '';
         conversationData.forEach(message => {
@@ -461,7 +462,7 @@ function renderConversation() {
           // If close to the bottom, scroll to the bottom
           cd.scrollTop = cd.scrollHeight;
       }
-
+      adjustTextareaHeight()
  
     }
 
@@ -558,6 +559,7 @@ function renderConversation() {
       document.getElementById('mymessage').value = ''
       document.getElementById('quotedid').value = ''
       document.getElementById('qtd').innerHTML = ''
+      adjustChatDataHeight()
 
     renderConversation();
     }
@@ -623,6 +625,7 @@ reader.onload = function () {
               conversationData.push(data)
               document.getElementById('myimg').value = ''
               renderConversation();
+              adjustChatDataHeight()
 
             
           };
