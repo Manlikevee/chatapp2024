@@ -14,23 +14,29 @@
             window.addEventListener('resize', adjustChatDataHeight);
 
             function adjustTextareaHeight() {
-              // Reset the height to fit-content
-              const textarea = document.getElementById('mymessage')
-              textarea.style.height = 'fit-content';
-              adjustChatDataHeight()
-            
-              // Define character count limit
-              let charCountLimit = window.innerWidth >= 768 ? 90 : 50;
-            
-              // Get the current character count
-              let charCount = textarea.value.length;
-            
-              // Check if character count exceeds the limit
-              if (charCount >= charCountLimit) {
-                  textarea.style.height = '46px'; // Set the height to 60px
-                  adjustChatDataHeight()
+              // Get the textarea element
+              var text = document.getElementById('mymessage');
+          
+              // Set initial rows attribute to 1 and resize
+              text.setAttribute('rows', 1);
+              resize(text);
+          
+              // Add input event listener to adjust height dynamically
+              text.addEventListener('input', function() {
+                  resize(text);
+              });
+          
+              // Define the resize function
+              function resize(textElement) {
+                  textElement.style.height = 'auto';
+                  // Calculate the maximum height for 3 rows
+                  var maxHeight = textElement.scrollHeight > (textElement.clientHeight * 3) ? textElement.clientHeight * 2 : textElement.scrollHeight;
+                  textElement.style.height = maxHeight + 'px';
               }
-            }
+          }
+
+          adjustTextareaHeight();
+            
 
             function attachmenttoggle() {
                 console.log('kekekek')
@@ -559,9 +565,10 @@ function renderConversation() {
       document.getElementById('mymessage').value = ''
       document.getElementById('quotedid').value = ''
       document.getElementById('qtd').innerHTML = ''
-      adjustChatDataHeight()
+    
 
     renderConversation();
+    adjustChatDataHeight()
     }
 
 
