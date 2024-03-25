@@ -13,7 +13,23 @@
             adjustChatDataHeight();
             window.addEventListener('resize', adjustChatDataHeight);
 
-
+            function adjustTextareaHeight(textarea) {
+              // Reset the height to fit-content
+              textarea.style.height = 'fit-content';
+              adjustChatDataHeight()
+            
+              // Define character count limit
+              let charCountLimit = window.innerWidth >= 768 ? 90 : 50;
+            
+              // Get the current character count
+              let charCount = textarea.value.length;
+            
+              // Check if character count exceeds the limit
+              if (charCount >= charCountLimit) {
+                  textarea.style.height = '46px'; // Set the height to 60px
+                  adjustChatDataHeight()
+              }
+            }
 
             function attachmenttoggle() {
                 console.log('kekekek')
@@ -425,6 +441,10 @@ function replyto(id){
 
 
 }
+
+
+
+
 function renderConversation() {
 
   
