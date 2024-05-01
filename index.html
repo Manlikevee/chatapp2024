@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="sidebardatas">
-                    <div class="infotitle">
+                    <div class="infotitle" onclick="audplayer()">
                         Stories
                     </div>
                     <div class="owlsection">
@@ -330,15 +330,15 @@
                         </div>
                         <div class="chatfooter">
 
-                            <div class="chatinputbox">
-                                <div class="emoji">
+                            <div class="chatinputbox activebox" id="normalmessage" >
+                                <div class="emoji" onclick="audioswitch()">
                                     <span class="material-symbols-outlined">
                                         mood
                                     </span>
                                 </div>
                                 <div class="attachment">
                                     <div class="attachmentdata" id="attachmentdata">
-                                        <div class="attachcontent">
+                                        <div class="attachcontent" >
                                             <div class="attachiconthree">
                                                 <span class="material-symbols-outlined">
                                                     description
@@ -386,61 +386,39 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="chatinputbox">
+                            <div class="chatinputbox" id="audiomessage">
+                                <button id="recordButton">Record</button>
+<button id="stopButton" disabled>Stop</button>
+<button style="display: none;" id="playButton" disabled>Play</button>
                                 <div class="emoji">
                                     <span class="material-symbols-outlined">
                                         mood
                                     </span>
                                 </div>
-                                <div class="attachment">
-                                    <div class="attachmentdata" id="attachmentdata">
-                                        <div class="attachcontent">
-                                            <div class="attachiconthree">
-                                                <span class="material-symbols-outlined">
-                                                    description
-                                                </span>
-                                            </div>
-                                            <div class="attachtext">Document</div>
-                                        </div>
-
-                                        <div class="attachcontent">
-                                            <div class="attachicon">
-                                                <input type="file" name="" class="file-upload-input" id="myimg" accept=".jpg, .jpeg, .png, .gif" >
-                                                <span class="material-symbols-outlined">
-                                                    photo_library
-                                                </span>
-                                            </div>
-                                            <div class="attachtext">Photo</div>
-                                        </div>
-
-                                        <div class="attachcontent">
-                                            <div class="attachicontwo">
-                                                <span class="material-symbols-outlined">
-                                                    ballot
-                                                </span>
-                                            </div>
-                                            <div class="attachtext">Poll</div>
-                                        </div>
-                                    </div>
-                                    <span class="material-symbols-outlined" onclick="attachmenttoggle()">
-                                        attach_file_add
-                                    </span>
-                                </div>
+                         
                                 <div class="textareasection" >
-                                    <div id="qtd"></div>
+                                  
                                 
                                     <div class="input">
-<input type="hidden" name="" id="quotedid">
-                                        <textarea name="" oninput="adjustTextareaHeight()" id="mymessage" rows="1" placeholder="Write a message"></textarea>
+                                 
+
+                                        <div style="display: none;">
+                                            <input type="file" id="fileInput" style="display: none;">
+                                        </div>
+                                     
+                                        <p id="recordingText" style="display: none;">Recording...</p>
+                                        <div id="attachmentContainer"></div>
+                                        <audio id="audioPlayback" controls style="display: none;"></audio>
                                     </div>
                                 </div>
 
-
-                                <div class="attachment snd" id="attachmentbtn" onclick="createconversation()">
+                                <button id="sendButton" style="display: none;">
+                                <div class="attachment snd" id="attachmentbtn" >
                                     <span class="material-symbols-outlined">
                                         send
                                     </span>
                                 </div>
+                            </button>
                             </div>
                         </div>
              
@@ -575,6 +553,11 @@
     });
     </script> -->
  
+
+
+
+
+
     
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

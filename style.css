@@ -618,13 +618,19 @@ color: var(--white);
 }
 .chatinputbox{
     padding: 4px;
-    display: flex;
+    display: none;
     width: 100%;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
+.chatinputbox audio{
+    display: none;
+}
 
+.activebox{
+    display: flex;
+}
 .textareasection{
     width: 100%;
     display: flex;

@@ -339,7 +339,7 @@ console.log(userconversation)
               // Return a promise from createProfileIfNotExists
               return new Promise((resolve, reject) => {
                   if (!AllChats.some(profile => profile.to_id == chat_id || profile.from_id == chat_id)) {
-                      axiosInstance.get(`https://veejobapi.vercel.app/usermessagecreate/${chat_id}`)
+                      axiosInstance.get(`/usermessagecreate/${chat_id}`)
                           .then(response => {
                               const { id, message } = response.data;
           
@@ -496,7 +496,72 @@ console.log(userconversation)
                             `;
         } 
 
-        
+        else if(message.type === 'voicenote'){
+          messageHTML += `
+          <div ondblclick="blurpreview(${message.id})" class="${message.senderid === activeuserid ? 'completemessagesent' : 'completemessagerec'}">
+          <div class="${message.senderid === activeuserid ? 'messagesent' : 'messagerec'}" id="${message?.id  ? message?.id : ''}">
+                              <div class="edgecontrol">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                              <path d="${message.senderid === activeuserid ? 'M18.5039 3.6641C20.1503 2.56645 19.3733 3.61246e-06 17.3944 3.52596e-06L2.60673e-06 -9.53989e-08L1.90735e-06 16L18.5039 3.6641Z' : 'M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z'}" fill="${message.senderid === activeuserid ? 'var(--greenbar)' : 'var(--greybar)'}"/>
+                          </svg>
+                              </div>
+                              <div class="chatbubble">
+                              <div class='www'> 
+                           
+                              <div class="audio-player" data-url="https://res.cloudinary.com/viktortech/${message?.audio_url}">
+                              <div class="player">
+                                <button type="button" class="btn-play">
+                                  <span class="material-icons icon-play">play_arrow</span>
+                                  <span class="material-icons icon-pause">pause</span>
+                                  <span class="material-icons icon-loop">loop</span>
+                                </button>
+                                <div class="timeline">
+                                  <div class="line">
+                                    <input dir="ltr" type="range" min="0" max="100" value="0">
+                                  </div>
+                                  <div class="data">
+                                    <div class="current-time"></div>
+                                    <div class="time">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="user">
+                                <img src="https://avatars.githubusercontent.com/u/3522573?&v=4" />
+                                <span class="material-icons">mic</span>
+                              </div>
+                            </div>
+
+
+
+                              <span class="smallspan"> ${formatDateTime(message.datetime)} 
+                              <ion-icon name="checkmark-done-outline"></ion-icon>  </span> </div>
+                              <div class="qts"  style="display: flex; gap: 14px; font-size: 19px;  font-weight: 900; ">
+                                                     
+                              <div class="quot"   onclick="replyto(${message.id})">
+                                  <ion-icon name="arrow-undo-outline"></ion-icon>
+                                </div>
+
+                          
+                              <div class="edit">
+                              <ion-icon name="create-outline"></ion-icon>
+                            </div>
+                            <div class="delete"   onclick="deletemessage(${message.id})">
+                            <ion-icon name="trash-outline"></ion-icon>
+                            </div>
+                            
+                  
+                          </div>
+                              </div>
+                          </div>
+                          <div class="messageopt" onclick="replyto(${message.id})" >
+                          <span class="material-symbols-outlined">
+                              reply
+                              </span>
+                      </div>
+                          </div>
+                          `;
+        }
         
         else if (message.type === 'image') {
           
@@ -1004,7 +1069,7 @@ function bluroverlay(){
       let quotedids = document.getElementById('quotedid').value
       var file = document.getElementById('myimg').files[0];
       const myimg = document.getElementById("myimg").files[0]
-
+ 
       let payloaddata 
       let payloaddataimg
       let payloaddataimgs
@@ -2173,6 +2238,16 @@ async function fdatatwo() {
 }
 
 
+
+function audioswitch(){
+  const a = document.getElementById('normalmessage')
+  const b = document.getElementById('audiomessage')
+
+ a.classList.toggle('activebox')
+ b.classList.toggle('activebox')
+
+}
+
 // async function fetchDataEveryFiveSeconds() {
 //   console.log('fetched')
 //   // Call fdatatwo() initially
@@ -2361,83 +2436,315 @@ const audioWrappers = document.querySelectorAll(".c-wa-audio");
 audioWrappers.forEach((wrapper) => new AudioPlayer(wrapper));
 
 
+function audplayer(){
+  const audioPlayers = document.querySelectorAll(".audio-player");
 
-const audioPlayers = document.querySelectorAll(".audio-player");
+  audioPlayers.forEach((audioPlayer) => {
+    const audioUrl = audioPlayer.dataset.url;
+    const audio = new Audio(audioUrl);
+  
+    const btnPlayToggle = audioPlayer.querySelector(".btn-play");
+    const slider = audioPlayer.querySelector("input[type='range']");
+  
+    function setMessageDate() {
+      currentDateTime = new Date().toISOString().substr(11, 5);
+      audioPlayer.style.setProperty(
+        "--player-current-date-time",
+        `'${currentDateTime}'`
+      );
+    }
+  
+    function formatTimeToDisplay(seconds) {
+      const milliseconds = seconds * 1000;
+      return new Date(milliseconds).toISOString().substr(14, 5);
+    }
+  
+    function handlePlayButton() {
+      audio.paused ? audio.play() : audio.pause();
+    }
+  
+    function handleSlider(e) {
+      const { duration } = audio;
+      const percent = e.target.value;
+      const currentTimeInSeconds = ((percent * duration) / 100).toFixed(2);
+      audio.currentTime = currentTimeInSeconds;
+    }
+  
+    function updateCurrentTimeDisplay(time) {
+      audioPlayer.style.setProperty("--player-current-time", `'${time}'`);
+    }
+  
+    function updateCurrentPercent() {
+      const { currentTime, duration } = audio;
+      const percentPlayed = (currentTime * 100) / duration;
+      slider.value = percentPlayed;
+      audioPlayer.style.setProperty(
+        "--player-percent-played",
+        `${percentPlayed}%`
+      );
+    }
+  
+    function showTimeDuration() {
+      const { duration } = audio;
+      const durationDisplay = formatTimeToDisplay(duration);
+      updateCurrentTimeDisplay(durationDisplay);
+    }
+  
+    function start() {
+      btnPlayToggle.onclick = handlePlayButton;
+      slider.oninput = handleSlider;
+  
+      audio.onloadstart = () => {
+        setMessageDate();
+        audioPlayer.classList.add("loading");
+      };
+      audio.onplay = () => audioPlayer.classList.add("playing");
+      audio.onpause = () => audioPlayer.classList.remove("playing");
+      audio.onloadeddata = () => audioPlayer.classList.remove("loading");
+      audio.ondurationchange = showTimeDuration;
+      audio.onended = () => (audio.currentTime = 0);
+      audio.ontimeupdate = () => {
+        const { currentTime } = audio;
+        const currentTimeDisplay = formatTimeToDisplay(currentTime);
+        updateCurrentTimeDisplay(currentTimeDisplay);
+        updateCurrentPercent();
+        if (currentTime === 0) {
+          showTimeDuration();
+        }
+      };
+    }
+  
+    start();
+  });
+} audplayer()
 
-audioPlayers.forEach((audioPlayer) => {
-  const audioUrl = audioPlayer.dataset.url;
-  const audio = new Audio(audioUrl);
 
-  const btnPlayToggle = audioPlayer.querySelector(".btn-play");
-  const slider = audioPlayer.querySelector("input[type='range']");
 
-  function setMessageDate() {
-    currentDateTime = new Date().toISOString().substr(11, 5);
-    audioPlayer.style.setProperty(
-      "--player-current-date-time",
-      `'${currentDateTime}'`
-    );
+
+let mediaRecorder;
+let audioChunks = [];
+let recordedAudioBlob;
+
+const recordButton = document.getElementById('recordButton');
+const stopButton = document.getElementById('stopButton');
+const playButton = document.getElementById('playButton');
+const audioPlayback = document.getElementById('audioPlayback');
+const attachmentContainer = document.getElementById('attachmentContainer');
+const fileInput = document.getElementById('fileInput');
+const sendButton = document.getElementById('sendButton');
+const recordingText = document.getElementById('recordingText');
+
+recordButton.addEventListener('click', startRecording);
+stopButton.addEventListener('click', stopRecording);
+playButton.addEventListener('click', playRecording);
+fileInput.addEventListener('change', handleFileInputChange);
+sendButton.addEventListener('click', sendAudio);
+
+function startRecording() {
+  // Clear previous recording if any
+  clearPreviousRecording();
+
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+      mediaRecorder = new MediaRecorder(stream);
+      recordingText.style.display = 'block';
+      mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
+      };
+      mediaRecorder.onstop = () => {
+        recordingText.style.display = 'none';
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        recordedAudioBlob = audioBlob;
+        const audioUrl = URL.createObjectURL(audioBlob);
+        displayAudioPlayer(audioUrl);
+        fileInput.style.display = 'inline';
+        sendButton.style.display = 'inline';
+      };
+      mediaRecorder.start();
+    })
+    .catch(console.error);
+  recordButton.disabled = true;
+  stopButton.disabled = false;
+  playButton.disabled = true;
+}
+
+function clearPreviousRecording() {
+  audioChunks = [];
+  recordedAudioBlob = null;
+  const existingAudioPlayer = document.querySelector('audio');
+  if (existingAudioPlayer) {
+    existingAudioPlayer.parentNode.removeChild(existingAudioPlayer);
   }
+}
 
-  function formatTimeToDisplay(seconds) {
-    const milliseconds = seconds * 1000;
-    return new Date(milliseconds).toISOString().substr(14, 5);
+function stopRecording() {
+  mediaRecorder.stop();
+  recordButton.disabled = false;
+  stopButton.disabled = true;
+  playButton.disabled = false;
+}
+
+function playRecording() {
+  audioPlayback.play();
+}
+
+function displayAudioPlayer(audioUrl) {
+  // Remove any existing audio players
+  while (attachmentContainer.firstChild) {
+    attachmentContainer.removeChild(attachmentContainer.firstChild);
   }
+  const audioAttachment = createAudioAttachment(audioUrl);
+  attachmentContainer.appendChild(audioAttachment);
+}
 
-  function handlePlayButton() {
-    audio.paused ? audio.play() : audio.pause();
+function createAudioAttachment(audioUrl) {
+  const audioAttachment = document.createElement('audio');
+  audioAttachment.controls = true;
+  audioAttachment.src = audioUrl;
+  
+  return audioAttachment;
+}
+
+function handleFileInputChange(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const fileAttachment = createFileAttachment(file);
+    attachmentContainer.appendChild(fileAttachment);
   }
+}
 
-  function handleSlider(e) {
-    const { duration } = audio;
-    const percent = e.target.value;
-    const currentTimeInSeconds = ((percent * duration) / 100).toFixed(2);
-    audio.currentTime = currentTimeInSeconds;
+function createFileAttachment(file) {
+  const fileAttachment = document.createElement('p');
+  fileAttachment.textContent = `File: ${file.name}`;
+  return fileAttachment;
+}
+
+function sendAudio() {
+  const confirmation = confirm('Do you want to send the audio?');
+  if (confirmation) {
+    if (recordedAudioBlob) {
+      const formData = new FormData();
+      formData.append('myaudio', recordedAudioBlob, 'recording.wav');
+      const access = localStorage.getItem('access_token')
+      const arrayToken = access.split('.');
+      const tokenPayload = JSON.parse(atob(arrayToken[1]));
+      const uniqueid = activeprofiledata?.message_id
+    
+      let payloadvn
+      // ddd
+      payloadvn = {
+           myaudio:   recordedAudioBlob,
+            data: {
+              id: getRandomNumber(1, 990000),
+              senderid: activeuserid,
+              recieverid: activeuser?.userid,
+              type: "voicenote",
+               sender: "sent",
+               from: "victor",
+               datetime: new Date(),
+            }
+          };
+
+      if (payloadvn){
+
+            axiosInstance.post(`/messageportal/${uniqueid}/`, payloadvn, {
+              headers: {
+                'Content-Type': 'multipart/form-data', // Override Content-Type for this request
+                // Add other headers if needed
+              }
+            })
+            .then(response => {
+              console.log('Response from sent message:', response.data);
+              let allfetchmessage = []
+              response?.data?.allmessages.forEach(item => {  
+          
+                if (item?.messageid?.sender?.id === tokenPayload?.user_id) {
+                allfetchmessage.push({
+                  'chat_id': item?.messageid?.messageid,
+                   from_id: activeuserid, 
+                   to_id: aud(item?.messageid?.reciever?.id)?.userid,
+                    conversationDatas: item.testj
+                });
+          
+              }
+              else if (item?.messageid?.reciever?.id === tokenPayload?.user_id) {
+                allfetchmessage.push({
+                  'chat_id': item?.messageid?.messageid,
+                   from_id: activeuserid, 
+                   to_id: aud(item?.messageid?.sender?.id,)?.userid,
+                    conversationDatas: item.testj
+                });
+          
+          
+              }
+          
+            
+              })
+          
+              AllChats = allfetchmessage
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        
+        
+          }
+
+ 
+    } else {
+      alert('No recorded audio to send.');
+    }
   }
+}
 
-  function updateCurrentTimeDisplay(time) {
-    audioPlayer.style.setProperty("--player-current-time", `'${time}'`);
-  }
 
-  function updateCurrentPercent() {
-    const { currentTime, duration } = audio;
-    const percentPlayed = (currentTime * 100) / duration;
-    slider.value = percentPlayed;
-    audioPlayer.style.setProperty(
-      "--player-percent-played",
-      `${percentPlayed}%`
-    );
-  }
 
-  function showTimeDuration() {
-    const { duration } = audio;
-    const durationDisplay = formatTimeToDisplay(duration);
-    updateCurrentTimeDisplay(durationDisplay);
-  }
+function payloadvns (payloaddata){
 
-  function start() {
-    btnPlayToggle.onclick = handlePlayButton;
-    slider.oninput = handleSlider;
 
-    audio.onloadstart = () => {
-      setMessageDate();
-      audioPlayer.classList.add("loading");
-    };
-    audio.onplay = () => audioPlayer.classList.add("playing");
-    audio.onpause = () => audioPlayer.classList.remove("playing");
-    audio.onloadeddata = () => audioPlayer.classList.remove("loading");
-    audio.ondurationchange = showTimeDuration;
-    audio.onended = () => (audio.currentTime = 0);
-    audio.ontimeupdate = () => {
-      const { currentTime } = audio;
-      const currentTimeDisplay = formatTimeToDisplay(currentTime);
-      updateCurrentTimeDisplay(currentTimeDisplay);
-      updateCurrentPercent();
-      if (currentTime === 0) {
-        showTimeDuration();
+  if (payloaddata){
+
+    axiosInstance.post(`/messageportal/${uniqueid}/`, payloaddata, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Override Content-Type for this request
+        // Add other headers if needed
       }
-    };
+    })
+    .then(response => {
+      console.log('Response from sent message:', response.data);
+      let allfetchmessage = []
+      response?.data?.allmessages.forEach(item => {  
+  
+        if (item?.messageid?.sender?.id === tokenPayload?.user_id) {
+        allfetchmessage.push({
+          'chat_id': item?.messageid?.messageid,
+           from_id: activeuserid, 
+           to_id: aud(item?.messageid?.reciever?.id)?.userid,
+            conversationDatas: item.testj
+        });
+  
+      }
+      else if (item?.messageid?.reciever?.id === tokenPayload?.user_id) {
+        allfetchmessage.push({
+          'chat_id': item?.messageid?.messageid,
+           from_id: activeuserid, 
+           to_id: aud(item?.messageid?.sender?.id,)?.userid,
+            conversationDatas: item.testj
+        });
+  
+  
+      }
+  
+    
+      })
+  
+      AllChats = allfetchmessage
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+
   }
 
-  start();
-});
+}
