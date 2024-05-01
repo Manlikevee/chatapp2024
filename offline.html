@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Web App</title>
+    <style>
+        /* Add your custom CSS styles for the "no internet connection" message here */
+        .no-internet-message {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="cccc" style="display:flex; width:300px; margin: auto;">
+        <img src="" alt="" style="width: 100%; height: 100%;">
+    </div>
+
+    <div id="regularContent">
+        <!-- Your regular content goes here -->
+        <h1>Your Regular Content</h1>
+        <p>This is your regular content.</p>
+    </div>
+
+    <div id="noInternetContent" class="no-internet-message">
+        <h1>No Internet Connection</h1>
+        <p>Please check your internet connection and try again.</p>
+    </div>
+
+    <!-- Include your regular JavaScript files -->
+    <script>
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('data:text/javascript,' + encodeURIComponent(`
+                    const cacheName = 'offline-content';
+                    const offlineMessage = document.getElementById('noInternetContent');
+                    const essentialResources = [offlineMessage.innerHTML];
+
+                    self.addEventListener('install', function(event) {
+                        event.waitUntil(
+                            caches.open(cacheName).then(function(cache) {
+                                return cache.addAll(essentialResources);
+                            })
+                        );
+                    });
+
+                    self.addEventListener('fetch', function(event) {
+                        event.respondWith(
+                            caches.match(event.request).then(function(response) {
+                                return response || fetch(event.request).catch(function() {
+                                    return caches.match('no_internet.html');
+                                });
+                            })
+                        );
+                    });
+                `))
+                .then(function(registration) {
+                    console.log('Service Worker registered successfully');
+                })
+                .catch(function(error) {
+                    console.error('Service Worker registration failed:', error);
+                });
+            });
+        }
+
+        // Check for internet connection
+        function updateOnlineStatus(event) {
+            const noInternetMessage = document.getElementById('noInternetContent');
+            const regularContent = document.getElementById('regularContent');
+
+            if (navigator.onLine) {
+                noInternetMessage.style.display = 'none';
+                regularContent.style.display = 'block';
+            } else {
+                noInternetMessage.style.display = 'block';
+                regularContent.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('online',  updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+
+        // Initial check
+        updateOnlineStatus();
+    </script>
+</body>
+</html>

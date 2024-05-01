@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Veechat</title>
+    <meta name="description" content="">
+<link rel="stylesheet" href="vtoast.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#26272D" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<meta name="description" content="VeeChat: Redefining Messaging Excellence. Elevate your communication experience with VeeChat, a dynamic messaging web app. Seamlessly connect, share, and collaborate with friends and colleagues. Enjoy a feature-packed platform that prioritizes security, innovation, and user-friendly design. Experience the future of messaging – VeeChat, where every conversation becomes an exceptional journey. Start chatting, start connecting!">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      </head>
+
+    <body>
+<style>
+  body{
+    overflow: auto !important;
+  }
+</style>
+<div class="overlay" id="overlay" onclick="closeqrpopup()"></div>
+<div class="popup mypop" id="popup">
+    <div class="stepup">
+        <div class="steps">
+          
+           <h3>Login with Mobile App</h3>
+           <ul class="list">
+            <li>Launch the Veechat app on your smartphone.</li>
+            <li>Tap the Menu icon on the chat homescreen: Look for the Menu icon (usually three horizontal lines) and tap it.</li>
+            <li>Tap Linked Devices and then link a device: Access Linked Devices from the Menu and select "Link a Device".</li>
+            <li>Point Your Phone at this screen and capture the QR code: Use your phone's camera to scan the QR code displayed here.</li>
+        </ul>
+        </div>
+
+        <div id="qrcode-container">
+            <div id="qrcode" class="qrcode"></div>
+        </div>
+    </div>
+
+   
+</div>
+<div class="loginform">
+    <div class="loginimg">
+        <div class="roundvee">
+            V
+        </div>
+        <div class="domainlink">
+            veechat.vercel.app
+        </div>
+        <div class="shorttext">
+            Connect, Chat, Create: Where Conversations Flow Freely!
+        </div>
+        <br>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="sbox">
+                    <div class="slideicon">
+                    
+                   
+                        <ion-icon name="logo-vimeo"></ion-icon>
+                                        </div>
+                                        <div class="slidetitle">@TwitterAccount</div>
+                                        <div class="slidebody">Tweet, reply to tweet, manage DMs, and more in a single dashboard.</div>
+                </div>
+
+              </div>
+              <div class="swiper-slide">
+                <div class="sbox">
+                    <div class="slideicon">
+                    
+              
+                        <ion-icon name="logo-vimeo"></ion-icon>
+                                        </div>
+                                        <div class="slidetitle">@TwitterAccount</div>
+                                        <div class="slidebody">Tweet, reply to tweet, manage DMs, and more in a single dashboard.</div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="sbox">
+                    <div class="slideicon">
+                    
+                     
+                        <ion-icon name="logo-vimeo"></ion-icon>
+                                        </div>
+                                        <div class="slidetitle">@TwitterAccount</div>
+                                        <div class="slidebody">Tweet, reply to tweet, manage DMs, and more in a single dashboard.</div>
+                </div>
+              </div>
+              <!-- Add more slides as needed -->
+            </div>
+        
+            <!-- Add Pagination -->
+            <div class="swiper-pagination" style="display: none;"></div>
+          </div>
+    </div>
+    <div class="loginlogin">
+       <div class="loginforms">
+        <div class="ltitle">
+            Login
+        </div>
+        <div class="sso">
+            You can login with your registered account or quick login with Our Mobile App .
+        </div>
+      <div class="applogin" onclick="qrpopup()">
+        <ion-icon name="logo-vimeo"></ion-icon> Login with Mobile App
+      </div>
+      <div class="login">
+        <label for="username">Username</label>
+        <div class="lbx">
+            <input type="text" id="username" placeholder="Enter Your Username/Email">
+        </div>
+    </div>
+    <div class="login">
+        <label for="password">Password <small class="fpass">Forgot Password?</small></label>
+        <div class="lbx">
+            <input type="password" id="password" placeholder="••••••••••••••••••••••">
+        </div>
+    </div>
+    <div class="login">
+      
+        <button id="submitBtn" onclick="submitLogin()">Submit</button>
+        <button id="loadingBtn" style="display: none;" disabled><i class="fa fa-spinner fa-spin"></i> Loading</button>
+    </div>
+    
+        <div class="create">
+            Don’t have an account? <a href="register.html">Create one!</a> 
+                       
+                    </div>
+       </div>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="vtoast.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script>
+
+function submitLogin() {
+    // Disable the submit button to prevent double submission
+
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+
+    if (username && password){
+      login(username, password);
+      document.getElementById('submitBtn').style.display = 'none';
+
+// Show the loading spinner
+document.getElementById('loadingBtn').style.display = 'inline-block';
+    } else{
+      VanillaToasts.create({
+        title: 'Note!',
+        text:  'Fields Are Required' ,
+        type: 'info',
+        timeout: 3000
+    });
+    }
+
+}
+function login(username, password) {
+    const url = 'https://veejobapi.vercel.app/token/';
+
+    const data = {
+        username: username,
+        password: password
+    };
+
+    // Show loading spinner
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('loadingBtn').style.display = 'block';
+
+    axios.post(url, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        // Successful login
+        VanillaToasts.create({
+            title: 'Success!',
+            text: 'Login successfully',
+            type: 'success',
+            timeout: 3000
+        });
+
+        // Save access and refresh tokens to localStorage
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
+        setTimeout(function() {
+            window.location.href = `index.html`;
+        }, 2000);
+
+        const token = response.data.access;
+        const arrayToken = token.split('.');
+        const tokenPayload = JSON.parse(atob(arrayToken[1]));
+        console.log(tokenPayload);
+
+        // Hide loading spinner and enable submit button
+        hideLoadingSpinner();
+    })
+    .catch(error => {
+        // Failed login
+        VanillaToasts.create({
+            title: 'Error!',
+            text: error.response ? error.response.data.message || 'Invalid Username or Password' : 'Failed to connect to server',
+            type: 'error',
+            timeout: 5000
+        });
+
+        // Hide loading spinner and enable submit button
+        hideLoadingSpinner();
+    });
+}
+
+function hideLoadingSpinner() {
+    document.getElementById('submitBtn').style.display = 'block';
+    document.getElementById('loadingBtn').style.display = 'none';
+}
+
+
+
+
+function qrpopup(){
+    const popupmodal = document.getElementById('overlay')
+    const popup =  document.getElementById('popup')
+
+
+    generateQRCode()
+    popup.classList.add('shw')
+    popupmodal.classList.add('shw')
+}
+function generateQRCode() {
+      let website = 'google.com';
+      if (website) {
+        let qrcodeContainer = document.getElementById("qrcode");
+        qrcodeContainer.innerHTML = "";
+        new QRCode(qrcodeContainer, website);
+ 
+        document.getElementById("qrcode-container").style.display = "block";
+      } else {
+        alert("Please enter a valid URL");
+      }
+    }
+
+function closeqrpopup(){
+    const popupmodal = document.getElementById('overlay')
+    const popup =  document.getElementById('popup')
+
+
+    popup.classList.remove('shw')
+    popupmodal.classList.remove('shw')
+}
+
+   var swiper = new Swiper('.swiper-container', {
+      slidesPerView: '2',
+      spaceBetween: 20,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      autoplay: {
+        delay: 2000, // Adjust the delay as needed (in milliseconds)
+      },
+      breakpoints: {
+        3000: {
+          slidesPerView: 2,
+        },
+        2000: {
+          slidesPerView: 2,
+        },
+        1000: {
+          slidesPerView: 1,
+        },
+        600: {
+          slidesPerView: 1,
+        },
+        100: {
+          slidesPerView: 1,
+        }
+      }
+    });
+
+    
+</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Veechat</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="vtoast.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#26272D" />
+    <meta name="description" content="VeeChat: Redefining Messaging Excellence. Elevate your communication experience with VeeChat, a dynamic messaging web app. Seamlessly connect, share, and collaborate with friends and colleagues. Enjoy a feature-packed platform that prioritizes security, innovation, and user-friendly design. Experience the future of messaging – VeeChat, where every conversation becomes an exceptional journey. Start chatting, start connecting!">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+</head>
+
+
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="overlay" id="overlay"></div>
+    <div class="swipecont">
+        <div class="mySwiper-container" id="hidden">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slides will be added dynamically using JavaScript -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <div class="autoplay-progress">
+                    <svg viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20"></circle>
+                    </svg>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main>
+
+        <div class="container" >
+            <div class="sidebar" id="sidebar">
+                <div class="sidebarheader">
+                    <div class="chatscreenheader">
+                        <div class="userdata">
+                            <div class="profilephoto">
+                                <img src="image 40.png" alt="">
+                            </div>
+                            <div class="usersname">
+                                <div> <small class="small uname"> <span id="correctusername"> </span><img src="Vector (47).svg" alt=""> </small>
+                                </div>
+                                <small class="small" id="correctemail"></small>
+                            </div>
+                        </div>
+                        <div class="usersettings">
+                            <div class="search" onclick="toggleFullscreen()"> <span class="material-symbols-outlined">
+                                    add_comment
+                                </span></div>
+                            <div class="toggle" ><span class="material-symbols-outlined">
+                                    more_vert
+                                </span></div>
+                                <div class="toggle srch" id="srch" onclick="searchshow()">
+                                    <span class="material-symbols-outlined">
+                                        search
+                                    </span>
+                                </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <div class="sidebardatas" id="search" >
+                    <div class="closed" onclick="searchshow()">
+                        x
+                    </div>
+                    <div class="searchinput">
+                        <input type="text" placeholder="Search"> <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </div>
+                </div>
+                <div class="sidebardatas">
+                    <div class="infotitle">
+                        Stories
+                    </div>
+                    <div class="owlsection">
+                        <div class="owl-carousel stories">
+                            <div class="tts">
+                                <div class="item" id="storyone"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item" id="storytwo"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item" id="storythree"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <div class="tts">
+                                <div class="item"><img src="image 116.png" alt="Image 1"></div>
+                            </div>
+                            <!-- Add more items as needed -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="sidebarextradata" id="msgdta">
+                    <div class="sidebardatas">
+                        <div class="infotitle" id="switch" onclick="myswitch()">
+                            Messages    <a href="#" onclick="swapchat()">back</a> 
+                        </div>
+                        <div class="newchats chatbubbles" id="newchats" >
+                         
+                        </div>
+                        <div class="chatbubbles h" id="allchat">
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="messagesettings">
+                    <div class="logoutbtn" style="cursor: pointer;" onclick="logout()">
+                        <div class="logout">
+                            <div class="icon">
+                                <span class="material-symbols-outlined">
+                                    logout
+                                </span>
+                            </div>
+                            <div class="messagetext">Logout</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="chatscreen" id="chatscreen">
+
+<div class="chatsplash" id="cspalash">
+
+<img src="me.svg" alt="">
+
+
+
+<div class="oops">
+    <h4>Start a conversation</h4>
+    <p>Oops! You haven't started any conversation yet. Click <a href="#" onclick="showme()">here</a> to start one.</p>
+</div>
+</div>
+                
+
+                <div class="chatbody" id="cdata" style="display: none;">
+                    <div class="chatcontainer">
+                        <div class="charheader">
+                            <div class="chatscreenheader">
+                                <div class="userdata">
+                                    <ion-icon name="arrow-back-outline" class="mybackbtn" onclick="myswitch()"></ion-icon>
+                                    <div class="profilephoto">
+                                        <img src="image 40.png" alt="">
+                                    </div>
+                                    <div class="usersname" >
+                                        <div> <small class="small uname"> <span id="usersname"></span>  <img src="Vector (47).svg" alt="">
+                                            </small></div>
+                                        <small class="small" id="lastseen"></small>
+                                    </div>
+                                </div>
+                                <div class="usersettings">
+                                    <div class="search" onclick="mediashow()">
+                                        <span class="material-symbols-outlined">
+                                            search
+                                        </span>
+                                    </div>
+                                    <div class="toggle"><span class="material-symbols-outlined">
+                                            more_vert
+                                        </span></div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+<div class="blurpreview" id="blurredpreview" onclick="bluroverlay()"></div>
+                       
+                        <div class="chatdata" id="chatData">
+                            <div ondblclick="blurpreview(71119)" class="completemessagerec">
+                                <div class="messagerec" id="71119">
+                                                    <div class="edgecontrol">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                                    <path d="M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z" fill="var(--greybar)"></path>
+                                                </svg>
+                                                    </div>
+                                                    <div class="chatbubble">
+                                                    <div class="www"> 
+                                                        <div class="audio-player" data-url="https://upload.wikimedia.org/wikipedia/commons/8/81/Audio_test_german.ogg">
+                                                            <div class="player">
+                                                              <button type="button" class="btn-play">
+                                                                <span class="material-icons icon-play">play_arrow</span>
+                                                                <span class="material-icons icon-pause">pause</span>
+                                                                <span class="material-icons icon-loop">loop</span>
+                                                              </button>
+                                                              <div class="timeline">
+                                                                <div class="line">
+                                                                  <input dir="ltr" type="range" min="0" max="100" value="0">
+                                                                </div>
+                                                                <div class="data">
+                                                                  <div class="current-time"></div>
+                                                                  <div class="time">
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="user">
+                                                              <img src="https://avatars.githubusercontent.com/u/3522573?&v=4" />
+                                                              <span class="material-icons">mic</span>
+                                                            </div>
+                                                          </div>
+
+                                                    <span class="smallspan"> 10:16 AM 
+                                                    <ion-icon name="checkmark-done-outline" role="img" class="md hydrated"></ion-icon>  </span> </div>
+                                                    <div class="qts" style="display: flex; gap: 14px; font-size: 19px;  font-weight: 900; ">
+                                                                           
+                                                    <div class="quot" onclick="replyto(71119)">
+                                                        <ion-icon name="arrow-undo-outline" role="img" class="md hydrated"></ion-icon>
+                                                      </div>
+                    
+                                                
+                                                    <div class="edit">
+                                                    <ion-icon name="create-outline" role="img" class="md hydrated"></ion-icon>
+                                                  </div>
+                                                  <div class="delete" onclick="deletemessage(71119)">
+                                                  <ion-icon name="trash-outline" role="img" class="md hydrated"></ion-icon>
+                                                  </div>
+                                                  
+                                        
+                                                </div>
+                                                    </div>
+                                                </div>
+                                                <div class="messageopt" onclick="replyto(71119)">
+                                                <span class="material-symbols-outlined">
+                                                    reply
+                                                    </span>
+                                            </div>
+                                                </div>
+<!-- 
+                            <div ondblclick="blurpreview(517997)" class="completemessagesent">
+                                <div class="messagesent " id="517997">
+                                                    <div class="edgecontrol">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                                    <path d="M18.5039 3.6641C20.1503 2.56645 19.3733 3.61246e-06 17.3944 3.52596e-06L2.60673e-06 -9.53989e-08L1.90735e-06 16L18.5039 3.6641Z" fill="var(--greenbar)"></path>
+                                                </svg>
+                                                    </div>
+                                                    <div class="chatbubble">
+                                                    <div class="www"> 
+                                                      var elements = document.getElementsByClassName("blurred");
+                      Array.from(elements).forEach(function(element) {
+                        element.classList.remove("blurred");
+                      });  var elements = document.getElementsByClassName("blurred");
+                      Array.from(elements).forEach(function(element) {
+                        element.classList.remove("blurred");
+                      });  var elements = document.getElementsByClassName("blurred");
+                      Array.from(elements).forEach(function(element) {
+                        element.classList.remove("blurred");
+                      });
+                                                    <span class="smallspan"> 11:48 AM 
+                                                    <ion-icon name="checkmark-done-outline" role="img" class="md hydrated"></ion-icon>  </span> </div>
+                                                    <div class="qts"  style="display: flex; gap: 14px; font-size: 19px;  font-weight: 900; ">
+                                                       
+                                                        <div class="quot"   onclick="replyto(${message.id})">
+                                                            <ion-icon name="arrow-undo-outline"></ion-icon>
+                                                          </div>
+
+                                                    
+                                                        <div class="edit">
+                                                        <ion-icon name="create-outline"></ion-icon>
+                                                      </div>
+                                                      <div class="delete">
+                                                        <ion-icon name="trash-outline"></ion-icon>
+                                                      </div>
+                                            
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="messageopt" onclick="replyto(517997)">
+                                                <span class="material-symbols-outlined">
+                                                    reply
+                                                    </span>
+                                            </div>
+                                                </div> -->
+
+  
+
+                            <div id="chatContainer">
+
+                            </div>
+
+                        </div>
+                        <div class="chatfooter">
+
+                            <div class="chatinputbox">
+                                <div class="emoji">
+                                    <span class="material-symbols-outlined">
+                                        mood
+                                    </span>
+                                </div>
+                                <div class="attachment">
+                                    <div class="attachmentdata" id="attachmentdata">
+                                        <div class="attachcontent">
+                                            <div class="attachiconthree">
+                                                <span class="material-symbols-outlined">
+                                                    description
+                                                </span>
+                                            </div>
+                                            <div class="attachtext">Document</div>
+                                        </div>
+
+                                        <div class="attachcontent">
+                                            <div class="attachicon">
+                                                <input type="file" name="" class="file-upload-input" id="myimg" accept=".jpg, .jpeg, .png, .gif" >
+                                                <span class="material-symbols-outlined">
+                                                    photo_library
+                                                </span>
+                                            </div>
+                                            <div class="attachtext">Photo</div>
+                                        </div>
+
+                                        <div class="attachcontent">
+                                            <div class="attachicontwo">
+                                                <span class="material-symbols-outlined">
+                                                    ballot
+                                                </span>
+                                            </div>
+                                            <div class="attachtext">Poll</div>
+                                        </div>
+                                    </div>
+                                    <span class="material-symbols-outlined" onclick="attachmenttoggle()">
+                                        attach_file_add
+                                    </span>
+                                </div>
+                                <div class="textareasection" >
+                                    <div id="qtd"></div>
+                                
+                                    <div class="input">
+<input type="hidden" name="" id="quotedid">
+                                        <textarea name="" oninput="adjustTextareaHeight()" id="mymessage" rows="1" placeholder="Write a message"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="attachment snd" id="attachmentbtn" onclick="createconversation()">
+                                    <span class="material-symbols-outlined">
+                                        send
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="chatinputbox">
+                                <div class="emoji">
+                                    <span class="material-symbols-outlined">
+                                        mood
+                                    </span>
+                                </div>
+                                <div class="attachment">
+                                    <div class="attachmentdata" id="attachmentdata">
+                                        <div class="attachcontent">
+                                            <div class="attachiconthree">
+                                                <span class="material-symbols-outlined">
+                                                    description
+                                                </span>
+                                            </div>
+                                            <div class="attachtext">Document</div>
+                                        </div>
+
+                                        <div class="attachcontent">
+                                            <div class="attachicon">
+                                                <input type="file" name="" class="file-upload-input" id="myimg" accept=".jpg, .jpeg, .png, .gif" >
+                                                <span class="material-symbols-outlined">
+                                                    photo_library
+                                                </span>
+                                            </div>
+                                            <div class="attachtext">Photo</div>
+                                        </div>
+
+                                        <div class="attachcontent">
+                                            <div class="attachicontwo">
+                                                <span class="material-symbols-outlined">
+                                                    ballot
+                                                </span>
+                                            </div>
+                                            <div class="attachtext">Poll</div>
+                                        </div>
+                                    </div>
+                                    <span class="material-symbols-outlined" onclick="attachmenttoggle()">
+                                        attach_file_add
+                                    </span>
+                                </div>
+                                <div class="textareasection" >
+                                    <div id="qtd"></div>
+                                
+                                    <div class="input">
+<input type="hidden" name="" id="quotedid">
+                                        <textarea name="" oninput="adjustTextareaHeight()" id="mymessage" rows="1" placeholder="Write a message"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="attachment snd" id="attachmentbtn" onclick="createconversation()">
+                                    <span class="material-symbols-outlined">
+                                        send
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+             
+                    </div>
+                    <div class="mediafiles" id="mymedia">
+                        <div class="charheader">
+                            <div class="chatscreenheader">
+                                <div class="userdata">
+
+                                    <div class="usersname">Contact info
+                                        <small class="small"> <img src="Vector (47).svg" alt=""> Verified</small>
+                                    </div>
+                                </div>
+                                <div class="usersettings" onclick="mediashow()">
+                                    <div class="search">
+                                        <span class="material-symbols-outlined">
+                                            cancel
+                                        </span>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="mediaextradata">
+                            <div class="recepientprofile">
+
+                                <div class="recepientphoto">
+                                    <img src="image 40.png" alt="">
+                                </div>
+                                <div class="recepientdetails">
+                                    <div class="recepientname" id="pname"></div>
+                                    <div class="recepientnumber" id="pphone"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="recepientinfo">
+                                <div class="infotitle">
+                                    Info
+                                </div>
+                                <div class="infotext" id="ptext">
+                                  
+                                </div>
+                            </div>
+
+                            <div class="recentmedia">
+                                <div class="mediatitle">
+                                    Media, Links and Documents
+                                </div>
+
+                
+                                <div class="mediacontainer" id="mediablob">
+                                    <!-- <div class="media">
+                                        <img src="https://images.unsplash.com/photo-1704642406927-d454ea541612?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" loading="lazy"
+                                            alt="">
+                                    </div> -->
+                     
+           
+                                </div>
+                            </div>
+
+                            <div class="messagesettings">
+                                <div class="marked">
+                                    <div class="icon">
+                                        <span class="material-symbols-outlined">
+                                            star
+                                        </span>
+                                    </div>
+                                    <div class="messagetext">Marked messages</div>
+                                </div>
+                                <div class="notification">
+                                    <div class="icon">
+                                        <span class="material-symbols-outlined">
+                                            notifications
+                                        </span>
+                                    </div>
+                                    <div class="messagetext">Notifications</div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="messagesettings nb">
+                            <div class="settings">
+                                <div class="icon">
+                                    <span class="material-symbols-outlined">
+                                        settings
+                                    </span>
+                                </div>
+                                <div class="messagetext">Settings</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+        
+
+    </main>
+
+<script>
+
+</script>
+<script src="vtoast.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+ 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<!-- <script>
+    window.addEventListener("beforeunload", function (event) {
+        event.preventDefault();
+        event.returnValue = '';
+        const confirmationMessage = 'Are you sure you want to leave? Your changes may not be saved.';
+        event.returnValue = confirmationMessage;
+        return confirmationMessage;
+    });
+    </script> -->
+ 
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

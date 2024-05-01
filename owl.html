@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Investments</title>
+</head>
+<body>
+    <h1>User Investments</h1>
+    
+    <div>
+        <label for="activeUser">Active User:</label>
+        <select id="activeUser" onchange="updateActiveUser()">
+            <option value="1">John</option>
+            <option value="2">Alice</option>
+            <option value="3">Bob</option>
+        </select>
+    </div>
+
+    <div>
+        <h2>Investments</h2>
+        <ul id="investmentList"></ul>
+    </div>
+
+    <div>
+        <h2>Add Investment</h2>
+        <label for="investmentType">Type:</label>
+        <input type="text" id="investmentType">
+        <label for="investmentAmount">Amount:</label>
+        <input type="number" id="investmentAmount">
+        <button onclick="addInvestment()">Add Investment</button>
+    </div>
+
+    <script>
+        // Sample data
+        const users = [
+            { id: 1, name: "John" },
+            { id: 2, name: "Alice" },
+            { id: 3, name: "Bob" }
+        ];
+
+        let active = 1; // Initial active user ID
+
+        let profiles = []; // Initialize profiles as an empty array
+
+        // Function to update profile array
+        function updateProfile(user_id, newInvestments) {
+            const index = profiles.findIndex(profile => profile.user_id === user_id);
+            if (index !== -1) {
+                profiles[index].investments = newInvestments;
+            } else {
+                profiles.push({ user_id, investments: newInvestments });
+            }
+        }
+
+        // Function to update active user
+        function updateActiveUser() {
+            active = parseInt(document.getElementById("activeUser").value);
+            createProfileIfNotExists(active);
+            displayInvestments();
+        }
+
+        // Function to create a profile if it doesn't exist
+        function createProfileIfNotExists(user_id) {
+            if (!profiles.some(profile => profile.user_id === user_id)) {
+                profiles.push({ user_id, investments: [] });
+            }
+        }
+
+        // Function to display investments for active user
+        function displayInvestments() {
+            const investmentList = document.getElementById("investmentList");
+            investmentList.innerHTML = ''; // Clear previous list
+
+            const activeProfile = profiles.find(profile => profile.user_id === active);
+            if (activeProfile) {
+                activeProfile.investments.forEach(investment => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${investment.type}: $${investment.amount}`;
+                    investmentList.appendChild(listItem);
+                });
+            }
+        }
+
+        // Function to add investment to active user
+        function addInvestment() {
+            const type = document.getElementById("investmentType").value;
+            const amount = parseFloat(document.getElementById("investmentAmount").value);
+            if (!isNaN(amount) && type.trim() !== '') {
+                createProfileIfNotExists(active); // Create profile if it doesn't exist
+                const activeProfile = profiles.find(profile => profile.user_id === active);
+                if (activeProfile) {
+                    const newInvestment = { type: type, amount: amount };
+                    activeProfile.investments.push(newInvestment);
+                    updateProfile(active, activeProfile.investments);
+                    displayInvestments();
+                }
+            } else {
+                alert("Please enter a valid investment type and amount.");
+            }
+        }
+
+        // Initial display
+        displayInvestments();
+    </script>
+</body>
+</html>
+
+
+
+// //   {
+  // //       type: "invite",
+  // //       sender: "sent",
+  // //       roomName: "Ishika’s Personal Room",
+  // //       message: "There are few minor changes that need.",
+  // //       imageSrc: "image 40.png"
+  // //   },
+  // //   {
+  // //       type: "image",
+  // //       sender: "rec",
+  // //       message: "Hey there! Have you heard about how AI is changing the world?",
+  // //       imageUrl: "https://plus.unsplash.com/premium_photo-1677215211005-0305cb45e09f?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Hey there! Have you heard about how AI is changing the world?"
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "rec",
+  // //       "message": "Absolutely! AI is making significant impacts across various industries, from healthcare to finance."
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "It's fascinating how AI is enhancing efficiency and bringing about innovative solutions. What specific areas interest you the most?"
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "rec",
+  // //       "message": "I'm particularly interested in AI applications in natural language processing and chatbots. The advancements in language understanding have been impressive."
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Absolutely! Chatbots are revolutionizing customer support and communication. They can provide instant assistance and improve user experiences. What do you think about the ethical considerations surrounding AI?"
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "rec",
+  // //       "message": "Ethical considerations are crucial. It's essential to ensure responsible AI development, addressing issues like bias and privacy concerns. Striking the right balance is key for the positive impact of AI on society."
+  // //   },
+  // //   {
+  // //       type: "image",
+  // //       sender: "rec",
+  // //       imageUrl: "https://i.pinimg.com/564x/71/0b/b0/710bb08e5b6f161b3e17028a012641a5.jpg",
+        
+  // //       "message": "Beautifully generated Ai Images"
+  // //   },
+  // //   {
+  // //       type: "text",
+  // //       sender: "rec",
+  // //       message: "That Image image looks fascinating! AI is enabling creativity and innovation."
+  // //   },
+  //   {
+  //     id : '88833',
+  //     type: "text",
+  //     from:'victor',
+  //     sender: "rec",
+  //     datetime: new Date(),
+  //     message: "Thanks to you, I smile a little more, laugh a little harder, and cry a little less. I am so lucky to have you in my life. I don’t know where I would be without your love. To the most wonderful woman I know, thank you for constantly bringing out the best in me."
+  // },
+  // //   {
+  // //       type: "text",
+  // //       sender: "sent",
+  // //       message: "Absolutely! It's amazing to see how AI is transforming various aspects of our lives."
+  // //   },
+  // //   {
+  // //       "type": "image",
+  // //       "sender": "sent",
+  // //       "message": "I prefer this alot more, The beauty in so many colors.Very eye catching.( Joy )",
+  // //       imageUrl: "https://i.pinimg.com/564x/9f/8f/30/9f8f3075d1cb75d190240d242765142a.jpg",
+  // //   },
+  // //   {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Hey there! 😊 Can I steal a moment of your time?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "Of course! What's on your mind?",
+  // //       "from": "You",
+  // //       "quotemessage": "Hey there! 😊 Can I steal a moment of your time?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Lily! 🌸 What a lovely name! It suits you perfectly. Tell me, what's your favorite way to spend a lazy Sunday?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "Lazy Sundays are the best, right? I love curling up with a good book. How about you?",
+  // //       "from": "You",
+  // //       "quotemessage": "Lily! 🌸 What a lovely name! It suits you perfectly. Tell me, what's your favorite way to spend a lazy Sunday?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Books, huh? That's fascinating! Any particular genre that makes your heart race?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "I'm a sucker for romance novels! There's just something magical about love stories. What about you, any favorite genre?",
+  // //       "from": "You",
+  // //       "quotemessage": "Books, huh? That's fascinating! Any particular genre that makes your heart race?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Romance novels, huh? I might have to borrow a few recommendations from you! Any all-time favorites?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "Oh, where do I start? 'Pride and Prejudice,' 'Romeo and Juliet,' and 'The Notebook' are classics. Do you enjoy reading romantic tales?",
+  // //       "from": "You",
+  // //       "quotemessage": "Romance novels, huh? I might have to borrow a few recommendations from you! Any all-time favorites?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Absolutely! There's something enchanting about love stories. 'The Fault in Our Stars' and 'Eleanor Oliphant Is Completely Fine' are among my favorites. Any other hobbies you'd like to share, Lily?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "Great choices! Besides reading, I enjoy painting landscapes and playing the piano. How about you? Any hidden talents or hobbies?",
+  // //       "from": "You",
+  // //       "quotemessage": "Absolutely! There's something enchanting about love stories. 'The Fault in Our Stars' and 'Eleanor Oliphant Is Completely Fine' are among my favorites. Any other hobbies you'd like to share, Lily?"
+  // //     },
+
+
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "It's a gift! So, Lily, besides dodgy jokes, what are your passions? What makes your heart race with excitement?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "rec",
+  // //       "message": "Well, Alex, I have this inexplicable love for old bookstores, lazy Sunday mornings, and dancing in the rain. What about you? What's your secret passion?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Ah, Lily, you just described a perfect day! As for me, I secretly love singing in the shower and believe that every meal deserves a dash of hot sauce. Spice it up, right?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Favorite spots, Lily! Do you have any go-to places that hold a special spot in your heart? Perhaps a cozy cafe or a hidden park?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "Absolutely! There's this quaint bookstore cafe downtown. The smell of old books and freshly brewed coffee makes it magical. How about you? Any favorite spots that bring a smile to your face?",
+  // //       "from": "Lily",
+  // //       "quotemessage": "Favorite spots, Lily! Do you have any go-to places that hold a special spot in your heart? Perhaps a cozy cafe or a hidden park?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "That bookstore cafe sounds like a dream! Personally, I love this rooftop garden with a view of the city lights. It's my little haven. Now, shifting gears a bit, how about dinner? Any favorite dishes that make your taste buds dance?"
+  // //     },
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "City lights and rooftop gardens? That sounds enchanting! As for dinner, I'm a sucker for homemade pasta. There's something therapeutic about cooking a delicious meal. What about you? Any favorite cuisines or dishes?",
+  // //       "from": "Lily",
+  // //       "quotemessage": "That bookstore cafe sounds like a dream! Personally, I love this rooftop garden with a view of the city lights. It's my little haven. Now, shifting gears a bit, how about dinner? Any favorite dishes that make your taste buds dance?"
+  // //     },
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Homemade pasta is a culinary masterpiece! I have a soft spot for sushi – the delicate balance of flavors is pure bliss. Now, onto a topic that stirs passion in many hearts: football! Do you have a favorite team that you cheer for with all your might?"
+  // //     },
+
+  // //     {
+  // //       "type": "text",
+  // //       "sender": "sent",
+  // //       "message": "Absolutely! There's something enchanting about love stories. 'The Fault in Our Stars' and 'Eleanor Oliphant Is Completely Fine' are among my favorites. Any other hobbies you'd like to share, Lily?"
+  // //     },
+
+  // //     {
+  // //       "type": "replytext",
+  // //       "sender": "rec",
+  // //       "message": "Sushi and football, a dynamic duo! I'm a die-hard fan of Manchester United. The thrill of the game and the camaraderie of the fans make it an unforgettable experience. How about you? Any football teams that you passionately support?",
+  // //       "from": "Lily",
+  // //       "quotemessage": "Homemade pasta is a culinary masterpiece! I have a soft spot for sushi – the delicate balance of flavors is pure bliss. Now, onto a topic that stirs passion in many hearts: football! Do you have a favorite team that you cheer for with all your might?"
+  // //     },
+
+
+  // //   {
+  // //     "id" : 'code884833',
+  // //     "type": "text",
+  // //     "sender": "sent",
+  // //     "message": "Hey there! 😊 Can I steal a moment of your time?"
+  // //   },
+  //   {
+  //     "id" : '88844',
+  //     "type": "replytext",
+  //     "sender": "rec",
+  //     "message": "Of course! What's on your mind?",
+  //     "from": "You",
+  //     'datetime': new Date(),
+  //     "quotemessage": "Hey there! 😊 Can I steal a moment of your time?",
+  //     "quotedid": "88833",
+  //   },

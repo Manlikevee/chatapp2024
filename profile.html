@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Veechat</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#26272D" />
+<meta name="description" content="VeeChat: Redefining Messaging Excellence. Elevate your communication experience with VeeChat, a dynamic messaging web app. Seamlessly connect, share, and collaborate with friends and colleagues. Enjoy a feature-packed platform that prioritizes security, innovation, and user-friendly design. Experience the future of messaging – VeeChat, where every conversation becomes an exceptional journey. Start chatting, start connecting!">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+</head>
+
+
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="overlay" id="overlay"></div>
+    <div class="swipecont">
+        <div class="mySwiper-container" id="hidden">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slides will be added dynamically using JavaScript -->
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <div class="autoplay-progress">
+                    <svg viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20"></circle>
+                    </svg>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main>
+
+        <div class="container">
+            <div class="sidebar" id="sidebar">
+                <div class="sidebarheader">
+                    <div class="chatscreenheader">
+                        <div class="userdata">
+                            <div class="profilephoto">
+                                <img src="image 40.png" alt="">
+                            </div>
+                            <div class="usersname">
+                                <div> <small class="small uname">ManLikeVee<img src="Vector (47).svg" alt=""> </small>
+                                </div>
+                                <small class="small">odahviktor@gmail.com</small>
+                            </div>
+                        </div>
+                        <div class="usersettings">
+                            <div class="search"> <span class="material-symbols-outlined">
+                                    add_comment
+                                </span></div>
+                            <div class="toggle"><span class="material-symbols-outlined">
+                                    more_vert
+                                </span></div>
+                                <div class="toggle srch" id="srch" onclick="searchshow()">
+                                    <span class="material-symbols-outlined">
+                                        search
+                                    </span>
+                                </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+  
+                <div class="sidebardatas">
+                    <div class="infotitle">
+                        Profile
+                    </div>
+                    <div class="recepientprofile userprofiles">
+
+                        <div class="recepientphoto">
+                            <img src="image 40.png" alt="">
+                        </div>
+                        <div class="recepientdetails">
+                            <div class="recepientname">Lara Mueller depay</div>
+                            <div class="recepientnumber">+49 1522 792358</div>
+                            <small class="recepientnumber">odahviktor@gmail.com</small>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="sidebarextradata" id="msgdta">
+                    <div class="sidebardatas">
+                        <div class="infotitle" id="switch" onclick="myswitch()">
+                           User Data
+                        </div>
+          <div class="vvd">
+         <div class="vvdbox">
+            <span class="material-symbols-outlined">
+                schedule
+                </span>      Last Seen
+         </div>
+         <div class="vvdbox">
+            <span class="material-symbols-outlined">
+                language
+                </span>      Online Status
+         </div>
+         <div class="vvdbox">
+            <span class="material-symbols-outlined">
+                settings
+                </span>     settings
+         </div>
+          </div>
+                    </div>
+                </div>
+           
+
+                <div class="messagesettings">
+                    <div class="logoutbtn ">
+                        <div class="logout deactivate">
+                            <span class="material-symbols-outlined">
+                                delete
+                                </span>
+                            <div class="messagetext">   Deactivate </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="chatscreen" id="chatscreen">
+
+
+                <div class="chatbody">
+                    <div class="chatcontainer" id="profilecontainer">
+                      
+                        <div class="charheader">
+                            <div class="chatscreenheader">
+                                <div class="userdata">
+                                    <div class="profilephoto">
+                                        <img src="image 40.png" alt="">
+                                    </div>
+                                    <div class="usersname" onclick="myswitch()">
+                                        <div> <small class="small uname">Lara Mueller <img src="Vector (47).svg" alt="">
+                                            </small></div>
+                                        <small class="small">Last Seen yesterday at 4:00 pm</small>
+                                    </div>
+                                </div>
+                 
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="profilecontent" id="profilecontent">
+                     <div class="bentoflex">
+
+                        <div class="bentotop">
+                           
+                            <div class="bbox">
+                                <div class="btitle">Personal Information</div>
+                                <div class="bbody">
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Name:</div>
+                                        <div class="bodybody">Victor Odah Ebube</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Email:</div>
+                                        <div class="bodybody">odahviktor@gmail.com</div>
+                                    </div>
+
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Number</div>
+                                        <div class="bodybody">+234-81-65290</div>
+                                    </div>
+
+                        
+                                    
+                                </div>
+                            </div>
+
+                            <div class="bbox">
+                                <div class="btitle">User Information</div>
+                                <div class="bbody">
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Country</div>
+                                        <div class="bodybody">Nigeria</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">City:</div>
+                                        <div class="bodybody">Lagos</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">State:</div>
+                                        <div class="bodybody">Lagos</div>
+                                    </div>
+
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Zip</div>
+                                        <div class="bodybody">+29172</div>
+                                    </div>
+
+                        
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bentotop">
+                           
+                            <div class="bbox">
+                                <div class="btitle">Personal Information</div>
+                                <div class="bbody">
+                    
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Name:</div>
+                                        <div class="bodybody">Victor Odah Ebube</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Email:</div>
+                                        <div class="bodybody">odahviktor@gmail.com</div>
+                                    </div>
+
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Number</div>
+                                        <div class="bodybody">+234-81-65290</div>
+                                    </div>
+
+                        
+                                    
+                                </div>
+                            </div>
+
+                            <div class="bbox bsmall">
+                                <div class="btitle">User Agent</div>
+                                <div class="bbody">
+                      
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Device:</div>
+                                        <div class="bodybody">Desktop</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Location:</div>
+                                        <div class="bodybody">Lagos</div>
+                                    </div>
+
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Ip</div>
+                                        <div class="bodybody">292.011.536.011</div>
+                                    </div>
+
+                        
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bentotop">
+                           
+                            <div class="bbox">
+                                <div class="btitle">Personal Information</div>
+                                <div class="bbody">
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Username</div>
+                                        <div class="bodybody">Manlikevee</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Name:</div>
+                                        <div class="bodybody">Victor Odah Ebube</div>
+                                    </div>
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Email:</div>
+                                        <div class="bodybody">odahviktor@gmail.com</div>
+                                    </div>
+
+                                    <div class="bodyflex">
+                                        <div class="bodytitle">Number</div>
+                                        <div class="bodybody">+234-81-65290</div>
+                                    </div>
+
+                        
+                                    
+                                </div>
+                            </div>
+
+                      
+                        </div>
+
+                     </div>
+                    </div>
+                
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+        
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="script.js" async defer></script>
+
+    
+</body>
+
+</html>

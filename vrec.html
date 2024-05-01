@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Recorder</title>
+</head>
+<body>
+<button id="recordButton">Record</button>
+<button id="stopButton" disabled>Stop</button>
+<button id="playButton" disabled>Play</button>
+<input type="file" id="fileInput" style="display: none;">
+<button id="sendButton" style="display: none;">Send</button>
+<p id="recordingText" style="display: none;">Recording...</p>
+<div id="attachmentContainer"></div>
+<audio id="audioPlayback" controls style="display: none;"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  let mediaRecorder;
+  let audioChunks = [];
+  let recordedAudioBlob;
+
+  const recordButton = document.getElementById('recordButton');
+  const stopButton = document.getElementById('stopButton');
+  const playButton = document.getElementById('playButton');
+  const audioPlayback = document.getElementById('audioPlayback');
+  const attachmentContainer = document.getElementById('attachmentContainer');
+  const fileInput = document.getElementById('fileInput');
+  const sendButton = document.getElementById('sendButton');
+  const recordingText = document.getElementById('recordingText');
+
+  recordButton.addEventListener('click', startRecording);
+  stopButton.addEventListener('click', stopRecording);
+  playButton.addEventListener('click', playRecording);
+  fileInput.addEventListener('change', handleFileInputChange);
+  sendButton.addEventListener('click', sendAudio);
+
+  function startRecording() {
+    // Clear previous recording if any
+    clearPreviousRecording();
+
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        recordingText.style.display = 'block';
+        mediaRecorder.ondataavailable = event => {
+          audioChunks.push(event.data);
+        };
+        mediaRecorder.onstop = () => {
+          recordingText.style.display = 'none';
+          const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+          recordedAudioBlob = audioBlob;
+          const audioUrl = URL.createObjectURL(audioBlob);
+          displayAudioPlayer(audioUrl);
+          fileInput.style.display = 'inline';
+          sendButton.style.display = 'inline';
+        };
+        mediaRecorder.start();
+      })
+      .catch(console.error);
+    recordButton.disabled = true;
+    stopButton.disabled = false;
+    playButton.disabled = true;
+  }
+
+  function clearPreviousRecording() {
+    audioChunks = [];
+    recordedAudioBlob = null;
+    const existingAudioPlayer = document.querySelector('audio');
+    if (existingAudioPlayer) {
+      existingAudioPlayer.parentNode.removeChild(existingAudioPlayer);
+    }
+  }
+
+  function stopRecording() {
+    mediaRecorder.stop();
+    recordButton.disabled = false;
+    stopButton.disabled = true;
+    playButton.disabled = false;
+  }
+
+  function playRecording() {
+    audioPlayback.play();
+  }
+
+  function displayAudioPlayer(audioUrl) {
+    // Remove any existing audio players
+    while (attachmentContainer.firstChild) {
+      attachmentContainer.removeChild(attachmentContainer.firstChild);
+    }
+    const audioAttachment = createAudioAttachment(audioUrl);
+    attachmentContainer.appendChild(audioAttachment);
+  }
+
+  function createAudioAttachment(audioUrl) {
+    const audioAttachment = document.createElement('audio');
+    audioAttachment.controls = true;
+    audioAttachment.src = audioUrl;
+    return audioAttachment;
+  }
+
+  function handleFileInputChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const fileAttachment = createFileAttachment(file);
+      attachmentContainer.appendChild(fileAttachment);
+    }
+  }
+
+  function createFileAttachment(file) {
+    const fileAttachment = document.createElement('p');
+    fileAttachment.textContent = `File: ${file.name}`;
+    return fileAttachment;
+  }
+
+  function sendAudio() {
+    const confirmation = confirm('Do you want to send the audio?');
+    if (confirmation) {
+      if (recordedAudioBlob) {
+        const formData = new FormData();
+        formData.append('myaudio', recordedAudioBlob, 'recording.wav');
+
+
+        // ddd
+
+
+
+
+        axios.post('https://veejobapi.vercel.app/upload/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(response => {
+          console.log('Upload successful:', response.data);
+          alert('Audio sent successfully!');
+        })
+        .catch(error => {
+          console.error('Error uploading audio:', error);
+          alert('Error uploading audio. Please try again.');
+        });
+      } else {
+        alert('No recorded audio to send.');
+      }
+    }
+  }
+</script>
+</body>
+</html>

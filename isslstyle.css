@@ -1,0 +1,98 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter&family=Manrope&family=Poppins&family=Roboto&display=swap');
+
+
+* , body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+
+
+}
+
+.hd{
+    background: linear-gradient(153.43deg, #092349 0%, #060E24 83.33%);
+
+    
+}
+.herosection{
+    min-height: 86vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+background-size: 30%;
+padding: 90px;
+background-repeat: no-repeat;
+background-image: url('Oval\ Base.png');
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.heroimg{
+    width: 70%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.heroimg img{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.herodata{
+    width: 72%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+.herosmalltitle{
+color: #bacdea;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    line-height: 1.375rem !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+}
+
+.herotitle{
+    font-size: 3.125rem;
+    line-height: 120%;
+    font-weight: 900;
+    text-align: center;
+    color: #f5f9ff;
+}
+.herotitle span{
+    color: #EB3238;
+}
+.subtext{
+    margin-top: -9px;
+    padding: 20px;
+    color: #cac9c9;
+ text-align: center;
+ font-size: 14px;
+    line-height: 1.55rem;
+
+    display: inline-block;
+}
+
+.getstarted{
+    background-color: #EB3238;
+    padding: 13px;
+    color: white;
+    font-size: 15px;
+    line-height: 1.55rem;
+    border-radius: 3px;
+    min-width: 170px;
+    text-align: center;
+}

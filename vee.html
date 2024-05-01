@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Compression and Base64 Encoding</title>
+</head>
+<body>
+    <input type="file" onchange="previewFile()" />
+    <br />
+    <span id="original_file_size"></span>
+    <br />
+    <img id="source_img" src="" alt="Preview Image" style="max-width: 300px; max-height: 300px;" />
+    <br />
+    <span id="compressed_file_size"></span>
+    <br />
+    <img id="target_img" src="" alt="Compressed Image" style="max-width: 300px; max-height: 300px;" />
+    <script>
+        function previewFile() {
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                var source_img = document.getElementById("source_img");
+                // source_img.src = reader.result;
+                displayFileSize(file.size, "original_file_size");
+                compressAndEncodeToBase64(file=file, name='vee');
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function displayFileSize(size, elementId) {
+            var fileSizeDisplay = document.getElementById(elementId);
+            var fileSizeFormatted = (size / 1024).toFixed(2) + " KB";
+            fileSizeDisplay.textContent = "File Size: " + fileSizeFormatted;
+        }
+
+        async function compressAndEncodeToBase64(file, name) {
+    console.log(name)
+    var quality = 60;
+    var output_format = 'jpg';
+
+    var reader = new FileReader();
+
+    reader.onload = function () {
+        var img = new Image();
+        img.src = reader.result;
+
+        img.onload = function () {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Check if the image has transparency
+            var hasTransparency = false;
+            ctx.drawImage(img, 0, 0);
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < imageData.data.length; i += 4) {
+                if (imageData.data[i + 3] < 255) { // Check alpha value
+                    hasTransparency = true;
+                    break;
+                }
+            }
+
+            // If image has transparency, draw it onto a white background before converting to JPEG
+            if (hasTransparency) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+                ctx.fillStyle = '#FFFFFF'; // Set background color to white
+                ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill canvas with white
+            }
+
+            // Draw image onto canvas
+            ctx.drawImage(img, 0, 0);
+
+            // Convert canvas to JPEG
+            canvas.toBlob(function (blob) {
+                var readerBlob = new FileReader();
+                readerBlob.readAsDataURL(blob);
+                readerBlob.onloadend = function () {
+                    var base64Result = URL.createObjectURL(blob);
+                    var target_img = document.getElementById("target_img");
+                    target_img.src = base64Result;
+                    displayFileSize(blob.size, "compressed_file_size");
+                    console.log("Compressed file size:", blob.size);
+                  
+                };
+            }, 'image/jpeg', quality / 100);
+        };
+    };
+
+    reader.onerror = function (error) {
+        console.error("Error:", error);
+    };
+
+    reader.readAsDataURL(file);
+}
+
+  
+  </script>
+</body>
+</html>

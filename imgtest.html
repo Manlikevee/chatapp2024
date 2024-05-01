@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Form</title>
+</head>
+<body>
+    <form id="imageUploadForm">
+        <input type="file" id="myimg">
+        <!-- Other input fields for additional data -->
+        <input type="text" id="id" value="123">
+        <input type="text" id="senderid" value="456">
+        <!-- Add more input fields for other data as needed -->
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("imageUploadForm");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get input field values
+        const myimg = document.getElementById("myimg").files[0];
+        const id = document.getElementById("id").value;
+        const senderid = document.getElementById("senderid").value;
+
+        // Call payloadpost function with the values
+        payloadpost(myimg, id, senderid);
+    });
+});
+
+function payloadpost(myimg, id, senderid) {
+    const access = localStorage.getItem('access_token');
+    const arrayToken = access.split('.');
+    const tokenPayload = JSON.parse(atob(arrayToken[1]));
+    const uniqueid = activeprofiledata?.message_id;
+
+    // Create a new FormData object
+    const formData = new FormData();
+    formData.append('myimg', myimg);
+    formData.append('id', id);
+    formData.append('senderid', senderid);
+
+    axios.post(`https://veejobapi.vercel.app/upload/`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data', // Set content type to multipart/form-data
+
+        }
+    })
+    .then(response => {
+        console.log('Response from sent message:', response.data);
+        let allfetchmessage = [];
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+    </script>
+</body>
+</html>

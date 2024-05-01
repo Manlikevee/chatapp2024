@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Form</title>
+    <style>
+        /* Add your styling here */
+        .messagebox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .quotedmessage {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .messagebox img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .messagebox:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+<form id="conversationForm">
+    <label for="message">Message:</label>
+    <div class="quotedmessage" id="quotedMessagePreview"></div>
+    <input type="text" id="message" name="message" required>
+
+    <label for="quotedId">Quoted Id:</label>
+    <input type="text" id="quotedId" name="quotedId">
+
+    <label for="quotedFrom">Quoted From:</label>
+    <input type="text" id="quotedFrom" name="quotedFrom">
+
+    <label for="imageInput">Select Image:</label>
+    <input type="file" id="imageInput" name="imageInput" accept="image/*">
+
+    <button type="submit">Submit</button>
+</form>
+
+<div id="chatContainer">
+    <!-- Messages will be dynamically added here -->
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('conversationForm');
+        const chatContainer = document.getElementById('chatContainer');
+        const quotedMessagePreview = document.getElementById('quotedMessagePreview');
+        const messageInput = document.getElementById('message');
+        const imageInput = document.getElementById('imageInput');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const messageType = determineMessageType();
+            renderMessage(messageType);
+            form.reset();
+        });
+
+        function determineMessageType() {
+            const messageInputValue = document.getElementById('message').value;
+            const quotedIdInput = document.getElementById('quotedId').value;
+            const quotedFromInput = document.getElementById('quotedFrom').value;
+            const imageInputValue = imageInput.files.length > 0 ? URL.createObjectURL(imageInput.files[0]) : '';
+
+            if (imageInputValue.trim() !== '') {
+                // Check if there is also text input for the image message
+                if (messageInputValue.trim() !== '') {
+                    return 'imageWithText';
+                } else {
+                    return 'image';
+                }
+            } else if (messageInputValue.trim() !== '') {
+                return 'text';
+            } else if (quotedIdInput.trim() !== '' && quotedFromInput.trim() !== '') {
+                return 'quoted';
+            } else {
+                // Handle other cases if needed
+                return 'unknown';
+            }
+        }
+
+        function renderMessage(messageType) {
+            const messageInputValue = document.getElementById('message').value;
+            const quotedIdInput = document.getElementById('quotedId').value;
+            const quotedFromInput = document.getElementById('quotedFrom').value;
+            const imageInputValue = imageInput.files.length > 0 ? URL.createObjectURL(imageInput.files[0]) : '';
+
+            let messageHTML = '';
+
+            switch (messageType) {
+                case 'text':
+                    messageHTML = createTextMessage(messageInputValue);
+                    break;
+                case 'quoted':
+                    if (quotedIdInput.trim() !== '' && quotedFromInput.trim() !== '') {
+                        messageHTML = createQuotedMessage(quotedIdInput, quotedFromInput, messageInputValue);
+                        updateQuotedMessagePreview(messageHTML);
+                    }
+                    break;
+                case 'image':
+                    if (imageInputValue.trim() !== '') {
+                        messageHTML = createImageMessage(imageInputValue);
+                    }
+                    break;
+                case 'imageWithText':
+                    if (imageInputValue.trim() !== '') {
+                        messageHTML = createImageMessageWithText(imageInputValue, messageInputValue);
+                    }
+                    break;
+                default:
+                    // Handle other cases if needed
+                    break;
+            }
+
+            if (messageHTML !== '') {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'messagebox';
+                messageElement.id = generateRandomId(); // Assign a random ID
+                messageElement.innerHTML = messageHTML;
+                chatContainer.appendChild(messageElement);
+
+                // Add click event listener to each message div
+                messageElement.addEventListener('click', function () {
+                    if (messageType === 'quoted') {
+                        updateQuotedMessagePreview(messageHTML);
+                    }
+                });
+            }
+        }
+
+        function updateQuotedMessagePreview(html) {
+            quotedMessagePreview.innerHTML = html;
+        }
+
+        function generateRandomId() {
+            return 'msg' + Math.floor(Math.random() * 1000000);
+        }
+
+        function createTextMessage(message) {
+            // Your existing logic for creating text message HTML
+            // Replace this with your own implementation
+            return `<div class="messagetext">${message}</div>`;
+        }
+
+        function createQuotedMessage(quotedId, quotedFrom, message) {
+            // Your existing logic for creating quoted message HTML
+            // Replace this with your own implementation
+            return `<div class="quotedmessage">
+                        <div class="messagetext">Quoted Id: ${quotedId}</div>
+                        <div class="messagetext">Quoted From: ${quotedFrom}</div>
+                        <div class="messagetext">Message: ${message}</div>
+                    </div>`;
+        }
+
+        function createImageMessage(imageUrl) {
+            // Your existing logic for creating image message HTML
+            // Replace this with your own implementation
+            return `<img src="${imageUrl}" alt="Image">
+                    <div class="messagetext">(Click to view)</div>`;
+        }
+
+        function createImageMessageWithText(imageUrl, text) {
+            // Your existing logic for creating image with text message HTML
+            // Replace this with your own implementation
+            return `<img src="${imageUrl}" alt="Image">
+                    <div class="messagetext">${text}</div>
+                    <div class="messagetext">(Click to view)</div>`;
+        }
+    });
+</script>
+
+</body>
+</html>
