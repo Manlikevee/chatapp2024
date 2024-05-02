@@ -374,6 +374,7 @@ console.log(userconversation)
         let activeprofiledata 
 
          function updateActiveUser(id) {
+
           active = id;
           console.log('active is ', active);
           
@@ -400,7 +401,7 @@ console.log(userconversation)
                   document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
                   document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
                   renderConversation();
-      
+                  audplayer()
                   const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
       
                   showme();
@@ -2248,26 +2249,26 @@ function audioswitch(){
 
 }
 
-// async function fetchDataEveryFiveSeconds() {
-//   console.log('fetched')
-//   // Call fdatatwo() initially
+async function fetchDataEveryFiveSeconds() {
+  console.log('fetched')
+  // Call fdatatwo() initially
 
-//   // Set up interval to call fdatatwo() every 5 seconds
-//   setInterval(async () => {
-//     var elementstwo = document.getElementById("blurredpreview");
-//     var containsClassName = elementstwo.classList.contains("blurpreviewshow");
-//     console.log(containsClassName)
-//     await fdatatwo();
-//     if(active){
+  // Set up interval to call fdatatwo() every 5 seconds
+  setInterval(async () => {
+    var elementstwo = document.getElementById("blurredpreview");
+    var containsClassName = elementstwo.classList.contains("blurpreviewshow");
+    console.log(containsClassName)
+    await fdatatwo();
+    if(active){
 
-//       if (!elementstwo.classList.contains("blurpreviewshow")) {
+      if (!elementstwo.classList.contains("blurpreviewshow")) {
         
-//       updateActiveUser(active)
-//       }
+      updateActiveUser(active)
+      }
     
-//     }
-//   }, 5000); // 5000 milliseconds = 5 seconds
-// }fetchDataEveryFiveSeconds()
+    }
+  }, 5000); // 5000 milliseconds = 5 seconds
+}fetchDataEveryFiveSeconds()
 
 
 
@@ -2496,7 +2497,7 @@ function audplayer(){
   
       audio.onloadstart = () => {
         setMessageDate();
-        audioPlayer.classList.add("loading");
+        audioPlayer.classList.add("loadings");
       };
       audio.onplay = () => audioPlayer.classList.add("playing");
       audio.onpause = () => audioPlayer.classList.remove("playing");
