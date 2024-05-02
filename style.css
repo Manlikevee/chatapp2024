@@ -618,13 +618,19 @@ color: var(--white);
 }
 .chatinputbox{
     padding: 4px;
-    display: flex;
+    display: none;
     width: 100%;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
+.chatinputbox audio{
+    display: none;
+}
 
+.activebox{
+    display: flex;
+}
 .textareasection{
     width: 100%;
     display: flex;
@@ -2304,7 +2310,17 @@ z-index: 999999;
             user-select: none;
 
   }
+
+  .messagesent .audio-player{
+    --player-color-featured:rgba(29, 30, 34, 1);
+
+    --player-color-text: rgba(29, 30, 34, 1);
+  }
   
+  .messagesent .audio-player .player .timeline .line input[type="range"]{
+    background-color: rgba(29, 30, 34, 0.712) !important;
+  }
+
   .audio-player + .audio-player {
     margin-top: 1rem;
   }

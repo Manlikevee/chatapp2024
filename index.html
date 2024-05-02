@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="sidebardatas">
-                    <div class="infotitle">
+                    <div class="infotitle" onclick="audplayer()">
                         Stories
                     </div>
                     <div class="owlsection">
@@ -216,65 +216,7 @@
 <div class="blurpreview" id="blurredpreview" onclick="bluroverlay()"></div>
                        
                         <div class="chatdata" id="chatData">
-                            <div ondblclick="blurpreview(71119)" class="completemessagerec">
-                                <div class="messagerec" id="71119">
-                                                    <div class="edgecontrol">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                                    <path d="M1.49615 3.6641C-0.150327 2.56645 0.626734 3.61246e-06 2.60555 3.52596e-06L20 -9.53989e-08L20 16L1.49615 3.6641Z" fill="var(--greybar)"></path>
-                                                </svg>
-                                                    </div>
-                                                    <div class="chatbubble">
-                                                    <div class="www"> 
-                                                        <div class="audio-player" data-url="https://upload.wikimedia.org/wikipedia/commons/8/81/Audio_test_german.ogg">
-                                                            <div class="player">
-                                                              <button type="button" class="btn-play">
-                                                                <span class="material-icons icon-play">play_arrow</span>
-                                                                <span class="material-icons icon-pause">pause</span>
-                                                                <span class="material-icons icon-loop">loop</span>
-                                                              </button>
-                                                              <div class="timeline">
-                                                                <div class="line">
-                                                                  <input dir="ltr" type="range" min="0" max="100" value="0">
-                                                                </div>
-                                                                <div class="data">
-                                                                  <div class="current-time"></div>
-                                                                  <div class="time">
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                            <div class="user">
-                                                              <img src="https://avatars.githubusercontent.com/u/3522573?&v=4" />
-                                                              <span class="material-icons">mic</span>
-                                                            </div>
-                                                          </div>
 
-                                                    <span class="smallspan"> 10:16 AM 
-                                                    <ion-icon name="checkmark-done-outline" role="img" class="md hydrated"></ion-icon>  </span> </div>
-                                                    <div class="qts" style="display: flex; gap: 14px; font-size: 19px;  font-weight: 900; ">
-                                                                           
-                                                    <div class="quot" onclick="replyto(71119)">
-                                                        <ion-icon name="arrow-undo-outline" role="img" class="md hydrated"></ion-icon>
-                                                      </div>
-                    
-                                                
-                                                    <div class="edit">
-                                                    <ion-icon name="create-outline" role="img" class="md hydrated"></ion-icon>
-                                                  </div>
-                                                  <div class="delete" onclick="deletemessage(71119)">
-                                                  <ion-icon name="trash-outline" role="img" class="md hydrated"></ion-icon>
-                                                  </div>
-                                                  
-                                        
-                                                </div>
-                                                    </div>
-                                                </div>
-                                                <div class="messageopt" onclick="replyto(71119)">
-                                                <span class="material-symbols-outlined">
-                                                    reply
-                                                    </span>
-                                            </div>
-                                                </div>
 <!-- 
                             <div ondblclick="blurpreview(517997)" class="completemessagesent">
                                 <div class="messagesent " id="517997">
@@ -330,15 +272,15 @@
                         </div>
                         <div class="chatfooter">
 
-                            <div class="chatinputbox">
-                                <div class="emoji">
+                            <div class="chatinputbox activebox" id="normalmessage" >
+                                <div class="emoji" onclick="audioswitch()">
                                     <span class="material-symbols-outlined">
                                         mood
                                     </span>
                                 </div>
                                 <div class="attachment">
                                     <div class="attachmentdata" id="attachmentdata">
-                                        <div class="attachcontent">
+                                        <div class="attachcontent" >
                                             <div class="attachiconthree">
                                                 <span class="material-symbols-outlined">
                                                     description
@@ -386,61 +328,39 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="chatinputbox">
+                            <div class="chatinputbox" id="audiomessage">
+                                <button id="recordButton">Record</button>
+<button id="stopButton" disabled>Stop</button>
+<button style="display: none;" id="playButton" disabled>Play</button>
                                 <div class="emoji">
                                     <span class="material-symbols-outlined">
                                         mood
                                     </span>
                                 </div>
-                                <div class="attachment">
-                                    <div class="attachmentdata" id="attachmentdata">
-                                        <div class="attachcontent">
-                                            <div class="attachiconthree">
-                                                <span class="material-symbols-outlined">
-                                                    description
-                                                </span>
-                                            </div>
-                                            <div class="attachtext">Document</div>
-                                        </div>
-
-                                        <div class="attachcontent">
-                                            <div class="attachicon">
-                                                <input type="file" name="" class="file-upload-input" id="myimg" accept=".jpg, .jpeg, .png, .gif" >
-                                                <span class="material-symbols-outlined">
-                                                    photo_library
-                                                </span>
-                                            </div>
-                                            <div class="attachtext">Photo</div>
-                                        </div>
-
-                                        <div class="attachcontent">
-                                            <div class="attachicontwo">
-                                                <span class="material-symbols-outlined">
-                                                    ballot
-                                                </span>
-                                            </div>
-                                            <div class="attachtext">Poll</div>
-                                        </div>
-                                    </div>
-                                    <span class="material-symbols-outlined" onclick="attachmenttoggle()">
-                                        attach_file_add
-                                    </span>
-                                </div>
+                         
                                 <div class="textareasection" >
-                                    <div id="qtd"></div>
+                                  
                                 
                                     <div class="input">
-<input type="hidden" name="" id="quotedid">
-                                        <textarea name="" oninput="adjustTextareaHeight()" id="mymessage" rows="1" placeholder="Write a message"></textarea>
+                                 
+
+                                        <div style="display: none;">
+                                            <input type="file" id="fileInput" style="display: none;">
+                                        </div>
+                                     
+                                        <p id="recordingText" style="display: none;">Recording...</p>
+                                        <div id="attachmentContainer"></div>
+                                        <audio id="audioPlayback" controls style="display: none;"></audio>
                                     </div>
                                 </div>
 
-
-                                <div class="attachment snd" id="attachmentbtn" onclick="createconversation()">
+                                <button id="sendButton" style="display: none;">
+                                <div class="attachment snd" id="attachmentbtn" >
                                     <span class="material-symbols-outlined">
                                         send
                                     </span>
                                 </div>
+                            </button>
                             </div>
                         </div>
              
@@ -575,6 +495,11 @@
     });
     </script> -->
  
+
+
+
+
+
     
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
