@@ -1359,10 +1359,11 @@ function bluroverlay(){
                 addtoConversation(c)
                 conversationData = b?.conversationDatas
               }
-              // AllChats = allfetchmessage
+              
             } else{
               isnewdata = false
               conversationData = b?.conversationDatas
+              AllChats = allfetchmessage
             }
           }
         })
@@ -1418,7 +1419,26 @@ function bluroverlay(){
         
           })
       
-          AllChats = allfetchmessage
+          // AllChats = allfetchmessage
+          if(active){
+            if (AllChats.length > 0){
+              const a = allfetchmessage?.find(profile => profile.to_id == active || profile.from_id == active);
+              const b = AllChats?.find(profile => profile.to_id == active || profile.from_id == active);
+              const c = findDifference( a?.conversationDatas, b?.conversationDatas)
+              console.log('difference', c);
+              if (c.length > 0){
+                isnewdata = true
+                AllChats = allfetchmessage
+                addtoConversation(c)
+                conversationData = b?.conversationDatas
+              }
+              
+            } else{
+              isnewdata = false
+              conversationData = b?.conversationDatas
+              AllChats = allfetchmessage
+            }
+          }
         })
         .catch(error => {
           console.error('Error:', error);
