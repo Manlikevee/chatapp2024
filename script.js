@@ -394,12 +394,13 @@ console.log(userconversation)
       
                   conversationData = activeProfile.conversationDatas;
                   console.log('convo data is', conversationData);
-      
+                  console.log('activeuser is ',activeuser)
                   document.getElementById('usersname').innerHTML = activeuser?.name;
-                  document.getElementById('lastseen').innerHTML = `${activeuser?.lastSeen}`;
+                  document.getElementById('lastseen').innerHTML = formatDateTime(activeuser?.lastSeen) ;
                   document.getElementById('pname').innerHTML = `${activeuser?.name}`;
                   document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
                   document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
+                  document.getElementById('profilephoto').src = `${activeuser?.avatar}`
                   renderConversation();
                   audplayer()
                   const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
