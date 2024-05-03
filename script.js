@@ -950,7 +950,7 @@ function replyto(id){
     quotecontainer.innerHTML= ` `
   } else{
     document.getElementById('quotedid').value = id
-    let replydata =  conversationData.find(obj => String(obj.id)   === String(id)  );
+    let replydata =  conversationData.find(obj => obj.id.toString()   == id.toString()  );
     quotecontainer.innerHTML= `
     <div class="quoted" id="${replydata?.id}" onclick="replyto('closequote')">
     <div class="quotetext" >
@@ -1357,12 +1357,12 @@ function bluroverlay(){
                 isnewdata = true
                 AllChats = allfetchmessage
                 addtoConversation(c)
-                conversationData = b?.conversationDatas
+                conversationData = a?.conversationDatas
               }
               
             } else{
               isnewdata = false
-              conversationData = b?.conversationDatas
+              // conversationData = a?.conversationDatas
               AllChats = allfetchmessage
             }
           }
@@ -1430,12 +1430,12 @@ function bluroverlay(){
                 isnewdata = true
                 AllChats = allfetchmessage
                 addtoConversation(c)
-                conversationData = b?.conversationDatas
+                conversationData = a?.conversationDatas
               }
               
             } else{
               isnewdata = false
-              conversationData = b?.conversationDatas
+              // conversationData = a?.conversationDatas
               AllChats = allfetchmessage
             }
           }
@@ -2361,12 +2361,12 @@ async function fdatatwonew() {
           isnewdata = true
           AllChats = allfetchmessages
           addtoConversation(c)
-          conversationData = b?.conversationDatas
+          conversationData = a?.conversationDatas
         }
         // AllChats = allfetchmessage
       } else{
         isnewdata = false
-        conversationData = b?.conversationDatas
+        // conversationData = a?.conversationDatas
       }
     }
 
@@ -2845,12 +2845,12 @@ function sendAudio() {
                     isnewdata = true
                     AllChats = allfetchmessage
                     addtoConversation(c)
-                    conversationData = b?.conversationDatas
+                    conversationData = a?.conversationDatas
                   }
                   
                 } else{
                   isnewdata = false
-                  conversationData = b?.conversationDatas
+                  // conversationData = a?.conversationDatas
                   AllChats = allfetchmessage
                 }
               }
