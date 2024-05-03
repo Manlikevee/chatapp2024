@@ -2322,6 +2322,7 @@ async function fdatatwonew() {
           isnewdata = true
           newdata = c
           AllChats = allfetchmessage
+          conversationData = b?.conversationDatas
         }
         // AllChats = allfetchmessage
       } else{
