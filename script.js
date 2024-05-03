@@ -319,15 +319,15 @@ console.log(userconversation)
             ];
 
             // let arrayOfMessages = localStorage.getItem('conversationdata');
-            let arrayOfMessages
-            if (arrayOfMessages){
-              arrayOfMessages = JSON.parse(arrayOfMessages)
-              let filteredMessages = arrayOfMessages.filter(message =>
-                message.senderid === activeuserid || message.recieverid === activeuserid
-              );
-              conversationData = filteredMessages
-              console.log('conversation data is', conversationData)
-            }
+            // let arrayOfMessages
+            // if (arrayOfMessages){
+            //   arrayOfMessages = JSON.parse(arrayOfMessages)
+            //   let filteredMessages = arrayOfMessages.filter(message =>
+            //     message.senderid === activeuserid || message.recieverid === activeuserid
+            //   );
+            //   conversationData = filteredMessages
+            //   console.log('conversation data is', conversationData)
+            // }
 
          
             
@@ -969,8 +969,8 @@ function replyto(id){
 }
 
 async function renderConversation() {
-  localStorage.setItem('conversationdata', JSON.stringify(conversationData));
-  localStorage.setItem('userconversationdata', JSON.stringify(AllChats));
+  // localStorage.setItem('conversationdata', JSON.stringify(conversationData));
+  // localStorage.setItem('userconversationdata', JSON.stringify(AllChats));
 
   const chatContainer = document.getElementById('chatContainer');
   chatContainer.innerHTML = '';
@@ -998,18 +998,21 @@ async function renderConversation() {
 
 
 
-async function addtoConversation() {
+async function addtoConversation(data) {
   localStorage.setItem('conversationdata', JSON.stringify(conversationData));
   localStorage.setItem('userconversationdata', JSON.stringify(AllChats));
 
   const chatContainer = document.getElementById('chatContainer');
 
+  if (data){
+    await Promise.all(data.map(async message => {
+      const messageHTML = createMessageHTML(message);
+      chatContainer.innerHTML += messageHTML;
+    }));
+  }
   // Render conversation messages
-  await Promise.all(newdata.map(async message => {
-    const messageHTML = createMessageHTML(message);
-    chatContainer.innerHTML += messageHTML;
-  }));
-  newdata = []
+
+
   // Scroll handling
   console.log('scrolltop plus client height', cd.scrollTop + cd.clientHeight);
   console.log('scroll height', cd.scrollHeight);
@@ -1299,7 +1302,7 @@ function bluroverlay(){
       document.getElementById('qtd').innerHTML = ''
     
 
-    renderConversation();
+    // renderConversation();
     adjustChatDataHeight()
     }
 
@@ -1330,7 +1333,7 @@ function bluroverlay(){
             allfetchmessage.push({
               'chat_id': item?.messageid?.messageid,
                from_id: activeuserid, 
-               to_id: aud(item?.messageid?.sender?.id,)?.userid,
+               to_id: aud(item?.messageid?.sender?.id)?.userid,
                 conversationDatas: item.testj
             });
       
@@ -1340,7 +1343,28 @@ function bluroverlay(){
         
           })
       
-          AllChats = allfetchmessage
+          // AllChats = allfetchmessage
+          // const b = AllChats?.find(profile => profile.to_id == active || profile.from_id == active);
+          // conversationData = b?.conversationDatas
+
+          if(active){
+            if (AllChats.length > 0){
+              const a = allfetchmessage?.find(profile => profile.to_id == active || profile.from_id == active);
+              const b = AllChats?.find(profile => profile.to_id == active || profile.from_id == active);
+              const c = findDifference( a?.conversationDatas, b?.conversationDatas)
+              console.log('difference', c);
+              if (c.length > 0){
+                isnewdata = true
+                AllChats = allfetchmessage
+                addtoConversation(c)
+                conversationData = b?.conversationDatas
+              }
+              // AllChats = allfetchmessage
+            } else{
+              isnewdata = false
+              conversationData = b?.conversationDatas
+            }
+          }
         })
         .catch(error => {
           console.error('Error:', error);
@@ -2272,7 +2296,6 @@ function findDifference(a, b) {
 }
 
 let isnewdata = false
-let newdata = []
 async function fdatatwonew() {
   
   const access = localStorage.getItem('access_token')
@@ -2280,14 +2303,13 @@ async function fdatatwonew() {
   const tokenPayload = JSON.parse(atob(arrayToken[1]));
   try {
     const response = await axiosInstance.get('/messagedashboard');
-    console.log(response);
  
     // Redirect to success.html with the random ID as a parameter
-    let allfetchmessage = []
+    let allfetchmessages = []
     response?.data?.allmessages.forEach(item => {  
 
       if (item?.messageid?.sender?.id === tokenPayload?.user_id) {
-      allfetchmessage.push({
+      allfetchmessages.push({
         'chat_id': item?.messageid?.messageid,
          from_id: activeuserid, 
          to_id: aud(item?.messageid?.reciever?.id)?.userid,
@@ -2296,10 +2318,10 @@ async function fdatatwonew() {
 
     }
     else if (item?.messageid?.reciever?.id === tokenPayload?.user_id) {
-      allfetchmessage.push({
+      allfetchmessages.push({
         'chat_id': item?.messageid?.messageid,
          from_id: activeuserid, 
-         to_id: aud(item?.messageid?.sender?.id,)?.userid,
+         to_id: aud(item?.messageid?.sender?.id)?.userid,
           conversationDatas: item.testj
       });
 
@@ -2311,22 +2333,20 @@ async function fdatatwonew() {
 
     if(active){
       if (AllChats.length > 0){
-        const a = allfetchmessage?.find(profile => profile.to_id == active || profile.from_id == active);
-        console.log('a', a)
-    
+        const a = allfetchmessages?.find(profile => profile.to_id == active || profile.from_id == active);
         const b = AllChats?.find(profile => profile.to_id == active || profile.from_id == active);
-        console.log('b', b)
         const c = findDifference( a?.conversationDatas, b?.conversationDatas)
         console.log('difference', c);
         if (c.length > 0){
           isnewdata = true
-          newdata = c
-          AllChats = allfetchmessage
+          AllChats = allfetchmessages
+          addtoConversation(c)
           conversationData = b?.conversationDatas
         }
         // AllChats = allfetchmessage
       } else{
         isnewdata = false
+        conversationData = b?.conversationDatas
       }
     }
 
@@ -2371,7 +2391,7 @@ async function fetchDataEveryFiveSeconds() {
       if (!elementstwo.classList.contains("blurpreviewshow")) {
       
         if(isnewdata){
-          addtoConversation()
+         
           console.log('new dataaaaaaa')
         }
     
