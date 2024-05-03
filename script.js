@@ -997,6 +997,35 @@ async function renderConversation() {
 }
 
 
+
+async function addtoConversation() {
+  localStorage.setItem('conversationdata', JSON.stringify(conversationData));
+  localStorage.setItem('userconversationdata', JSON.stringify(AllChats));
+
+  const chatContainer = document.getElementById('chatContainer');
+
+  // Render conversation messages
+  await Promise.all(newdata.map(async message => {
+    const messageHTML = createMessageHTML(message);
+    chatContainer.innerHTML += messageHTML;
+  }));
+  newdata = []
+  // Scroll handling
+  console.log('scrolltop plus client height', cd.scrollTop + cd.clientHeight);
+  console.log('scroll height', cd.scrollHeight);
+
+  if (cd.scrollHeight - (cd.scrollTop + cd.clientHeight) < 120) {
+    // If close to the bottom, scroll to the bottom
+    setTimeout(function() {
+      cd.scrollTop = cd.scrollHeight;
+    }, 2000); // 2000 milliseconds = 2 seconds
+    cd.scrollTop = cd.scrollHeight;
+  }
+
+  adjustTextareaHeight();
+}
+
+
 // function renderConversation() {
 
 //         localStorage.setItem('conversationdata', JSON.stringify(conversationData) )
@@ -2186,7 +2215,6 @@ function continuation(response){
 }
 
 
-
 async function fdatatwo() {
   
   const access = localStorage.getItem('access_token')
@@ -2225,7 +2253,6 @@ async function fdatatwo() {
 
     AllChats = allfetchmessage
 
-
   } catch (error) {
     console.error(error.message);
     VanillaToasts.create({
@@ -2239,6 +2266,81 @@ async function fdatatwo() {
 }
 
 
+function findDifference(a, b) {
+  // Filter elements from array 'a' that are not present in array 'b'
+  return a.filter(itemA => !b.find(itemB => itemA.id === itemB.id));
+}
+
+let isnewdata = false
+let newdata = []
+async function fdatatwonew() {
+  
+  const access = localStorage.getItem('access_token')
+  const arrayToken = access.split('.');
+  const tokenPayload = JSON.parse(atob(arrayToken[1]));
+  try {
+    const response = await axiosInstance.get('/messagedashboard');
+    console.log(response);
+ 
+    // Redirect to success.html with the random ID as a parameter
+    let allfetchmessage = []
+    response?.data?.allmessages.forEach(item => {  
+
+      if (item?.messageid?.sender?.id === tokenPayload?.user_id) {
+      allfetchmessage.push({
+        'chat_id': item?.messageid?.messageid,
+         from_id: activeuserid, 
+         to_id: aud(item?.messageid?.reciever?.id)?.userid,
+          conversationDatas: item.testj
+      });
+
+    }
+    else if (item?.messageid?.reciever?.id === tokenPayload?.user_id) {
+      allfetchmessage.push({
+        'chat_id': item?.messageid?.messageid,
+         from_id: activeuserid, 
+         to_id: aud(item?.messageid?.sender?.id,)?.userid,
+          conversationDatas: item.testj
+      });
+
+
+    }
+
+  
+    })
+
+    if(active){
+      if (AllChats.length > 0){
+        const a = allfetchmessage?.find(profile => profile.to_id == active || profile.from_id == active);
+        console.log('a', a)
+    
+        const b = AllChats?.find(profile => profile.to_id == active || profile.from_id == active);
+        console.log('b', b)
+        const c = findDifference( a?.conversationDatas, b?.conversationDatas)
+        console.log('difference', c);
+        if (c.length > 0){
+          isnewdata = true
+          newdata = c
+          AllChats = allfetchmessage
+        }
+        // AllChats = allfetchmessage
+      } else{
+        isnewdata = false
+      }
+    }
+
+
+  } catch (error) {
+    console.error(error.message);
+    VanillaToasts.create({
+      title: 'Error!',
+      text: error.message || 'An Error Occurred',
+      type: 'error',
+      timeout: 5000
+    });
+  }
+
+}
 
 function audioswitch(){
   const a = document.getElementById('normalmessage')
@@ -2251,22 +2353,32 @@ function audioswitch(){
 
 async function fetchDataEveryFiveSeconds() {
   console.log('fetched')
-  // Call fdatatwo() initially
+  //  fdatatwo() 
 
   // Set up interval to call fdatatwo() every 5 seconds
   setInterval(async () => {
     var elementstwo = document.getElementById("blurredpreview");
     var containsClassName = elementstwo.classList.contains("blurpreviewshow");
     console.log(containsClassName)
-    await fdatatwo();
-    if(active){
+    if(AllChats.length > 0){
+      await fdatatwonew();
+    }
 
+
+    if(active){
+     
       if (!elementstwo.classList.contains("blurpreviewshow")) {
-        
-      updateActiveUser(active)
+      
+        if(isnewdata){
+          addtoConversation()
+          console.log('new dataaaaaaa')
+        }
+    
+
       }
     
     }
+
   }, 5000); // 5000 milliseconds = 5 seconds
 }fetchDataEveryFiveSeconds()
 
