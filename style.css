@@ -350,7 +350,25 @@ font-style: normal;
 font-weight: 400;
 line-height: 20px; /* 142.857% */
 }
+.copyright{
+    display: none;
+background-color: var(--bubblehover);
+    align-items: center;
+    gap: 10px;
+    /* background-color: var(--UI-Dark-02); */
+ 
+    flex-direction: column;
+    color: #b8b8b8;
+    border-radius: 0px 4px 4px 4px;
+    /* Body 2 */
+    font-family: Nunito Sans;
+    font-size: 12px;
+    font-style: normal;
+    text-align: center;
 
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+}
 .chatimg{
     width: 100%;
     height:100% ;
@@ -439,6 +457,10 @@ ion-icon{
         text-align: center;
         margin-top: 40px;
         text-align: center;
+    }
+
+    .keyboard-open{
+        display: flex;
     }
     .suball {
         max-width: 90%;

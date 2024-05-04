@@ -2921,3 +2921,19 @@ function payloadvns (payloaddata){
   }
 
 }
+
+
+const copyrightDiv = document.querySelector('.copyright');
+const textInput = document.getElementById('mymessage');
+
+textInput.addEventListener('focus', function() {
+    // Keyboard is open, add class to copyright div
+    copyrightDiv.classList.add('keyboard-open');
+    adjustChatDataHeight()
+});
+
+textInput.addEventListener('blur', function() {
+    // Keyboard is closed, remove class from copyright div
+    copyrightDiv.classList.remove('keyboard-open');
+    adjustChatDataHeight()
+});
