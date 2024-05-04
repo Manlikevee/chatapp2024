@@ -1565,7 +1565,7 @@ reader.onload = function () {
                   id: getRandomNumber(1, 990000),
                   senderid: data.senderid,
                   recieverid: data.recieverid,
-                  type: "image",
+                  type: data.type,
                   quotedid: data.type === "replyimg" ? data.quotedids : undefined, 
                    sender: "sent",
                    from: "victor",
