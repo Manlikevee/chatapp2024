@@ -1566,7 +1566,7 @@ reader.onload = function () {
                   senderid: data.senderid,
                   recieverid: data.recieverid,
                   type: data.type,
-                  quotedid: data.type === "replyimg" ? data.quotedids : undefined, 
+                  quotedid: data.type === "replyimg" ? data.quotedid : undefined, 
                    sender: "sent",
                    from: "victor",
                    message: data.message,
