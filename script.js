@@ -379,49 +379,92 @@ console.log(userconversation)
           console.log('active is ', active);
           
           // Call createProfileIfNotExists and wait for it to finish
-          createProfileIfNotExists(active)
-              .then(() => {
-                  // Once createProfileIfNotExists is finished, continue with the rest of the code
-      
-                  const activeProfile = AllChats.find(profile => profile.to_id == active || profile.from_id == active);
-                  console.log('activeprofile is ', activeProfile);
-      
-                  activeuser = chatData.find(profile => String(profile.id) === String(active));
-                 
-                  activeprofiledata = activeuser
-                  console.log('active user is', activeprofiledata);
-                 
-      
-                  conversationData = activeProfile.conversationDatas;
-                  console.log('convo data is', conversationData);
-                  console.log('activeuser is ',activeuser)
-                  document.getElementById('usersname').innerHTML = activeuser?.name;
-                  document.getElementById('lastseen').innerHTML = formatDateTime(activeuser?.lastSeen) ;
-                  document.getElementById('pname').innerHTML = `${activeuser?.name}`;
-                  document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
-                  document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
-                  document.getElementById('profilephoto').src = `${activeuser?.avatar}`
-                  renderConversation();
-                  audplayer()
-                  const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
-      
-                  showme();
-                  adjustTextareaHeight();
-                  if (filteredArray) {
-                      const imagecontainer = document.getElementById('mediablob');
-                      imagecontainer.innerHTML = '';
-                      filteredArray.forEach(date => {
-                          const messageHTML = createimages(date);
-                          imagecontainer.innerHTML += messageHTML;
-                      });
-                  }
-      
-                  myswitchmobile()
-                  console.log(active);
-              })
-              .catch(error => {
-                  console.error('Error creating profile:', error);
-              });
+          if (!AllChats.some(profile => profile.to_id == active || profile.from_id == active)) {
+            createProfileIfNotExists(active)
+            .then(() => {
+                // Once createProfileIfNotExists is finished, continue with the rest of the code
+    
+                const activeProfile = AllChats.find(profile => profile.to_id == active || profile.from_id == active);
+                console.log('activeprofile is ', activeProfile);
+    
+                activeuser = chatData.find(profile => String(profile.id) === String(active));
+               
+                activeprofiledata = activeuser
+                // console.log('active user is', activeprofiledata);
+                // alert('loading')
+
+                conversationData = activeProfile.conversationDatas;
+                console.log('convo data is', conversationData);
+                console.log('activeuser is ',activeuser)
+                document.getElementById('usersname').innerHTML = activeuser?.name;
+                document.getElementById('lastseen').innerHTML = formatDateTime(activeuser?.lastSeen) ;
+                document.getElementById('pname').innerHTML = `${activeuser?.name}`;
+                document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
+                document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
+                document.getElementById('profilephoto').src = `${activeuser?.avatar}`
+                myswitchmobile()
+                showme();
+                renderConversation();
+                audplayer()
+                const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
+    
+              
+                adjustTextareaHeight();
+                if (filteredArray) {
+                    const imagecontainer = document.getElementById('mediablob');
+                    imagecontainer.innerHTML = '';
+                    filteredArray.forEach(date => {
+                        const messageHTML = createimages(date);
+                        imagecontainer.innerHTML += messageHTML;
+                    });
+                }
+    
+               
+                console.log(active);
+            })
+            .catch(error => {
+                console.error('Error creating profile:', error);
+            });
+          } else{
+            const activeProfile = AllChats.find(profile => profile.to_id == active || profile.from_id == active);
+            console.log('activeprofile is ', activeProfile);
+
+            activeuser = chatData.find(profile => String(profile.id) === String(active));
+           
+            activeprofiledata = activeuser
+            console.log('active user is', activeprofiledata);
+            // alert('already exist')
+       
+            conversationData = activeProfile.conversationDatas;
+            console.log('convo data is', conversationData);
+            console.log('activeuser is ',activeuser)
+            document.getElementById('usersname').innerHTML = activeuser?.name;
+            document.getElementById('lastseen').innerHTML = formatDateTime(activeuser?.lastSeen) ;
+            document.getElementById('pname').innerHTML = `${activeuser?.name}`;
+            document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
+            document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
+            document.getElementById('profilephoto').src = `${activeuser?.avatar}`
+            myswitchmobile()
+            showme();
+            renderConversation();
+            audplayer()
+            const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
+
+          
+            adjustTextareaHeight();
+            if (filteredArray) {
+                const imagecontainer = document.getElementById('mediablob');
+                imagecontainer.innerHTML = '';
+                filteredArray.forEach(date => {
+                    const messageHTML = createimages(date);
+                    imagecontainer.innerHTML += messageHTML;
+                });
+            }
+
+           
+            console.log(active);
+          }
+  
       }
       
 
@@ -2923,17 +2966,17 @@ function payloadvns (payloaddata){
 }
 
 
-const copyrightDiv = document.querySelector('.copyright');
-const textInput = document.getElementById('mymessage');
+// const copyrightDiv = document.querySelector('.copyright');
+// const textInput = document.getElementById('mymessage');
 
-textInput.addEventListener('focus', function() {
-    // Keyboard is open, add class to copyright div
-    copyrightDiv.classList.add('keyboard-open');
-    adjustChatDataHeight()
-});
+// textInput.addEventListener('focus', function() {
+//     // Keyboard is open, add class to copyright div
+//     copyrightDiv.classList.add('keyboard-open');
+//     adjustChatDataHeight()
+// });
 
-textInput.addEventListener('blur', function() {
-    // Keyboard is closed, remove class from copyright div
-    copyrightDiv.classList.remove('keyboard-open');
-    adjustChatDataHeight()
-});
+// textInput.addEventListener('blur', function() {
+//     // Keyboard is closed, remove class from copyright div
+//     copyrightDiv.classList.remove('keyboard-open');
+//     adjustChatDataHeight()
+// });
