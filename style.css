@@ -2699,7 +2699,7 @@ z-index: 999999;
         width: fit-content;
         height: fit-content;
         max-width: 97%;
-        max-height: 80%;
+        max-height: 400px;
     }
     
     .imgcontnr img{
