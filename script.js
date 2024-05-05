@@ -330,18 +330,22 @@ console.log(userconversation)
             // }
 
          
-            
+            let backupid = ''
 
             function createProfileIfNotExists(chat_id) {
               console.log('gottten id ', chat_id);
-              console.log('ALL CHATS IS ', AllChats);
-          
+              const access = localStorage.getItem('access_token')
+              const arrayToken = access.split('.');
+              const tokenPayload = JSON.parse(atob(arrayToken[1]));
+              activeuserid = tokenPayload?.user_id
+              
               // Return a promise from createProfileIfNotExists
               return new Promise((resolve, reject) => {
                   if (!AllChats.some(profile => profile.to_id == chat_id || profile.from_id == chat_id)) {
-                      axiosInstance.get(`/usermessagecreate/${chat_id}`)
+                    
+                    axiosInstance.get(`/usermessagecreate/${chat_id}`)
                           .then(response => {
-                              const { id, message } = response.data;
+                              const { id, message, usecase } = response.data;
           
                               VanillaToasts.create({
                                   title: 'Success!',
@@ -352,8 +356,32 @@ console.log(userconversation)
           
                               console.log('ID:', id);
                               console.log('Message:', message);
+
+                              const item = usecase 
+                              const isSender = item?.sender?.id === tokenPayload?.user_id;
+                              const isReceiver = item?.reciever?.id === tokenPayload?.user_id;
+                          
+                              const user = isSender ? item.reciever : item.sender;
+                              const profile = isSender ? item.receiver_profile : item.sender_profile;
+                          
+                              chatData.push({
+                                id: isSender ? item.reciever.id : item.sender.id,
+                                userid: item.id,
+                                message_id: item.messageid,
+                                name: `${user.first_name} ${user.last_name}`,
+                                time: getlasttime(item.messageid), // Example value
+                                message: getlastmessage(item.messageid),
+                                lastSeen: profile.last_seen,
+                                status: profile.profile_status,
+                                quote: profile.bio,
+                                phoneNumber: profile.phonenumber,
+                                email: user.email,
+                                avatar: profile.avatar,
+                              });
+alert(item.messageid)
+backupid = item.messageid
                               AllChats.push({ 'chat_id': id, from_id: activeuserid, to_id: aud(chat_id).userid, conversationDatas: [] });
-          
+                              
                               // Resolve the promise to indicate success
                               resolve();
                           })
@@ -373,10 +401,15 @@ console.log(userconversation)
          let activeuser
         let activeprofiledata 
 
-         function updateActiveUser(id) {
 
+
+
+         function updateActiveUser(id) {
+          const activechatbx = document.getElementsByClassName(`chatnum${id}`)
           active = id;
           console.log('active is ', active);
+
+
           
           // Call createProfileIfNotExists and wait for it to finish
           if (!AllChats.some(profile => profile.to_id == active || profile.from_id == active)) {
@@ -463,11 +496,52 @@ console.log(userconversation)
 
            
             console.log(active);
+            if (activechatbx){
+              if (activechatbx.length > 0) {
+                // Loop through each element
+                for (let i = 0; i < activechatbx.length; i++) {
+                    // Add the class name to the current element
+                    activechatbx[i].classList.add('activebubble');
+                    activechatbx[i].classList.remove('activebubbleloading');
+                }
+            }
+              // activechatbx.classList.toggle('activebubble')
+            }
           }
   
-      }
+
       
 
+      }
+      
+function newupdateactiveuser(id){
+
+  const activeclass = document.getElementsByClassName(`activebubble`);
+
+  // Check if there are any elements with the specified class name
+  if (activeclass.length > 0) {
+      // Loop through each element
+      for (let i = 0; i < activeclass.length; i++) {
+          // Remove the class name from the current element
+          activeclass[i].classList.remove('activebubble');
+      }
+  }
+
+  const activechatbx = document.getElementsByClassName(`chatnum${id}`)
+  if (activechatbx){
+    if (activechatbx.length > 0) {
+      // Loop through each element
+      for (let i = 0; i < activechatbx.length; i++) {
+          // Add the class name to the current element
+          activechatbx[i].classList.add('activebubble');
+          activechatbx[i].classList.add('activebubbleloading');
+      }
+  }
+    // activechatbx.classList.toggle('activebubble')
+  }
+
+  updateActiveUser(id)
+}
 
         function mediashow(){
           const med = document.getElementById('mymedia')
@@ -926,7 +1000,7 @@ ${message.message}
       const access = localStorage.getItem('access_token')
       const arrayToken = access.split('.');
       const tokenPayload = JSON.parse(atob(arrayToken[1]));
-      const uniqueid = activeprofiledata?.message_id
+      const uniqueid = activeprofiledata?.message_id ? activeprofiledata.message_id : (backupid ? backupid : '');
       if (payloaddata){
 
         axiosInstance.post(`/deletemessageportals/${uniqueid}`, payloaddata)
@@ -963,7 +1037,7 @@ ${message.message}
 
         })
         .catch(error => {
-          console.error('Error:', error);
+          // console.error('Error:', error);
         });
 
 
@@ -1153,7 +1227,7 @@ function bluroverlay(){
       const access = localStorage.getItem('access_token')
       const arrayToken = access.split('.');
       const tokenPayload = JSON.parse(atob(arrayToken[1]));
-      const uniqueid = activeprofiledata?.message_id
+      const uniqueid = activeprofiledata?.message_id ? activeprofiledata.message_id : (backupid ? backupid : '');
       console.log('unique', uniqueid)
 
 
@@ -1355,7 +1429,7 @@ function bluroverlay(){
       const access = localStorage.getItem('access_token')
       const arrayToken = access.split('.');
       const tokenPayload = JSON.parse(atob(arrayToken[1]));
-      const uniqueid = activeprofiledata?.message_id
+      const uniqueid = activeprofiledata?.message_id ? activeprofiledata.message_id : (backupid ? backupid : '');
       if (payloaddata){
 
         axiosInstance.post(`/messageportal/${uniqueid}/`, payloaddata)
@@ -1424,7 +1498,7 @@ function bluroverlay(){
       const access = localStorage.getItem('access_token')
       const arrayToken = access.split('.');
       const tokenPayload = JSON.parse(atob(arrayToken[1]));
-      const uniqueid = activeprofiledata?.message_id
+      const uniqueid = activeprofiledata?.message_id ? activeprofiledata.message_id : (backupid ? backupid : '');
 
 
       if (payloaddata){
@@ -1647,7 +1721,7 @@ function lloading(){
 
     function generateChatBubble(data) {
       return `
-        <div class="chatbubbled" onclick="updateActiveUser(${data.id})">
+        <div class="chatbubbled chatnum${data.id}" onclick="newupdateactiveuser(${data.id})">
             <div class="userdata">
                 <div class="profilephoto">
                     <img src="image 116.png" alt="">
@@ -1656,7 +1730,14 @@ function lloading(){
                     <div>
                         <small class="small mg">
                             <div class="uname">${data.name}</div>
-                            <div class="time">${data.time}</div>
+                            <div class="time">
+                            <i class="fa fa-spinner fa-spin spinning"></i>
+<span> ${data.time} </span>
+
+
+                            
+
+                            </div>
                         </small>
                     </div>
                     <small class="small twolines">${data?.message || 'Click Here To Start A Conversation'}</small>
@@ -2826,7 +2907,7 @@ function sendAudio() {
       const access = localStorage.getItem('access_token')
       const arrayToken = access.split('.');
       const tokenPayload = JSON.parse(atob(arrayToken[1]));
-      const uniqueid = activeprofiledata?.message_id
+      const uniqueid = activeprofiledata?.message_id ? activeprofiledata.message_id : (backupid ? backupid : '');
     
       let payloadvn
       // ddd
