@@ -378,7 +378,7 @@ console.log(userconversation)
                                 email: user.email,
                                 avatar: profile.avatar,
                               });
-alert(item.messageid)
+
 backupid = item.messageid
                               AllChats.push({ 'chat_id': id, from_id: activeuserid, to_id: aud(chat_id).userid, conversationDatas: [] });
                               
@@ -2826,7 +2826,7 @@ function startRecording() {
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then(stream => {
       mediaRecorder = new MediaRecorder(stream);
-      recordingText.style.display = 'block';
+      recordingText.style.display = 'flex';
       mediaRecorder.ondataavailable = event => {
         audioChunks.push(event.data);
       };

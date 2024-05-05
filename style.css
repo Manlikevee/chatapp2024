@@ -1310,7 +1310,16 @@ i.fa.fa-spinner.fa-spin.spinning {
 
     color: #F1E0AC;
 }
-
+#recordingText{
+    width: 100%;
+}
+#recordingText img{
+    width: 100%;
+    object-fit: cover;
+    width: 100%;
+    object-fit: contain;
+    height: 20px;
+}
 .activebubbleloading span{
     display: none;
 }
