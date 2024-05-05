@@ -420,6 +420,18 @@ line-height: 18px; /* 150% */
     display: none;
 }
 
+.overlaytwo{
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    backdrop-filter: blur(1px);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    align-items: center;
+    display: none;
+}
 .blurpreview{
     background-color: rgba(0, 0, 0, 0.6 );
     position: fixed;
@@ -1312,6 +1324,30 @@ i.fa.fa-spinner.fa-spin.spinning {
 }
 #recordingText{
     width: 100%;
+}
+
+#lightbx{
+    z-index: 9999999999;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgcontnr{
+    background-color: var(--backgrounddark);
+    border-radius: 4px;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    max-width: 600px;
+    max-height: 500px;
+}
+
+.imgcontnr img{
+    width: fit-content;
+    height: fit-content;
+    max-width: 550px;
+    max-height: 450px;
+    object-fit: cover;
 }
 #recordingText img{
     width: 100%;
@@ -2655,6 +2691,26 @@ z-index: 999999;
         max-width: 100%;
 
     }
+
+    .imgcontnr{
+        background-color: var(--backgrounddark);
+        border-radius: 4px;
+        padding: 10px;
+        width: fit-content;
+        height: fit-content;
+        max-width: 97%;
+        max-height: 80%;
+    }
+    
+    .imgcontnr img{
+        width: fit-content;
+        height: fit-content;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+
     .chatbubble{
         padding: 6px !important;
     }

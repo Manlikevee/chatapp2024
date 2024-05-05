@@ -698,7 +698,7 @@ function newupdateactiveuser(id){
                                 </div>
                                 <div class="chatbubble" >
                                     <div class="chatimg">
-                                        <img src="${message.imageUrl}" alt="" loading="lazy">
+                                        <img src="${message.imageUrl}" alt="" loading="lazy"  onclick="openLightbox('${message.imageUrl}')">
                                     </div>
 
                                     <div class='www' > 
@@ -850,9 +850,9 @@ function newupdateactiveuser(id){
                                 </div>    
                                 </small>
                                </a>
-                                      <div class="chatimg">
-                                        <img src="${message.imageUrl}" alt="" loading="lazy">
-                                    </div>
+                               <div class="chatimg">
+                               <img src="${message.imageUrl}" alt="" loading="lazy"  onclick="openLightbox('${message.imageUrl}')">
+                           </div>
 <div class='www' ondblclick="blurpreview(${message.id})"> 
 ${message.message}
 <span class="smallspan"> ${formatDateTime(message.datetime)} 
@@ -3061,3 +3061,23 @@ function payloadvns (payloaddata){
 //     copyrightDiv.classList.remove('keyboard-open');
 //     adjustChatDataHeight()
 // });
+
+
+function openLightbox(imageSrc) {
+  const lightboxImg = document.querySelector('.lightbox-img');
+  const overlay = document.getElementById('lightbx');
+
+  // Set the src attribute of the lightbox image
+  lightboxImg.src = imageSrc;
+
+  // Display the overlay
+  overlay.style.display = 'flex';
+}
+
+// Function to close the lightbox
+function closeLightbox() {
+  const overlay = document.getElementById('lightbx');
+
+  // Hide the overlay
+  overlay.style.display = 'none';
+}
