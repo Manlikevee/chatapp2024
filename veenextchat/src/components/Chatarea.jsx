@@ -1,11 +1,12 @@
 import React, { useEffect, useRef , useContext} from 'react'
 import { VeeContext } from "@/components/context/Chatcontext";
+import Messagegenerator from './chattypes/Messagegenerator';
 const Chatarea = () => {
   const containerRef = useRef(null);
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   const chatDataRef = useRef(null);
-  const { test, } = useContext(VeeContext);
+  const { test,activechatdata, conversationdata } = useContext(VeeContext);
   const adjustChatDataHeight = () => {
     const container = containerRef.current;
     const header = headerRef.current;
@@ -35,7 +36,7 @@ useEffect(() => {
       <div className="userdata">
 
         <div className="profilephoto">
-          <img src="https://res.cloudinary.com/viktortech/image/upload/v1/media/profile_images/image_109_johqfa" alt="" id="profilephoto" />
+          <img src={activechatdata?.avatar} alt="" id="profilephoto" />
       
 
         </div>
@@ -46,7 +47,7 @@ useEffect(() => {
             <small className="small uname">
       
               <span id="usersname">
-           {test}
+           {activechatdata?.name}
               </span>
             </small>
           </div>
@@ -65,7 +66,13 @@ useEffect(() => {
   </div>
   <div className="blurpreview" id="blurredpreview"  />
   <div className="chatdata" id="chatData" ref={chatDataRef}>
-    <div id="chatContainer"></div>
+    <div id="chatContainer">
+
+{activechatdata && conversationdata && (<Messagegenerator messagedata={conversationdata} />)}
+
+
+
+    </div>
   </div>
   <div className="chatfooter" ref={footerRef} >
     <div className="chatinputbox activebox" id="normalmessage">

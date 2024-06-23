@@ -3,7 +3,7 @@ import { VeeContext } from "@/components/context/Chatcontext";
 
 
 const Sidebar = () => {
-  const { chatdata } = useContext(VeeContext);
+  const { chatdata, newupdateactiveuser, activeuserid, activechat } = useContext(VeeContext);
   return (
 <div className="sidebar" id="sidebar">
   <div className="sidebarheader">
@@ -71,7 +71,10 @@ const Sidebar = () => {
     {chatdata?.map((info, index) => (
 
 <div
-  className="chatbubbled chatnum${data.id}">
+className={`chatbubbled chatnum ${info.userid === activechat ? 'activebubble' : ''}`}
+key={index}
+onClick={() => newupdateactiveuser(info?.userid)}
+>
   <div className="userdata">
     <div className="profilephoto">
       <img src="image 116.png" alt="" />
@@ -87,13 +90,13 @@ const Sidebar = () => {
             <i className="fa fa-spinner fa-spin spinning" />
             <span>
               {" "}
-              ${"{"}data.time{"}"}{" "}
+            {info?.time}
             </span>
           </div>
         </small>
       </div>
       <small className="small twolines">
-        ${"{"}data?.message || 'Click Here To Start A Conversation'{"}"}
+        {info?.message || 'Click Here To Start A Conversation'}
       </small>
     </div>
   </div>

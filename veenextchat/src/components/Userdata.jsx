@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useRef , useContext} from 'react'
+import { VeeContext } from "@/components/context/Chatcontext";
 
 const Userdata = () => {
+  const { test,activechatdata } = useContext(VeeContext);
   return (
 <div className="mediafiles" id="mymedia">
   <div className="charheader">
@@ -10,7 +12,7 @@ const Userdata = () => {
           Contact info
           <small className="small">
             {" "}
-            {/* <img src="Vector (47).svg" alt="" /> Verified */}
+            <img src="/Vector (47).svg" alt="" /> Verified
           </small>
         </div>
       </div>
@@ -24,16 +26,19 @@ const Userdata = () => {
   <div className="mediaextradata">
     <div className="recepientprofile">
       <div className="recepientphoto">
-        {/* <img src="image 40.png" alt="" /> */}
+        <img src={activechatdata?.avatar} alt="" />
       </div>
       <div className="recepientdetails">
-        <div className="recepientname" id="pname" />
-        <div className="recepientnumber" id="pphone" />
+        <div className="recepientname" id="pname" >{activechatdata?.name} </div>
+        <div className="recepientnumber" id="pphone" > {activechatdata?.phoneNumber}  </div>
       </div>
     </div>
     <div className="recepientinfo">
       <div className="infotitle">Info</div>
-      <div className="infotext" id="ptext"></div>
+      <div className="infotext" id="ptext">
+
+
+      </div>
     </div>
     <div className="recentmedia">
       <div className="mediatitle">Media, Links and Documents</div>

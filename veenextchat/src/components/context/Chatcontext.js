@@ -13,11 +13,114 @@ export const VeeContext = createContext();
 export const VeeContextProvider = ({ children }) => {
     const router = useRouter();
     const [test, setTest] = useState('');
+    const [activechat, setActivechat] = useState('');
     const [allprofiles, setAllprofile] = useState([]);
+    const [activeprofile, setActiveprofile] = useState([]);
+    const [gottendata, setgottendata] = useState([])
     const [chatdata, setChatdata] = useState([]);
     const [activeuserid, setactiveuserid] = useState('');
+    const [conversationdata, setconversationdata] = useState([]);
+    const [allChat, setAllchat] = useState([]);
+    const [activechatdata, setActivechatdata] = useState([]);
     
 
+    function newupdateactiveuser(id){
+
+    console.log('clickedddddddd')
+
+        setActivechat(id);
+
+      
+        updateActiveUser(id);
+      }
+
+
+      function updateActiveUser(id) {
+        
+        
+        let active = id;
+        console.log('active is ', active);
+        console.log('all chat is',  chatdata)
+
+        
+        // Call createProfileIfNotExists and wait for it to finish
+        if (!allChat.some(profile => profile.to_id == active || profile.from_id == active)) {
+        //   createProfileIfNotExists(active)
+        //   .then(() => {
+        //       // Once createProfileIfNotExists is finished, continue with the rest of the code
+  
+        //       const activeProfile = AllChats.find(profile => profile.to_id == active || profile.from_id == active);
+        //       console.log('activeprofile is ', activeProfile);
+  
+        //       activeuser = chatData.find(profile => String(profile.id) === String(active));
+             
+        //       activeprofiledata = activeuser
+        //       // console.log('active user is', activeprofiledata);
+        //       // alert('loading')
+
+        //       conversationData = activeProfile.conversationDatas;
+        //       console.log('convo data is', conversationData);
+        //       console.log('activeuser is ',activeuser)
+        //       document.getElementById('usersname').innerHTML = activeuser?.name;
+        //       document.getElementById('lastseen').innerHTML = formatDateTime(activeuser?.lastSeen) ;
+        //       document.getElementById('pname').innerHTML = `${activeuser?.name}`;
+        //       document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
+        //       document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
+        //       document.getElementById('profilephoto').src = `${activeuser?.avatar}`
+        //       myswitchmobile()
+        //       showme();
+        //       renderConversation();
+        //       audplayer()
+        //       const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
+  
+            
+        //       adjustTextareaHeight();
+        //       if (filteredArray) {
+        //           const imagecontainer = document.getElementById('mediablob');
+        //           imagecontainer.innerHTML = '';
+        //           filteredArray.forEach(date => {
+        //               const messageHTML = createimages(date);
+        //               imagecontainer.innerHTML += messageHTML;
+        //           });
+        //       }
+  
+             
+        //       console.log(active);
+        //   })
+        //   .catch(error => {
+        //       console.error('Error creating profile:', error);
+        //   });
+
+        console.log('waitttt')
+        } else{
+          const myactiveProfile = allChat.find(profile => profile.to_id == active || profile.from_id == active);
+
+
+       const activeuser = chatdata.find(profile => String(profile.userid) === String(active));
+         
+          setActiveprofile(myactiveProfile)
+          console.log('active user is', activeuser);
+          setActivechatdata(activeuser)
+          // alert('already exist')
+     
+          setconversationdata(myactiveProfile.conversationDatas);
+          console.log('convo data is', conversationdata);
+
+
+          const filteredArray = conversationdata?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
+
+        
+
+
+         
+      
+
+        }
+
+
+    
+
+    }
 
     async function refreshAccessToken() {
         try {
@@ -124,11 +227,58 @@ export const VeeContextProvider = ({ children }) => {
             continuation(response)
             // setAllprofile(response.data.allprofile);
             // setChatdata(response.data.usecase);
+            setgottendata(response.data.usecase)
           })
           .catch(error => {
             console.error(error.message);
 
           });
+      }
+
+      function formatChatDateTime(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+      
+        if (diffInDays === 0) {
+          // Today: Show only time
+          const options = {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+          };
+          return new Intl.DateTimeFormat('en-US', options).format(date);
+        } else if (diffInDays === 1) {
+          // Yesterday: Show 'Yesterday'
+          return 'Yesterday';
+        } else {
+          // Other days: Show date in the format 'MM-DD-YYYY'
+          const day = date.getDate().toString().padStart(2, '0');
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
+          const year = date.getFullYear();
+          return `${month}-${day}-${year}`;
+        }
+      }
+function getlasttime(id){
+        const now = new Date();
+        const mygdata = gottendata.find(gd => gd?.messageid?.messageid == id )
+        
+        if( mygdata  ){
+      
+          if(mygdata?.testj?.length > 0){
+      
+            return formatChatDateTime(mygdata?.testj?.pop()?.messagetime);
+      
+          }else{
+           
+           return formatChatDateTime(now);
+          }
+          
+        } 
+        else{
+          return formatChatDateTime(now);
+        }
+      
       }
 
 
@@ -157,7 +307,7 @@ export const VeeContextProvider = ({ children }) => {
               userid: item.id,
               message_id: item.messageid,
               name: `${user.first_name} ${user.last_name}`,
-              time: '', // Example value
+              time: getlasttime(item.messageid),
               message: '',
               lastSeen: profile.last_seen,
               status: profile.profile_status,
@@ -189,9 +339,64 @@ export const VeeContextProvider = ({ children }) => {
       
       
         setAllprofile(allusersarray)
-        console.log(allusersarray);
+     
         setChatdata(newArray)
-  
+        console.log('chatdata', newArray)
+
+        fdatatwo(newArray)
+      }
+
+      let temporarydata 
+      function aud (id) {
+        
+        // console.log('temp', temporarydata.find(au => au.userid == id || au.id == id))
+        return  temporarydata.find(au => au.userid == id || au.id == id)
+        }
+
+async function fdatatwo(data) {
+        temporarydata= data
+        const access = Cookies.get("access_token");
+        const arrayToken = access.split('.');
+        const tokenPayload = JSON.parse(atob(arrayToken[1]));
+        try {
+          const response = await axiosInstance.get('/messagedashboard');
+          console.log(response);
+       
+          // Redirect to success.html with the random ID as a parameter
+          let allfetchmessage = []
+          response?.data?.allmessages.forEach(item => {  
+      
+            if (item?.messageid?.sender?.id === tokenPayload?.user_id) {
+            allfetchmessage.push({
+              'chat_id': item?.messageid?.messageid,
+               from_id: tokenPayload?.user_id, 
+               to_id: aud(item?.messageid?.reciever?.id)?.userid,
+                conversationDatas: item.testj
+            });
+      
+          }
+          else if (item?.messageid?.reciever?.id === tokenPayload?.user_id) {
+            allfetchmessage.push({
+              'chat_id': item?.messageid?.messageid,
+               from_id: aud(item?.messageid?.sender?.id,)?.userid, 
+               to_id:  tokenPayload?.user_id ,
+                conversationDatas: item.testj
+            });
+      
+      
+          }
+      
+        
+          })
+     
+          setAllchat(allfetchmessage) 
+          console.log('all fetch', allfetchmessage)
+      
+        } catch (error) {
+          console.error(error.message);
+          toast.error(error.message || 'An Error Occurred')
+        }
+      
       }
 
       useEffect(() => {
@@ -202,7 +407,12 @@ export const VeeContextProvider = ({ children }) => {
           value={{
             test,
             allprofiles,
-            chatdata
+            chatdata,
+            newupdateactiveuser,
+            activeuserid,
+            activechat,
+            activechatdata,
+            conversationdata
           }}
         >
           {children}

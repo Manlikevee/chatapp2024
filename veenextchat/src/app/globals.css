@@ -1771,7 +1771,20 @@ text-align: left;
     
 
 }
-
+[data-nextjs-dialog-overlay] {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    z-index: 100000000000000000000;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vh 15px 0;
+}
 
 .loginimg{
     width:48%;
