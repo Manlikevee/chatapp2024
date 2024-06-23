@@ -1,6 +1,8 @@
 import React, { useEffect, useRef , useContext} from 'react'
 import { VeeContext } from "@/components/context/Chatcontext";
 import Image from 'next/image';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Imagetype = ({ messagedata}) => {
   const { activeuserid,  } = useContext(VeeContext);
@@ -33,12 +35,16 @@ const Imagetype = ({ messagedata}) => {
         </div>
         <div className="chatbubble">
           <div className="chatimg">
-            <img
-              src={messagedata.imageUrl}
+            {/* <img
+       
               alt=""
               loading="lazy"
               // onClick={() => openLightbox(message.imageUrl)}
-            />
+            /> */}
+
+<LazyLoadImage
+    effect="blur"
+    src={messagedata.imageUrl} />
             {/* <Image   src={messagedata.imageUrl} width={100} height={100} /> */}
           </div>
           <div className="www">

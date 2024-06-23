@@ -1,8 +1,28 @@
 import React, { useEffect, useRef , useContext} from 'react'
 import { VeeContext } from "@/components/context/Chatcontext";
+import UserStories from './UserStories';
 
 
 const Sidebar = () => {
+  const storiesData = [
+    {
+      image: 'https://unsplash.com/photos/v0rV35-V-_Y/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzE5MTY3NDk1fA&force=true&w=640',
+      title: 'User 1',
+      stories: [
+        { url: 'https://unsplash.com/photos/v0rV35-V-_Y/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzE5MTY3NDk1fA&force=true&w=640', type: 'image' },
+        { url: 'https://unsplash.com/photos/yvG81vSKQp0/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzE5MTY5NDEyfA&force=true&w=640', type: 'image' },
+      ],
+    },
+    {
+      image: 'https://via.placeholder.com/150',
+      title: 'User 2',
+      stories: [
+        { url: 'https://unsplash.com/photos/hx_nol2JvK8/download?force=true&w=640', type: 'image' },
+        { url: 'https://unsplash.com/photos/uKTAhW299jY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzE5MTcxMzgxfA&force=true&w=640', type: 'image' },
+      ],
+    },
+    // Add more user stories here...
+  ];
   const { chatdata, newupdateactiveuser, activeuserid, activechat } = useContext(VeeContext);
   return (
 <div className="sidebar" id="sidebar">
@@ -52,7 +72,7 @@ const Sidebar = () => {
     <div className="infotitle">
       Stories
     </div>
-
+    <UserStories storiesData={storiesData} />
   </div>
   <div className="sidebarextradata" id="msgdta">
     <div className="sidebardatas">
