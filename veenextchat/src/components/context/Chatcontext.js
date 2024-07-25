@@ -10,6 +10,9 @@ import { useRouter } from "next/navigation";
 export const VeeContext = createContext();
 
 
+
+
+
 export const VeeContextProvider = ({ children }) => {
     const router = useRouter();
     const [test, setTest] = useState('');
@@ -41,56 +44,7 @@ export const VeeContextProvider = ({ children }) => {
         let active = id;
         console.log('active is ', active);
         console.log('all chat is',  chatdata)
-
-        
-        // Call createProfileIfNotExists and wait for it to finish
         if (!allChat.some(profile => profile.to_id == active || profile.from_id == active)) {
-        //   createProfileIfNotExists(active)
-        //   .then(() => {
-        //       // Once createProfileIfNotExists is finished, continue with the rest of the code
-  
-        //       const activeProfile = AllChats.find(profile => profile.to_id == active || profile.from_id == active);
-        //       console.log('activeprofile is ', activeProfile);
-  
-        //       activeuser = chatData.find(profile => String(profile.id) === String(active));
-             
-        //       activeprofiledata = activeuser
-        //       // console.log('active user is', activeprofiledata);
-        //       // alert('loading')
-
-        //       conversationData = activeProfile.conversationDatas;
-        //       console.log('convo data is', conversationData);
-        //       console.log('activeuser is ',activeuser)
-        //       document.getElementById('usersname').innerHTML = activeuser?.name;
-        //       document.getElementById('lastseen').innerHTML = formatDateTime(activeuser?.lastSeen) ;
-        //       document.getElementById('pname').innerHTML = `${activeuser?.name}`;
-        //       document.getElementById('pphone').innerHTML = `${activeuser?.phoneNumber}`;
-        //       document.getElementById('ptext').innerHTML = `${activeuser?.quote}`;
-        //       document.getElementById('profilephoto').src = `${activeuser?.avatar}`
-        //       myswitchmobile()
-        //       showme();
-        //       renderConversation();
-        //       audplayer()
-        //       const filteredArray = conversationData?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
-  
-            
-        //       adjustTextareaHeight();
-        //       if (filteredArray) {
-        //           const imagecontainer = document.getElementById('mediablob');
-        //           imagecontainer.innerHTML = '';
-        //           filteredArray.forEach(date => {
-        //               const messageHTML = createimages(date);
-        //               imagecontainer.innerHTML += messageHTML;
-        //           });
-        //       }
-  
-             
-        //       console.log(active);
-        //   })
-        //   .catch(error => {
-        //       console.error('Error creating profile:', error);
-        //   });
-
         console.log('waitttt')
         } else{
           const myactiveProfile = allChat.find(profile => profile.to_id == active || profile.from_id == active);
@@ -101,20 +55,9 @@ export const VeeContextProvider = ({ children }) => {
           setActiveprofile(myactiveProfile)
           console.log('active user is', activeuser);
           setActivechatdata(activeuser)
-          // alert('already exist')
-     
           setconversationdata(myactiveProfile.conversationDatas);
           console.log('convo data is', conversationdata);
-
-
           const filteredArray = conversationdata?.filter(obj => obj?.imageUrl && obj.type !== "deleted");
-
-        
-
-
-         
-      
-
         }
 
 
@@ -129,7 +72,7 @@ export const VeeContextProvider = ({ children }) => {
             throw new Error("Refresh token not found");
           }
           const response = await axios.post(
-            "'https://veejobapi.vercel.app/api/token/refresh/",
+            "https://veejobapi.vercel.app/api/token/refresh/",
             { refresh: refreshToken }
           );
           const newAccessToken = response.data.access;
